@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#FFFFFF;color:#12121C;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#5B4BF5;text-decoration:none}
+  a:hover{color:#4536d6}
+  ::selection{background:#DDD7FE}
+  .dsp{font-family:'Instrument Sans',system-ui,sans-serif;letter-spacing:-.034em}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+  a,button{transition:color .2s ease,background .2s ease,transform .2s ease,box-shadow .2s ease,border-color .2s ease,opacity .2s ease}
+  .navl{position:relative}
+  .navl:hover{color:#12121C}
+  .navl::after{content:"";position:absolute;left:50%;bottom:-9px;width:5px;height:5px;border-radius:50%;background:#5B4BF5;transform:translateX(-50%) scale(0);transition:transform .25s ease}
+  .navl:hover::after{transform:translateX(-50%) scale(1)}
+  .btn{white-space:nowrap}
+  .btn.solid:hover{box-shadow:0 12px 26px rgba(91,75,245,.28)}
+  .btn:not(.magnet):hover{transform:translateY(-2px)}
+  .costhead br.mbr{display:none}
+  .hicon{display:inline-flex;align-items:center;justify-content:center;width:.82em;height:.82em;border-radius:.2em;vertical-align:.04em;margin:0 .06em}
+  .fwrap{background:#EFEDF9;border-radius:20px;padding:14px}
+  .fgrid{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:14px}
+  .fcard{background:#fff;border-radius:16px;padding:20px 20px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;transition:transform .4s cubic-bezier(.22,.61,.36,1),box-shadow .4s ease}
+  .fcard:hover{transform:translateY(-4px);box-shadow:0 18px 42px rgba(18,18,28,.09)}
+  .fart{position:relative;width:100%;height:236px;margin-bottom:26px}
+  .pnl{position:absolute;border-radius:10px}
+  .pnl-b{background:#F4F2FE;box-shadow:0 8px 22px rgba(18,18,28,.06)}
+  .pnl-f{width:80%;left:10%;bottom:0;text-align:left;padding:12px;background:#fff;box-shadow:0 14px 34px rgba(18,18,28,.13);transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+  .fcard:hover .pnl-f{transform:rotate(0deg) translateY(-4px)!important}
+  .kpi-dots i{opacity:0;animation:dot 1.4s infinite}
+  .kpi-dots i:nth-child(2){animation-delay:.2s}
+  .kpi-dots i:nth-child(3){animation-delay:.4s}
+  @keyframes dot{0%,70%,100%{opacity:0}35%{opacity:1}}
+  .kpi-caret{animation:caret 1s steps(1) infinite}
+  @keyframes caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+  .kpi-bar i{width:var(--w);transform-origin:left;animation:barloop 4.6s linear infinite}
+  @keyframes barloop{0%{transform:scaleX(0)}55%{transform:scaleX(1)}99.9%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+  .vtile{position:relative;transition:box-shadow .3s ease}
+  .spk{animation:spkcycle 6.6s ease-in-out infinite}
+  .s0{animation-delay:0s}
+  .s1{animation-delay:2.2s}
+  .s2{animation-delay:4.4s}
+  @keyframes spkcycle{0%,26%{box-shadow:0 0 0 2px #5B4BF5,0 0 0 4px rgba(91,75,245,.22)}33%,100%{box-shadow:0 0 0 0 rgba(91,75,245,0)}}
+  .kpi-bars i{flex:1;background:#C4BBFB;border-radius:3px;transition:height .9s cubic-bezier(.22,.61,.36,1)}
+  .kpi-bars i:nth-child(4),.kpi-bars i:nth-child(5){background:#5B4BF5}
+  .kpi-bars i{height:var(--h);animation:sway 2s ease-in-out infinite}
+  .kpi-bars i:nth-child(1){animation-duration:1.8s}
+  .kpi-bars i:nth-child(2){animation-duration:2.4s;animation-delay:.3s}
+  .kpi-bars i:nth-child(3){animation-duration:1.6s;animation-delay:.15s}
+  .kpi-bars i:nth-child(4){animation-duration:2.2s;animation-delay:.45s}
+  .kpi-bars i:nth-child(5){animation-duration:1.9s;animation-delay:.1s}
+  .kpi-bars i:nth-child(6){animation-duration:2.6s;animation-delay:.6s}
+  @keyframes sway{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.8)}}
+  .kpi-bars i{transform-origin:bottom}
+  .kpi-ringp{transition:stroke-dashoffset 1.3s cubic-bezier(.22,.61,.36,1)}
+  .kpi-ringp{stroke-dashoffset:4.5}
+  .kpi-sync{animation:syncfade 1.9s ease-in-out infinite}
+  @keyframes syncfade{0%,100%{opacity:.35}50%{opacity:1}}
+  .kpi-tick{opacity:0;transform:scale(.4);animation:tickin 3.6s cubic-bezier(.34,1.56,.64,1) infinite}
+  @keyframes tickin{0%,8%{opacity:0;transform:scale(.4)}20%{opacity:1;transform:scale(1.25)}28%,84%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(.4)}}
+  .kpi-line{position:relative;overflow:hidden;background:#EDEAFE!important}
+  .kpi-line::after{content:"";position:absolute;inset:0;border-radius:99px;background:#8B7CFF;transform:scaleX(0);transform-origin:left;animation:linefill 5.2s cubic-bezier(.4,0,.3,1) infinite}
+  @keyframes linefill{0%{transform:scaleX(0)}42%{transform:scaleX(1)}72%{transform:scaleX(1)}100%{transform:scaleX(0);transform-origin:right}}
+  @media (max-width:760px){.fgrid{grid-template-columns:1fr!important}}
+  .psteps{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+  .pstep{padding-top:26px;border-top:1px solid #E9E7F3}
+  .picon{width:50px;height:50px;border-radius:50%;background:#EFEDF9;display:flex;align-items:center;justify-content:center;transition:transform .35s cubic-bezier(.22,.61,.36,1),background .35s ease}
+  .pstep:hover .picon{transform:translateY(-4px);background:#DDD7FE}
+  .vplay:hover{transform:scale(1.06)}
+  @media (max-width:900px){.psteps{grid-template-columns:1fr 1fr!important;gap:24px}}
+  @media (max-width:560px){.psteps{grid-template-columns:1fr!important}}
+  .iwrap{display:grid;grid-template-columns:0.82fr 1.18fr;gap:44px;align-items:center}
+  .ilist{display:flex;flex-direction:column;border-top:1px solid #E9E7F3}
+  .iitem{display:flex;gap:14px;padding:17px 2px;border-bottom:1px solid #E9E7F3;transition:padding-left .3s ease}
+  .iitem:hover{padding-left:8px}
+  .idot{width:8px;height:8px;flex:none;border-radius:50%;background:#C4BBFB;margin-top:7px;transition:background .3s ease,transform .3s ease}
+  .iitem:hover .idot{background:#5B4BF5;transform:scale(1.3)}
+  .ishot{border-radius:16px;overflow:hidden;background:#fff;border:1px solid #E5E3F0;box-shadow:0 26px 60px rgba(18,18,28,.1)}
+  .ibar{display:flex;align-items:center;gap:14px;padding:11px 16px;background:#F7F6FD;border-bottom:1px solid #EDEAF8}
+  .idots{display:flex;gap:5px}
+  .idots i{width:8px;height:8px;border-radius:50%;background:#D9D4F0}
+  .ibody{padding:24px 24px 26px}
+  .ihead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
+  .istats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:18px 0 20px;border-top:1px solid #F1EFFA;border-bottom:1px solid #F1EFFA;margin-bottom:16px}
+  .irows{display:flex;flex-direction:column}
+  .irow{display:grid;grid-template-columns:1.5fr 1fr .6fr .5fr;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #F5F3FC;font-size:12px;color:#3C3C52}
+  .irow:last-child{border-bottom:none}
+  .ihdr span{font-size:8.5px;color:#9694AE;letter-spacing:.1em}
+  .ihdr{padding-bottom:8px}
+  .isrc{display:flex;align-items:center;gap:9px;font-weight:600}
+  .ilogo{width:22px;height:22px;flex:none;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-style:normal}
+  .iscope{color:#7d7b96}
+  .irec{color:#12121C;font-weight:600;font-size:11px}
+  .istat{display:flex;align-items:center;gap:7px;font-size:10.5px;color:#3C9A62;font-weight:600}
+  .ibadge{width:14px;height:14px;flex:none;border-radius:4px;background:#3C9A62;display:flex;align-items:center;justify-content:center;animation:tickin 3.6s cubic-bezier(.34,1.56,.64,1) infinite}
+  .ilive{font-size:9.5px;font-weight:700;color:#3C9A62;animation:syncfade 1.9s ease-in-out infinite}
+  .ifoot{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:20px;padding-top:18px;border-top:1px solid #F1EFFA}
+  .ispark{display:flex;align-items:flex-end;gap:5px;height:34px;flex:1;max-width:230px}
+  .ispark i{flex:1;height:var(--h);border-radius:3px;background:#C4BBFB;transform-origin:bottom;animation:sway 2.4s ease-in-out infinite}
+  .ispark i:nth-child(4),.ispark i:nth-child(6),.ispark i:nth-child(8){background:#5B4BF5}
+  .ispark i:nth-child(2){animation-duration:3.1s;animation-delay:.2s}
+  .ispark i:nth-child(3){animation-duration:2.6s;animation-delay:.4s}
+  .ispark i:nth-child(4){animation-duration:3.4s;animation-delay:.1s}
+  .ispark i:nth-child(5){animation-duration:2.9s;animation-delay:.5s}
+  .ispark i:nth-child(6){animation-duration:3.2s;animation-delay:.3s}
+  .ispark i:nth-child(7){animation-duration:2.7s;animation-delay:.6s}
+  .ispark i:nth-child(8){animation-duration:3.6s;animation-delay:.15s}
+  @media (max-width:960px){.iwrap{grid-template-columns:1fr;gap:34px}.irow{grid-template-columns:1.4fr .8fr .6fr}.irow span:nth-child(2){display:none}}
+  .dwrap{background:#EFEDF9;border-radius:20px;padding:14px}
+  .dgrid{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:12px}
+  .dcell{background:#fff;border-radius:14px;padding:26px 28px 30px;transition:transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s ease}
+  .dcell:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(18,18,28,.09)}
+  .dnum{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:#EDEAFE;color:#5B4BF5;font-size:10px;font-weight:600;transition:background .35s ease,color .35s ease}
+  .dcell:hover .dnum{background:#5B4BF5;color:#fff}
+  @media (max-width:640px){.dgrid{grid-template-columns:1fr}}
+  .ul{position:relative;display:inline-block}
+  .ul::after{content:"";position:absolute;left:-.02em;right:-.02em;bottom:.02em;height:.14em;background:#C9F24D;border-radius:99px;z-index:-1}
+  .row{border-bottom:1px solid #E5E3F0;transition:background .3s ease,padding .3s ease}
+  .row:hover{background:#fff}
+  .row:hover .rowN{color:#5B4BF5}
+  .row:hover .rowArr{opacity:1;transform:translateX(0)}
+  .rowArr{opacity:0;transform:translateX(-8px);transition:opacity .3s ease,transform .3s ease}
+  .rowN{transition:color .3s ease}
+  .drow{border-bottom:1px solid #22223a;transition:background .3s ease}
+  .drow:hover{background:#15152a}
+  .drow:hover .drowN{color:#8B7CFF}
+  .drowN{transition:color .3s ease}
+  .chip:hover{background:#EDEAFE;border-color:#C4BBFB;color:#4536d6;transform:translateY(-2px)}
+  .tick:hover .tickd{background:#5B4BF5;transform:scale(1.25)}
+  .tickd{transition:background .3s ease,transform .3s ease}
+  .price:hover .pnum{color:#5B4BF5}
+  .pnum{transition:color .3s ease}
+  .reveal{opacity:1;transform:none}
+  @keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  @supports (animation-timeline: view()){
+    section h2,section > div > p,section > div > .mono,.dcell,.pstep,.drow,.tick,.row,.stat4 > div{animation:riseIn linear both;animation-timeline:view();animation-range:entry 8% cover 26%}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal{animation:none!important;opacity:1!important;transform:none!important}}
+  @keyframes blip{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
+  @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  .mnu{display:none}
+  .mnu:target{display:flex}
+  .mlink:hover{color:#C9F24D!important;padding-left:14px!important}
+  .mlink{transition:color .25s ease,padding-left .25s ease}
+  .menubtn:hover{border-color:#5B4BF5;transform:translateY(-1px)}
+  .scell{transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+  .scell:hover{transform:translateY(-6px)}
+  .plineup:hover .ptrack{animation-play-state:paused}
+  .scrollarrow{transition:background .35s ease,color .35s ease,border-color .35s ease,transform .16s ease-out}
+  .btn.plain{position:relative}
+  .btn.plain::after{content:"";position:absolute;left:4px;right:4px;bottom:9px;height:1.5px;background:#12121C;transform:scaleX(0);transform-origin:left;transition:transform .32s cubic-bezier(.22,.61,.36,1)}
+  .btn.plain:hover::after{transform:scaleX(1)}
+  .btn.plain:hover{transform:none}
+  .btn.plainw{position:relative}
+  .btn.plainw::after{content:"";position:absolute;left:6px;right:6px;bottom:11px;height:1.5px;background:#C9F24D;transform:scaleX(0);transform-origin:left;transition:transform .32s cubic-bezier(.22,.61,.36,1)}
+  .btn.plainw:hover{transform:none;color:#C9F24D!important}
+  .btn.plainw:hover::after{transform:scaleX(1)}
+  .btn.plainl:hover{transform:translateX(4px)}
+  .chipd{transition:background .3s ease,border-color .3s ease,color .3s ease,transform .3s ease}
+  .chipd:hover{background:#C9F24D;border-color:#C9F24D;color:#12121C!important;transform:translateY(-2px)}
+  .flink:hover{color:#C9F24D!important}
+  .sico{transition:border-color .3s ease,color .3s ease,background .3s ease,transform .3s ease}
+  .sico:hover{border-color:#C9F24D;color:#12121C!important;background:#C9F24D;transform:translateY(-3px)}
+  .tcard img{transition:transform .55s cubic-bezier(.22,.61,.36,1)}
+  .tcard:hover img{transform:scale(1.05)}
+  .tcard .trate{transition:transform .3s ease}
+  .tcard:hover .trate{transform:scale(1.06)}
+  @media (max-width:980px){.tgrid{grid-template-columns:1fr 1fr!important}}
+  @media (max-width:560px){.tgrid{grid-template-columns:1fr!important}}
+  .pstep .picon{transition:transform .3s cubic-bezier(.22,.61,.36,1),box-shadow .3s ease}
+  .pstep:hover .picon{transform:scale(1.08);box-shadow:0 12px 28px rgba(91,75,245,.24)}
+  @media (max-width:980px){
+    .pgrid{grid-template-columns:1fr!important;gap:52px!important}
+    .statcard{position:static!important;width:auto!important;margin-left:0!important;margin-bottom:20px!important}
+    .mediabox{min-height:340px!important}
+    .pgrid > div:last-child > p{margin-bottom:28px!important}
+  }
+  .scrollarrow:hover{background:#C9F24D!important;color:#12121C!important;border-color:#C9F24D}
+  .scrollarrow:hover .arrowlabel{color:rgba(255,255,255,.9)}
+  .scrollarrow .arrowico{animation:nudge 1.9s ease-in-out infinite}
+  .scrollarrow:hover .arrowico{animation-duration:.9s}
+  .arrowring circle{animation:ringdash 9s linear infinite}
+  @keyframes nudge{0%,100%{transform:translateY(-5px);opacity:.75}50%{transform:translateY(6px);opacity:1}}
+  @keyframes ringdash{to{stroke-dashoffset:-160}}
+  .w{opacity:1;transition:opacity .45s cubic-bezier(.33,1,.68,1)}
+  .storytext.scrollfx .w{opacity:.1}
+  .storytext .w.lime{opacity:1!important}
+  .magnet{transition:transform .35s cubic-bezier(.22,.61,.36,1)}
+  @media (prefers-reduced-motion:reduce){.w{opacity:1!important}}
+</style>
+<script src="./interactions.js"></script>
+<style>
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}.pcell,.plineup div{animation:none!important}}
+  @media (max-width:1080px){.nav-links{display:none!important}.navburger{display:flex!important}}
+  @media (max-width:1000px){.costline{white-space:normal!important}}
+  @media (max-width:1080px){
+    .navlogo svg{width:30px!important;height:30px!important}
+    .navlogo > .dsp{font-size:17px!important}
+    .navlogo .lsub{font-size:9.5px!important}
+    .navbtn{font-size:13.5px!important;padding:12px 18px!important;white-space:nowrap!important}
+  }
+  @media (max-width:520px){
+    .navlogo > .dsp{font-size:15.5px!important}
+    .navlogo .lsub{font-size:9px!important}
+    .navbtn{font-size:12.5px!important;padding:11px 15px!important}
+  }
+  @media (max-width:1080px){
+    .mediabox{margin-left:0!important;margin-right:0!important;max-width:100%!important}
+  }
+  @media (max-width:900px){
+    /* keep the real-cost headline on three lines */
+    .costhead .dbr{display:none}
+    .costhead br.mbr{display:inline}
+    /* nav: logo + CTA only */
+    .navburger{display:none!important}
+    /* banner: centered title + buttons, 4 lines */
+    .hero-copy{text-align:center!important;padding-top:56px!important}
+    .hero-h1{font-size:clamp(27px,7.4vw,38px)!important;line-height:1.16!important;margin-left:auto!important;margin-right:auto!important}
+    #top .mono{justify-content:center!important}
+    .hero-copy .cta-row{justify-content:center!important;flex-direction:column!important;align-items:center!important;gap:12px!important;margin-bottom:80px!important}
+    .hero-copy .btn{width:100%!important;max-width:320px!important;justify-content:center!important}
+    .mplineup{padding:22px 0 26px!important}
+    /* second section: shallower arc, tighter padding, ring matches circle */
+    #story > div{padding:110px 0 118px!important}
+    #story > svg{height:52px!important}
+    #top > div > svg[viewBox="0 0 1440 150"],#top svg[viewBox="0 0 1440 150"]{height:64px!important}
+    .scrollarrow{width:104px!important;height:104px!important;bottom:-52px!important;margin-left:-52px!important}
+    .arrowring{inset:-8px!important;width:auto!important;height:auto!important}
+    .arrowlabel{top:-24px!important}
+    /* analytical: stack the four metrics */
+    .stat4{grid-template-columns:1fr!important}
+    .stat4 > div{border-right:none!important;border-bottom:1px solid #EDEAF8!important}
+    .stat4 > div:last-child{border-bottom:none!important}
+    /* arcs edge to edge — no side padding on arc sections */
+    #story,#top,.arcsec{padding-left:0!important;padding-right:0!important}
+    .arcsec > div > div{padding-left:20px!important;padding-right:20px!important}
+    /* capabilities: keep classroom tiles inside the panel */
+    .vtile{min-width:0!important}
+    .pnl-f{width:86%!important;left:7%!important}
+    /* integrations: squeeze the dashboard, don't reflow it */
+    .mint{grid-template-columns:1fr!important;gap:30px!important}
+    .ishot{width:100%!important;overflow:hidden!important}
+    .ishot .ibody{padding:16px 14px 18px!important}
+    .mint .irow{grid-template-columns:1.5fr 1fr .6fr .5fr!important;gap:8px!important;font-size:10px!important}
+    .mint .irow span:nth-child(2){display:block!important}
+    .mint .ihdr span{font-size:7px!important}
+    .mint .istats{gap:6px!important}
+    .mint .istats .dsp{font-size:15px!important}
+    .mint .ilogo{width:18px!important;height:18px!important;font-size:7.5px!important}
+    .mint .isrc{gap:6px!important}
+    .mint .ispark{max-width:130px!important;height:26px!important}
+  }
+  @media (max-width:1000px){.costline{white-space:normal!important}}
+  @media (max-width:900px){
+    body{overflow-x:hidden}
+    .g3,.g4,.g2{grid-template-columns:1fr!important}
+    .g3 > div,.g4 > div{grid-column:auto!important}
+    .sec-h2{font-size:clamp(28px,7.4vw,36px)!important}
+    section{padding-left:20px!important;padding-right:20px!important}
+    .row-in{grid-template-columns:1fr!important;gap:10px!important}
+    .split{flex-direction:column!important;align-items:flex-start!important;gap:12px!important}
+  }
+</style>
+</helmet>
+
+<!-- MENU OVERLAY -->
+<div id="menu" class="mnu" style="position:fixed;inset:0;z-index:90;background:#0D0D16;color:#fff;flex-direction:column;padding:26px 30px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:50px">
+    <span class="dsp" style="display:flex;flex-direction:column;line-height:1;font-weight:700;font-size:18px">Eduvanta<span class="lsub" style="font-size:10.5px;font-weight:700;letter-spacing:.01em;color:#8B7CFF;margin-top:2px">Works</span></span>
+    <a href="#top" aria-label="Close" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></a>
+  </div>
+  <div style="display:flex;flex-direction:column;max-width:820px;margin:0 auto;width:100%">
+    <a href="#problems" class="dsp mlink" style="font-weight:600;font-size:clamp(30px,5vw,52px);color:#fff;padding:18px 0;border-bottom:1px solid #22223a">Problems we solve</a>
+    <a href="#build" class="dsp mlink" style="font-weight:600;font-size:clamp(30px,5vw,52px);color:#fff;padding:18px 0;border-bottom:1px solid #22223a">What we build</a>
+    <a href="#integrations" class="dsp mlink" style="font-weight:600;font-size:clamp(30px,5vw,52px);color:#fff;padding:18px 0;border-bottom:1px solid #22223a">Integrations</a>
+    <a href="#process" class="dsp mlink" style="font-weight:600;font-size:clamp(30px,5vw,52px);color:#fff;padding:18px 0;border-bottom:1px solid #22223a">How we work</a>
+    <a href="#team" class="dsp mlink" style="font-weight:600;font-size:clamp(30px,5vw,52px);color:#fff;padding:18px 0;border-bottom:1px solid #22223a">Team</a>
+    <a href="#cta" style="margin-top:36px;display:inline-flex;align-self:flex-start;align-items:center;gap:10px;background:#C9F24D;color:#12121C;font-weight:700;font-size:16px;padding:15px 28px;border-radius:99px">Book a scoping call</a>
+  </div>
+</div>
+
+<!-- HERO (centered, portrait lineup) -->
+<section id="top" style="position:relative;padding:16px 0 0;background:#F1F5FF;overflow:hidden">
+  <div class="gridfx" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;mask-image:radial-gradient(ellipse 78% 82% at 50% 32%,#000 42%,transparent 100%)"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(to right,#6E8FE0 1px,transparent 1px),linear-gradient(to bottom,#6E8FE0 1px,transparent 1px);background-size:72px 72px;opacity:.085;mask-image:radial-gradient(ellipse 78% 82% at 50% 32%,#000 42%,transparent 100%);pointer-events:none"></div>
+
+  <!-- NAV (inside hero so the grid runs behind it) -->
+  <div style="padding:22px 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;z-index:60;background:transparent">
+    <div class="navlogo" style="display:flex;align-items:center;gap:6px">
+      <svg width="34" height="34" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="9" fill="#5B4BF5"/><path d="M20 10.5h-8.5v11H20M11.5 16h7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="dsp" style="display:flex;flex-direction:column;line-height:1;font-weight:700;font-size:18px">Eduvanta<span class="lsub" style="font-size:10.5px;font-weight:700;letter-spacing:.01em;color:#5B4BF5;margin-top:2px">Works</span></span>
+    </div>
+    <nav class="nav-links" style="display:flex;align-items:center;gap:30px;font-size:14.5px;font-weight:500;color:#5A5A72;white-space:nowrap;flex:none">
+      <a href="#problems" class="navl" style="color:#5A5A72">Problems we solve</a>
+      <a href="#build" class="navl" style="color:#5A5A72">What we build</a>
+      <a href="#integrations" class="navl" style="color:#5A5A72">Integrations</a>
+      <a href="#process" class="navl" style="color:#5A5A72">How we work</a>
+      <a href="#team" class="navl" style="color:#5A5A72">Team</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:14px">
+      <a href="#menu" aria-label="Menu" class="menubtn navburger" style="display:none;align-items:center;gap:10px;background:transparent;border:1px solid #C9C3E6;cursor:pointer;padding:11px 18px;border-radius:99px">
+        <span style="display:flex;flex-direction:column;gap:4px">
+          <span style="display:block;width:16px;height:2px;border-radius:2px;background:#12121C"></span>
+          <span style="display:block;width:16px;height:2px;border-radius:2px;background:#12121C"></span>
+        </span>
+        <span class="mono" style="font-size:11.5px;font-weight:600;letter-spacing:.08em;color:#12121C">MENU</span>
+      </a>
+      <a href="#cta" class="btn magnet navbtn" style="display:inline-flex;align-items:center;background:transparent;color:#12121C;font-weight:600;font-size:15.5px;padding:15px 26px;border-radius:99px;border:1px solid #C9C3E6">Book a scoping call</a>
+    </div>
+  </div>
+  <div class="hero-copy" style="max-width:1200px;margin:0 auto;padding:86px 26px 0;text-align:left;position:relative;z-index:2">
+    <div class="mono" style="display:inline-flex;align-items:center;color:#4536d6;font-size:11.5px;font-weight:600;letter-spacing:.12em;margin-bottom:26px">
+      PRODUCT ENGINEERING FOR EDTECH
+    </div>
+    <h1 class="dsp hero-h1" style="font-weight:600;font-size:clamp(42px,6.6vw,92px);line-height:1.06;margin:0 0 38px;max-width:1120px">
+      We don't write software.<br>We ship EdTech products<br>that learners finish.
+    </h1>
+    <div class="cta-row" style="display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-start;margin-bottom:104px">
+      <a href="#cta" class="btn solid magnet" style="display:inline-flex;align-items:center;gap:10px;background:#5B4BF5;color:#fff;font-weight:600;font-size:15.5px;padding:15px 26px;border-radius:99px;box-shadow:0 10px 24px rgba(91,75,245,.24)">
+        Book a scoping call
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#problems" class="btn plain" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#12121C;font-weight:600;font-size:15.5px;padding:15px 4px;border-radius:99px">See what we solve
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#12121C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- PRODUCT SCREEN MARQUEE -->
+  <div class="plineup mplineup" style="position:relative;z-index:2;overflow:hidden;padding:44px 0 52px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
+    <div class="ptrack" style="display:flex;width:max-content;align-items:center;animation:marq 42s linear infinite">
+
+      <div style="display:flex;gap:22px;padding-right:22px">
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#C9F24D;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.12)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px"><span style="font-weight:700;font-size:12.5px;color:#12121C">Course builder</span><span class="mono" style="font-size:9px;font-weight:600;color:#4536d6;background:#EDEAFE;padding:3px 8px;border-radius:99px">DRAFT</span></div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <div style="display:flex;align-items:center;gap:9px"><span style="width:18px;height:18px;border-radius:5px;background:#5B4BF5"></span><span style="font-size:11px;color:#3C3C52;flex:1">Module 1 · Foundations</span><span class="mono" style="font-size:9px;color:#9694AE">6 units</span></div>
+              <div style="display:flex;align-items:center;gap:9px"><span style="width:18px;height:18px;border-radius:5px;background:#8B7CFF"></span><span style="font-size:11px;color:#3C3C52;flex:1">Module 2 · Practice</span><span class="mono" style="font-size:9px;color:#9694AE">9 units</span></div>
+              <div style="display:flex;align-items:center;gap:9px"><span style="width:18px;height:18px;border-radius:5px;border:2px dashed #D9D4F5"></span><span style="font-size:11px;color:#9694AE;flex:1">Add module</span></div>
+            </div>
+            <div style="margin-top:auto;height:5px;border-radius:99px;background:#EDEAFE;overflow:hidden"><div style="width:64%;height:100%;background:#5B4BF5"></div></div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#DDE7FF;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.14)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="font-weight:700;font-size:12.5px;color:#12121C;margin-bottom:13px">AI tutor</div>
+            <div style="display:flex;gap:8px;margin-bottom:9px"><span style="width:22px;height:22px;flex:none;border-radius:7px;background:#EDEAFE"></span><div style="background:#F7F6FD;border-radius:9px 9px 9px 3px;padding:7px 10px;font-size:10.5px;color:#3C3C52">Why did I get question 4 wrong?</div></div>
+            <div style="display:flex;gap:8px;flex-direction:row-reverse"><span style="width:22px;height:22px;flex:none;border-radius:7px;background:#DDD7FE"></span><div style="background:#5B4BF5;color:#fff;border-radius:9px 9px 3px 9px;padding:7px 10px;font-size:10.5px">You inverted the ratio — revisit §2.4.</div></div>
+            <div class="mono" style="margin-top:auto;font-size:9px;color:#9694AE">GROUNDED IN YOUR CURRICULUM</div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#C9F24D;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.14)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px"><span style="font-weight:700;font-size:12.5px;color:#12121C">Live classroom</span><span class="mono" style="font-size:9px;font-weight:600;color:#3C9A62">● LIVE</span></div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+              <div style="aspect-ratio:4/3;border-radius:6px;background:#5B4BF5"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#C4BBFB"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#DDD7FE"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#C4BBFB"></div>
+              <div style="aspect-ratio:4/3;border-radius:6px;background:#EDEAFE"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#C4BBFB"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#DDD7FE"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#EDEAFE"></div>
+            </div>
+            <div class="mono" style="margin-top:auto;font-size:9px;color:#9694AE">32 LEARNERS · 4 BREAKOUTS</div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#DDE7FF;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.14)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="font-weight:700;font-size:12.5px;color:#12121C;margin-bottom:14px">Cohort analytics</div>
+            <div style="display:flex;align-items:flex-end;gap:7px;height:86px">
+              <div style="flex:1;height:36%;background:#DDD7FE;border-radius:5px"></div><div style="flex:1;height:54%;background:#C4BBFB;border-radius:5px"></div><div style="flex:1;height:45%;background:#DDD7FE;border-radius:5px"></div><div style="flex:1;height:72%;background:#5B4BF5;border-radius:5px"></div><div style="flex:1;height:88%;background:#5B4BF5;border-radius:5px"></div><div style="flex:1;height:61%;background:#C4BBFB;border-radius:5px"></div>
+            </div>
+            <div style="margin-top:auto;display:flex;justify-content:space-between"><span class="mono" style="font-size:9px;color:#9694AE">COMPLETION</span><span class="mono" style="font-size:9px;font-weight:600;color:#5B4BF5">+34%</span></div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#C9F24D;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.12)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="font-weight:700;font-size:12.5px;color:#12121C;margin-bottom:13px">Integration health</div>
+            <div style="display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid #F1EFFA;margin-bottom:9px"><span style="width:24px;height:24px;border-radius:7px;background:#EDEAFE;color:#4536d6;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">Cv</span><span style="font-size:10.5px;color:#3C3C52;flex:1">Canvas LTI 1.3</span><span class="mono" style="font-size:9px;color:#3C9A62">2m</span></div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:24px;height:24px;border-radius:7px;background:#EDEAFE;color:#4536d6;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">Cl</span><span style="font-size:10.5px;color:#3C3C52;flex:1">Clever SIS sync</span><span class="mono" style="font-size:9px;color:#3C9A62">9m</span></div>
+            <div class="mono" style="margin-top:auto;font-size:9px;color:#9694AE">14,208 LEARNER RECORDS</div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#DDE7FF;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.12)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="font-weight:700;font-size:12.5px;color:#12121C;margin-bottom:14px">Assessment insight</div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <svg width="66" height="66" viewBox="0 0 66 66" style="flex:none"><circle cx="33" cy="33" r="26" fill="none" stroke="#EDEAFE" stroke-width="7"/><circle cx="33" cy="33" r="26" fill="none" stroke="#5B4BF5" stroke-width="7" stroke-linecap="round" stroke-dasharray="128 164" transform="rotate(-90 33 33)"/><text x="33" y="38" text-anchor="middle" font-size="14" font-weight="700" fill="#12121C" font-family="DM Sans">78%</text></svg>
+              <div style="display:flex;flex-direction:column;gap:6px;font-size:10px;color:#3C3C52"><span>Mastery · Ratios</span><span>Item difficulty · 0.42</span><span style="color:#b16a45">3 items flagged</span></div>
+            </div>
+            <div class="mono" style="margin-top:auto;font-size:9px;color:#9694AE">NEXT: RE-TEACH §2.4</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:22px;padding-right:22px" aria-hidden="true">
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#C9F24D;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.12)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px"><span style="font-weight:700;font-size:12.5px;color:#12121C">Course builder</span><span class="mono" style="font-size:9px;font-weight:600;color:#4536d6;background:#EDEAFE;padding:3px 8px;border-radius:99px">DRAFT</span></div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <div style="display:flex;align-items:center;gap:9px"><span style="width:18px;height:18px;border-radius:5px;background:#5B4BF5"></span><span style="font-size:11px;color:#3C3C52;flex:1">Module 1 · Foundations</span><span class="mono" style="font-size:9px;color:#9694AE">6 units</span></div>
+              <div style="display:flex;align-items:center;gap:9px"><span style="width:18px;height:18px;border-radius:5px;background:#8B7CFF"></span><span style="font-size:11px;color:#3C3C52;flex:1">Module 2 · Practice</span><span class="mono" style="font-size:9px;color:#9694AE">9 units</span></div>
+              <div style="display:flex;align-items:center;gap:9px"><span style="width:18px;height:18px;border-radius:5px;border:2px dashed #D9D4F5"></span><span style="font-size:11px;color:#9694AE;flex:1">Add module</span></div>
+            </div>
+            <div style="margin-top:auto;height:5px;border-radius:99px;background:#EDEAFE;overflow:hidden"><div style="width:64%;height:100%;background:#5B4BF5"></div></div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#DDE7FF;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.14)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="font-weight:700;font-size:12.5px;color:#12121C;margin-bottom:13px">AI tutor</div>
+            <div style="display:flex;gap:8px;margin-bottom:9px"><span style="width:22px;height:22px;flex:none;border-radius:7px;background:#EDEAFE"></span><div style="background:#F7F6FD;border-radius:9px 9px 9px 3px;padding:7px 10px;font-size:10.5px;color:#3C3C52">Why did I get question 4 wrong?</div></div>
+            <div style="display:flex;gap:8px;flex-direction:row-reverse"><span style="width:22px;height:22px;flex:none;border-radius:7px;background:#DDD7FE"></span><div style="background:#5B4BF5;color:#fff;border-radius:9px 9px 3px 9px;padding:7px 10px;font-size:10.5px">You inverted the ratio — revisit §2.4.</div></div>
+            <div class="mono" style="margin-top:auto;font-size:9px;color:#9694AE">GROUNDED IN YOUR CURRICULUM</div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#C9F24D;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.14)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px"><span style="font-weight:700;font-size:12.5px;color:#12121C">Live classroom</span><span class="mono" style="font-size:9px;font-weight:600;color:#3C9A62">● LIVE</span></div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+              <div style="aspect-ratio:4/3;border-radius:6px;background:#5B4BF5"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#C4BBFB"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#DDD7FE"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#C4BBFB"></div>
+              <div style="aspect-ratio:4/3;border-radius:6px;background:#EDEAFE"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#C4BBFB"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#DDD7FE"></div><div style="aspect-ratio:4/3;border-radius:6px;background:#EDEAFE"></div>
+            </div>
+            <div class="mono" style="margin-top:auto;font-size:9px;color:#9694AE">32 LEARNERS · 4 BREAKOUTS</div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#DDE7FF;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.14)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="font-weight:700;font-size:12.5px;color:#12121C;margin-bottom:14px">Cohort analytics</div>
+            <div style="display:flex;align-items:flex-end;gap:7px;height:86px">
+              <div style="flex:1;height:36%;background:#DDD7FE;border-radius:5px"></div><div style="flex:1;height:54%;background:#C4BBFB;border-radius:5px"></div><div style="flex:1;height:45%;background:#DDD7FE;border-radius:5px"></div><div style="flex:1;height:72%;background:#5B4BF5;border-radius:5px"></div><div style="flex:1;height:88%;background:#5B4BF5;border-radius:5px"></div><div style="flex:1;height:61%;background:#C4BBFB;border-radius:5px"></div>
+            </div>
+            <div style="margin-top:auto;display:flex;justify-content:space-between"><span class="mono" style="font-size:9px;color:#9694AE">COMPLETION</span><span class="mono" style="font-size:9px;font-weight:600;color:#5B4BF5">+34%</span></div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#C9F24D;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.12)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="font-weight:700;font-size:12.5px;color:#12121C;margin-bottom:13px">Integration health</div>
+            <div style="display:flex;align-items:center;gap:9px;padding-bottom:9px;border-bottom:1px solid #F1EFFA;margin-bottom:9px"><span style="width:24px;height:24px;border-radius:7px;background:#EDEAFE;color:#4536d6;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">Cv</span><span style="font-size:10.5px;color:#3C3C52;flex:1">Canvas LTI 1.3</span><span class="mono" style="font-size:9px;color:#3C9A62">2m</span></div>
+            <div style="display:flex;align-items:center;gap:9px"><span style="width:24px;height:24px;border-radius:7px;background:#EDEAFE;color:#4536d6;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">Cl</span><span style="font-size:10.5px;color:#3C3C52;flex:1">Clever SIS sync</span><span class="mono" style="font-size:9px;color:#3C9A62">9m</span></div>
+            <div class="mono" style="margin-top:auto;font-size:9px;color:#9694AE">14,208 LEARNER RECORDS</div>
+          </div>
+        </div>
+        <div class="scell" style="width:300px;flex:none;padding:8px;background:#DDE7FF;border-radius:20px;box-shadow:0 16px 36px rgba(18,18,28,.12)">
+          <div style="background:#fff;border-radius:14px;padding:15px;height:196px;display:flex;flex-direction:column">
+            <div style="font-weight:700;font-size:12.5px;color:#12121C;margin-bottom:14px">Assessment insight</div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <svg width="66" height="66" viewBox="0 0 66 66" style="flex:none"><circle cx="33" cy="33" r="26" fill="none" stroke="#EDEAFE" stroke-width="7"/><circle cx="33" cy="33" r="26" fill="none" stroke="#5B4BF5" stroke-width="7" stroke-linecap="round" stroke-dasharray="128 164" transform="rotate(-90 33 33)"/><text x="33" y="38" text-anchor="middle" font-size="14" font-weight="700" fill="#12121C" font-family="DM Sans">78%</text></svg>
+              <div style="display:flex;flex-direction:column;gap:6px;font-size:10px;color:#3C3C52"><span>Mastery · Ratios</span><span>Item difficulty · 0.42</span><span style="color:#b16a45">3 items flagged</span></div>
+            </div>
+            <div class="mono" style="margin-top:auto;font-size:9px;color:#9694AE">NEXT: RE-TEACH §2.4</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ORGANIC CURVED DIVIDER -->
+  <div style="position:relative;z-index:3;margin-top:52px;line-height:0">
+    <svg viewBox="0 0 1440 150" preserveAspectRatio="none" style="display:block;width:100%;height:130px">
+      <path d="M0,42 C480,124 960,124 1440,42 L1440,150 L0,150 Z" fill="#5B4BF5" stroke="none"/>
+    </svg>
+  </div>
+</section>
+
+<!-- NARRATIVE PAUSE -->
+<section id="story" style="position:relative;margin-top:-1px">
+  <div style="background:#5B4BF5;color:#fff;padding:210px 0 200px;position:relative">
+    <div class="storywrap" style="max-width:1200px;margin:0 auto;padding:0 32px;text-align:center">
+      <p class="dsp storytext" style="font-weight:500;font-size:clamp(30px,3.7vw,56px);line-height:1.28;margin:0 auto;max-width:1020px">
+        <span class="w">We've</span> <span class="w">built</span> <span class="w lime" style="color:#C9F24D">15+</span> <span class="w lime" style="color:#C9F24D">EdTech</span> <span class="w lime" style="color:#C9F24D">platforms</span> <span class="w">—</span> <span class="w">LMS,</span> <span class="w">virtual</span> <span class="w">classrooms,</span> <span class="w">AI</span> <span class="w">tutors,</span> <span class="w">assessment</span> <span class="w">engines.</span> <span class="w">We</span> <span class="w">know</span> <span class="w">your</span> <span class="w">retention</span> <span class="w">curves</span> <span class="w">and</span> <span class="w">enterprise</span> <span class="w">blockers</span> <span class="w lime" style="color:#C9F24D">before</span> <span class="w lime" style="color:#C9F24D">you</span> <span class="w lime" style="color:#C9F24D">brief</span> <span class="w lime" style="color:#C9F24D">us.</span>
+      </p>
+      <a href="#problems" class="scrollarrow magnetc" aria-label="Scroll to problems" style="position:absolute;left:50%;bottom:-73px;margin-left:-73px;z-index:4;display:flex;width:146px;height:146px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.32);background:#5B4BF5;align-items:center;justify-content:center;color:#fff">
+        <svg class="arrowring" viewBox="0 0 168 168" style="position:absolute;inset:-11px;width:168px;height:168px;pointer-events:none"><circle cx="84" cy="84" r="83" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1" stroke-dasharray="7 9"/></svg>
+        <span class="mono arrowlabel" style="position:absolute;top:-30px;font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.6)">SCROLL</span>
+        <svg class="arrowico" width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M12 4v15M5.5 12.5 12 19l6.5-6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 110" preserveAspectRatio="none" style="display:block;width:100%;height:96px;margin-top:-1px"><path d="M0,110 C480,34 960,34 1440,110 L1440,0 L0,0 Z" fill="#5B4BF5"/></svg>
+</section>
+
+<!-- STATS -->
+<section style="max-width:1200px;margin:0 auto;padding:112px 26px 0">
+  <div class="stat4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:left;border:1px solid #D8D3EF;border-radius:24px;overflow:hidden;background:#fff">
+    <div style="padding:34px 30px;border-right:1px solid #EDEAF8"><div class="dsp" style="font-weight:700;font-size:44px;line-height:1;margin-bottom:10px">15<span style="color:#5B4BF5">+</span></div><div class="mono" style="font-size:11px;color:#9694AE;letter-spacing:.06em">EDTECH PRODUCTS SHIPPED</div></div>
+    <div style="padding:34px 30px;border-right:1px solid #EDEAF8"><div class="dsp" style="font-weight:700;font-size:44px;line-height:1;margin-bottom:10px">SIS<span style="color:#5B4BF5">+</span>LTI</div><div class="mono" style="font-size:11px;color:#9694AE;letter-spacing:.06em">CANVAS, CLEVER, CLASSLINK</div></div>
+    <div style="padding:34px 30px;border-right:1px solid #EDEAF8"><div class="dsp" style="font-weight:700;font-size:44px;line-height:1;margin-bottom:10px">Seed<span style="color:#5B4BF5">–</span>A</div><div class="mono" style="font-size:11px;color:#9694AE;letter-spacing:.06em">WHERE WE DO OUR BEST WORK</div></div>
+    <div style="padding:34px 30px"><div class="dsp" style="font-weight:700;font-size:44px;line-height:1;margin-bottom:10px">Day<span style="color:#5B4BF5"> 1</span></div><div class="mono" style="font-size:11px;color:#9694AE;letter-spacing:.06em">DOMAIN CONTEXT, NO RAMP-UP</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE STRIP -->
+<section style="padding:64px 0 96px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)">
+  <div style="display:flex;width:max-content;animation:marq 30s linear infinite">
+    <div style="display:flex;gap:54px;padding-right:54px;font-size:26px;font-weight:600;color:#BFBBD6;white-space:nowrap" class="dsp">
+      <span>K–12 platforms</span><span style="color:#C9F24D">◆</span><span>Higher-ed LMS</span><span style="color:#C9F24D">◆</span><span>Corporate L&amp;D</span><span style="color:#C9F24D">◆</span><span>Test prep</span><span style="color:#C9F24D">◆</span><span>Bootcamps</span><span style="color:#C9F24D">◆</span><span>Assessment</span><span style="color:#C9F24D">◆</span>
+    </div>
+    <div style="display:flex;gap:54px;padding-right:54px;font-size:26px;font-weight:600;color:#BFBBD6;white-space:nowrap" class="dsp" aria-hidden="true">
+      <span>K–12 platforms</span><span style="color:#C9F24D">◆</span><span>Higher-ed LMS</span><span style="color:#C9F24D">◆</span><span>Corporate L&amp;D</span><span style="color:#C9F24D">◆</span><span>Test prep</span><span style="color:#C9F24D">◆</span><span>Bootcamps</span><span style="color:#C9F24D">◆</span><span>Assessment</span><span style="color:#C9F24D">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING -->
+<section style="max-width:1000px;margin:0 auto;padding:0 26px 108px;text-align:center">
+  <div class="mono" style="font-size:11px;color:#5B4BF5;letter-spacing:.12em;margin-bottom:24px">THE REAL COST</div>
+  <h2 class="dsp sec-h2 costhead" style="font-weight:600;font-size:clamp(32px,4.4vw,54px);line-height:1.24;margin:0 0 30px">Generalist dev shops <span class="hicon" style="background:#5B4BF5"><svg width="0.52em" height="0.52em" viewBox="0 0 24 24" fill="none"><path d="M4 8h16l-1.2 11a1 1 0 0 1-1 .9H6.2a1 1 0 0 1-1-.9L4 8Z" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></span> learn<br class="dbr">EdTech on<br class="mbr"> your budget <span class="hicon" style="background:#C9F24D"><svg width="0.52em" height="0.52em" viewBox="0 0 24 24" fill="none"><path d="M12 4v16" stroke="#12121C" stroke-width="1.9" stroke-linecap="round"/><path d="M15.5 8.2C15.5 6.7 14 5.8 12 5.8s-3.5.9-3.5 2.4S10 10.6 12 11s3.5 1.3 3.5 2.8-1.5 2.4-3.5 2.4-3.5-.9-3.5-2.4" stroke="#12121C" stroke-width="1.9" stroke-linecap="round"/></svg></span>.</h2>
+  <p style="font-size:17.5px;line-height:1.7;color:#5A5A72;max-width:720px;margin:0 auto 18px">Every EdTech company hits the same walls — and separately pays to discover them. Onboarding drop-off, completion that stalls, live classes that don't scale, enterprise deals blocked on integrations and compliance.</p>
+  <p class="costline" style="font-style:italic;font-weight:500;font-size:17.5px;line-height:1.7;color:#5B4BF5;max-width:900px;margin:26px auto 0;white-space:nowrap">Those aren't engineering problems. They're domain problems — and we've solved them before.</p>
+</section>
+
+<!-- PROBLEMS -->
+<section id="problems" class="arcsec" style="position:relative;margin-top:0">
+  <svg viewBox="0 0 1440 110" preserveAspectRatio="none" style="display:block;width:100%;height:92px;margin-bottom:-1px"><path d="M0,110 C480,34 960,34 1440,110 Z" fill="#0D0D16"/></svg>
+  <div style="background:#0D0D16;color:#fff;padding:96px 0 110px">
+    <div style="max-width:1140px;margin:0 auto;padding:0 26px">
+      <div style="text-align:center;margin-bottom:64px">
+        <div class="mono" style="font-size:11px;color:#8B7CFF;letter-spacing:.12em;margin-bottom:22px">WHAT KEEPS BREAKING</div>
+        <h2 class="dsp sec-h2" style="font-weight:600;font-size:clamp(34px,4.6vw,58px);line-height:1.06;margin:0 0 20px">The problems only<br>EdTech companies have.</h2>
+        <p style="font-size:16.5px;line-height:1.65;color:#9C9CB8;max-width:560px;margin:0 auto">Ten failure modes we've shipped against repeatedly. If two or more sit on your roadmap, we've already built the answer.</p>
+      </div>
+      <div style="border-top:1px solid #22223a">
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">01</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">Engagement drops after onboarding</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">CHURN BEFORE VALUE</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Learners sign up, poke around, and never return. We instrument the drop-off and build the nudge loops that pull them back.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">02</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">Course completion rates are low</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">WEAK OUTCOMES STORY</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Adaptive pathways, spaced repetition, and progress mechanics that get people to the last module.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">03</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">Live classes are hard to scale</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">INFRA COSTS EXPLODE</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Virtual classrooms with breakouts, recordings, attendance, and moderation that hold at 10,000 seats.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">04</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">Assessments lack learning insight</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">SCORES, NOT SIGNAL</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Item analysis, mastery mapping, and question banks that tell teachers what to do next Monday.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">05</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">Too many learner types to support</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">ROADMAP SPRAWL</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Students, instructors, admins, and parents in one product without four disconnected codebases.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">06</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">LMS is hard to customise at scale</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">EVERY DEAL IS A FORK</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Modular architecture and tenant-level configuration, so enterprise asks stop becoming custom builds.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">07</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">AI competitors ship features fast</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">LOSING THE DEMO</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">AI tutors, content generation, auto-grading, and feedback loops — grounded in your curriculum, not hallucinated.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">08</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">Schools require SIS / LTI</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">DEALS STALL AT IT REVIEW</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Canvas, Moodle, Blackboard, Google Classroom, Clever, ClassLink, LTI 1.3 — shipped and certified.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">09</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">Learning analytics are limited</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">NO RENEWAL EVIDENCE</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Cohort dashboards and outcome data that make the renewal conversation obvious.</p>
+        </div></div>
+        <div class="drow" style="padding:26px 20px;border-bottom:1px solid #22223a"><div class="row-in" style="display:grid;grid-template-columns:58px 1.05fr 1.25fr;gap:26px;align-items:baseline">
+          <span class="mono drowN" style="font-size:12px;color:#4a4a68">10</span>
+          <div><div class="dsp" style="font-weight:600;font-size:27px;margin-bottom:8px">Content creation is slow</div><div class="mono" style="font-size:10.5px;color:#C9F24D;letter-spacing:.06em">SUPPLY BOTTLENECK</div></div>
+          <p style="font-size:14.5px;line-height:1.65;color:#9C9CB8;margin:0">Authoring tools, AI-assisted drafting, and review workflows that let your SMEs move without engineering.</p>
+        </div></div>
+      </div>
+      <div style="text-align:center;padding-top:48px">
+        <a href="#cta" class="btn plainl" style="display:inline-flex;align-items:center;gap:10px;color:#C9F24D;font-weight:600;font-size:16.5px">Recognise three or more? Bring us the list
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#C9F24D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 110" preserveAspectRatio="none" style="display:block;width:100%;height:92px;margin-top:-1px"><path d="M0,0 C480,76 960,76 1440,0 Z" fill="#0D0D16"/></svg>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section id="build" style="max-width:1200px;margin:0 auto;padding:104px 26px 40px">
+  <div style="text-align:center;margin-bottom:56px">
+    <div class="mono" style="font-size:11px;color:#5B4BF5;letter-spacing:.12em;margin-bottom:22px">CAPABILITIES</div>
+    <h2 class="dsp sec-h2" style="font-weight:600;font-size:clamp(34px,4.6vw,58px);line-height:1.06;margin:0 0 20px">What we build<br>into your product.</h2>
+    <p style="font-size:16.5px;line-height:1.65;color:#5A5A72;max-width:540px;margin:0 auto">Six building blocks that map straight onto the failure modes above.</p>
+  </div>
+
+  <div class="fwrap">
+    <div class="fgrid">
+      <div class="fcard">
+        <div class="fart">
+          <div class="pnl pnl-b" style="width:62%;height:60%;left:5%;top:5%;transform:rotate(-5deg)"></div>
+          <div class="pnl pnl-f" style="transform:rotate(2deg)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px"><span class="mono" style="font-size:8px;color:#9694AE;letter-spacing:.1em">AI TUTOR</span><span class="mono" style="font-size:7.5px;font-weight:700;color:#5B4BF5">thinking<span class="kpi-dots"><i>.</i><i>.</i><i>.</i></span></span></div>
+            <div style="display:flex;gap:6px;margin-bottom:8px"><span style="width:17px;height:17px;flex:none;border-radius:5px;background:#EDEAFE"></span><div style="background:#F5F3FE;border-radius:7px 7px 7px 2px;padding:5px 8px;font-size:8.5px;color:#3C3C52">Why was Q4 wrong?</div></div>
+            <div style="display:flex;gap:6px;flex-direction:row-reverse;margin-bottom:10px"><span style="width:17px;height:17px;flex:none;border-radius:5px;background:#DDD7FE"></span><div style="background:#5B4BF5;color:#fff;border-radius:7px 7px 2px 7px;padding:5px 8px;font-size:8.5px">You inverted the ratio<span class="kpi-caret">|</span></div></div>
+            <div style="display:flex;gap:10px;padding-top:9px;border-top:1px solid #F1EFFA">
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">MASTERY LIFT</div><div class="dsp kpi-count" data-to="41" data-suffix="%" style="font-weight:700;font-size:14px;color:#5B4BF5">41%</div></div>
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">HINTS SAVED</div><div class="dsp kpi-count" data-to="3.2" data-suffix="k" style="font-weight:700;font-size:14px;color:#12121C">3.2k</div></div>
+            </div>
+          </div>
+        </div>
+        <h3 class="dsp" style="font-weight:600;font-size:22px;margin:0 0 9px">AI learning layer</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0;max-width:320px">Tutors, auto-graders, and grounded feedback that adapt to each learner — built on your curriculum.</p>
+      </div>
+      <div class="fcard">
+        <div class="fart">
+          <div class="pnl pnl-b" style="width:60%;height:56%;right:5%;top:5%;transform:rotate(7deg)"></div>
+          <div class="pnl pnl-f" style="transform:rotate(-2.5deg)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:9px;font-weight:700;color:#12121C">Cohort pathway</span><span class="mono" style="font-size:7px;color:#5B4BF5;background:#EDEAFE;padding:2px 5px;border-radius:99px">3 TENANTS</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px">
+              <div><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:8px;color:#3C3C52">Foundations</span><span class="mono kpi-pct" data-to="100" style="font-size:7px;color:#9694AE">100%</span></div><div class="kpi-bar" style="height:5px;border-radius:99px;background:#EDEAFE;overflow:hidden"><i class="kpi-fill" style="--w:100%;animation-delay:0s;display:block;height:100%;background:#5B4BF5;border-radius:99px"></i></div></div>
+              <div><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:8px;color:#3C3C52">Practice sets</span><span class="mono kpi-pct" data-to="86" style="font-size:7px;color:#9694AE">86%</span></div><div class="kpi-bar" style="height:5px;border-radius:99px;background:#EDEAFE;overflow:hidden"><i class="kpi-fill" style="--w:86%;animation-delay:.28s;display:block;height:100%;background:#8B7CFF;border-radius:99px"></i></div></div>
+              <div><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:8px;color:#3C3C52">Assessment</span><span class="mono kpi-pct" data-to="42" style="font-size:7px;color:#9694AE">42%</span></div><div class="kpi-bar" style="height:5px;border-radius:99px;background:#EDEAFE;overflow:hidden"><i class="kpi-fill" style="--w:42%;animation-delay:.56s;display:block;height:100%;background:#C4BBFB;border-radius:99px"></i></div></div>
+            </div>
+            <div style="display:flex;gap:10px;padding-top:9px;border-top:1px solid #F1EFFA">
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">SEATS LIVE</div><div class="dsp kpi-count" data-to="16240" style="font-weight:700;font-size:14px;color:#12121C">16,240</div></div>
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">CONFIG, NO FORK</div><div class="dsp kpi-count" data-to="100" data-suffix="%" style="font-weight:700;font-size:14px;color:#5B4BF5">100%</div></div>
+            </div>
+          </div>
+        </div>
+        <h3 class="dsp" style="font-weight:600;font-size:22px;margin:0 0 9px">Modular LMS</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0;max-width:320px">Courses, cohorts, and certification as composable modules you reconfigure per tenant.</p>
+      </div>
+      <div class="fcard">
+        <div class="fart">
+          <div class="pnl pnl-b" style="width:62%;height:54%;left:4%;top:7%;transform:rotate(5deg)"></div>
+          <div class="pnl pnl-f" style="transform:rotate(-2deg)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:9px;font-weight:700;color:#12121C">Live session</span><span class="mono" style="font-size:7px;font-weight:700;color:#D2453F">● REC <span class="kpi-timer" data-from="2468">41:08</span></span></div>
+            <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;margin-bottom:9px">
+              <div class="vtile spk s0" style="aspect-ratio:4/3;border-radius:4px;background:#5B4BF5;padding:1.5px"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div><div class="vtile" style="aspect-ratio:4/3;border-radius:4px;background:#C4BBFB;padding:1.5px"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div><div class="vtile" style="aspect-ratio:4/3;border-radius:4px;background:#DDD7FE;padding:1.5px"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div><div class="vtile spk s1" style="aspect-ratio:4/3;border-radius:4px;background:#C4BBFB;padding:1.5px"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div><div class="vtile" style="aspect-ratio:4/3;border-radius:4px;background:#EDEAFE;padding:1.5px"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div>
+              <div class="vtile" style="aspect-ratio:4/3;border-radius:4px;background:#DDD7FE;padding:1.5px"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div><div class="vtile spk s2" style="aspect-ratio:4/3;border-radius:4px;background:#C4BBFB;padding:1.5px"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div><div class="vtile" style="aspect-ratio:4/3;border-radius:4px;background:#EDEAFE;padding:1.5px"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div><div class="vtile" style="aspect-ratio:4/3;border-radius:4px;background:#C4BBFB;padding:1.5px"><img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div><div class="vtile" style="aspect-ratio:4/3;border-radius:4px;background:#DDD7FE;padding:1.5px"><img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=200&h=150&q=70&auto=format&fit=crop&crop=faces" alt="" style="display:block;width:100%;height:100%;object-fit:cover;border-radius:3px"></div>
+            </div>
+            <div style="display:flex;gap:10px;padding-top:9px;border-top:1px solid #F1EFFA">
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">CONCURRENT</div><div class="dsp kpi-count" data-to="10000" data-suffix="+" style="font-weight:700;font-size:14px;color:#12121C">10,000+</div></div>
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">JOIN TIME</div><div class="dsp kpi-count" data-to="1.4" data-suffix="s" style="font-weight:700;font-size:14px;color:#5B4BF5">1.4s</div></div>
+            </div>
+          </div>
+        </div>
+        <h3 class="dsp" style="font-weight:600;font-size:22px;margin:0 0 9px">Virtual classroom</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0;max-width:320px">Streaming, breakouts, attendance, and recordings that stay stable when the cohort triples.</p>
+      </div>
+      <div class="fcard">
+        <div class="fart">
+          <div class="pnl pnl-b" style="width:58%;height:56%;right:5%;top:5%;transform:rotate(-7deg)"></div>
+          <div class="pnl pnl-f" style="transform:rotate(2deg)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px"><span style="font-size:9px;font-weight:700;color:#12121C">Outcomes</span><span class="mono" style="font-size:7px;color:#3C9A62;background:#E6F6EC;padding:2px 5px;border-radius:99px">AUDIT READY</span></div>
+            <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
+              <div class="kpi-bars" style="flex:1;display:flex;align-items:flex-end;gap:4px;height:44px">
+                <i style="--h:34%"></i><i style="--h:52%"></i><i style="--h:43%"></i><i style="--h:70%"></i><i style="--h:88%"></i><i style="--h:62%"></i>
+              </div>
+              <svg class="kpi-ring" width="42" height="42" viewBox="0 0 46 46" style="flex:none"><circle cx="23" cy="23" r="18" fill="none" stroke="#EDEAFE" stroke-width="5"/><circle class="kpi-ringp" cx="23" cy="23" r="18" fill="none" stroke="#5B4BF5" stroke-width="5" stroke-linecap="round" stroke-dasharray="113" transform="rotate(-90 23 23)"/><text x="23" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#12121C" font-family="DM Sans">96%</text></svg>
+            </div>
+            <div style="display:flex;gap:10px;padding-top:9px;border-top:1px solid #F1EFFA">
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">COMPLETION</div><div class="dsp kpi-count" data-to="34" data-prefix="+" data-suffix="%" style="font-weight:700;font-size:14px;color:#5B4BF5">+34%</div></div>
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">IT REVIEW</div><div class="dsp kpi-count" data-to="11" data-suffix=" days" style="font-weight:700;font-size:14px;color:#12121C">11 days</div></div>
+            </div>
+          </div>
+        </div>
+        <h3 class="dsp" style="font-weight:600;font-size:22px;margin:0 0 9px">Analytics &amp; dashboards</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0;max-width:320px">Cohort progress, mastery, and outcome reporting your customers can take to their board.</p>
+      </div>
+      <div class="fcard">
+        <div class="fart">
+          <div class="pnl pnl-b" style="width:60%;height:56%;left:5%;top:5%;transform:rotate(6deg)"></div>
+          <div class="pnl pnl-f" style="transform:rotate(-2deg)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:9px;font-weight:700;color:#12121C">Integration health</span><span class="mono kpi-sync" style="font-size:7px;font-weight:700;color:#3C9A62">SYNCING</span></div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px">
+              <div style="display:flex;align-items:center;gap:7px"><span style="width:18px;height:18px;flex:none;border-radius:5px;background:#EDEAFE;color:#4536d6;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center">Cv</span><span style="font-size:8px;color:#3C3C52;flex:1">Canvas LTI 1.3</span><span class="kpi-tick" style="width:13px;height:13px;flex:none;border-radius:4px;background:#3C9A62;display:flex;align-items:center;justify-content:center;animation-delay:0s"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div style="display:flex;align-items:center;gap:7px"><span style="width:18px;height:18px;flex:none;border-radius:5px;background:#EDEAFE;color:#4536d6;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center">Cl</span><span style="font-size:8px;color:#3C3C52;flex:1">Clever SIS sync</span><span class="kpi-tick" style="width:13px;height:13px;flex:none;border-radius:4px;background:#3C9A62;display:flex;align-items:center;justify-content:center;animation-delay:.45s"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+              <div style="display:flex;align-items:center;gap:7px"><span style="width:18px;height:18px;flex:none;border-radius:5px;background:#EDEAFE;color:#4536d6;font-size:7px;font-weight:700;display:flex;align-items:center;justify-content:center">SS</span><span style="font-size:8px;color:#3C3C52;flex:1">SAML SSO</span><span class="kpi-tick" style="width:13px;height:13px;flex:none;border-radius:4px;background:#3C9A62;display:flex;align-items:center;justify-content:center;animation-delay:.9s"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            </div>
+            <div style="display:flex;gap:10px;padding-top:9px;border-top:1px solid #F1EFFA">
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">RECORDS SYNCED</div><div class="dsp kpi-count" data-to="14208" style="font-weight:700;font-size:14px;color:#12121C">14,208</div></div>
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">LTI CERTIFIED</div><div class="dsp kpi-count" data-to="8" data-suffix=" LMS" style="font-weight:700;font-size:14px;color:#5B4BF5">8 LMS</div></div>
+            </div>
+          </div>
+        </div>
+        <h3 class="dsp" style="font-weight:600;font-size:22px;margin:0 0 9px">Integrations &amp; SSO</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0;max-width:320px">Canvas, Clever, ClassLink, LTI 1.3 and district SSO — certified and shipped, not stubbed.</p>
+      </div>
+      <div class="fcard">
+        <div class="fart">
+          <div class="pnl pnl-b" style="width:58%;height:54%;right:5%;top:6%;transform:rotate(-6deg)"></div>
+          <div class="pnl pnl-f" style="transform:rotate(2deg)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:9px;font-weight:700;color:#12121C">Content pipeline</span><span class="mono" style="font-size:7px;color:#5B4BF5;background:#EDEAFE;padding:2px 5px;border-radius:99px">AI DRAFT</span></div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">
+              <div class="kpi-line" style="height:5px;border-radius:99px;background:#EDEAFE;width:92%"></div>
+              <div class="kpi-line" style="height:5px;border-radius:99px;background:#EDEAFE;width:74%;animation-delay:.18s"></div>
+              <div class="kpi-line" style="height:5px;border-radius:99px;background:#EDEAFE;width:84%;animation-delay:.36s"></div>
+              <div class="kpi-line" style="height:5px;border-radius:99px;background:#EDEAFE;width:56%;animation-delay:.54s"></div>
+            </div>
+            <div style="display:flex;gap:10px;padding-top:9px;border-top:1px solid #F1EFFA">
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">DRAFT TIME</div><div class="dsp kpi-count" data-to="72" data-prefix="−" data-suffix="%" style="font-weight:700;font-size:14px;color:#5B4BF5">−72%</div></div>
+              <div style="flex:1"><div class="mono" style="font-size:7px;color:#9694AE;margin-bottom:3px">SME REVIEW</div><div class="dsp kpi-count" data-to="2" data-suffix=" days" style="font-weight:700;font-size:14px;color:#12121C">2 days</div></div>
+            </div>
+          </div>
+        </div>
+        <h3 class="dsp" style="font-weight:600;font-size:22px;margin:0 0 9px">Content &amp; authoring</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0;max-width:320px">Authoring tools and AI-assisted drafting so your SMEs ship material without engineering.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section id="integrations" style="max-width:1160px;margin:0 auto;padding:104px 26px 40px">
+  <div style="text-align:center">
+    <div class="mono" style="font-size:11px;color:#5B4BF5;letter-spacing:.12em;margin-bottom:22px">INTEGRATIONS</div>
+    <h2 class="dsp sec-h2" style="font-weight:600;font-size:clamp(34px,4.4vw,54px);line-height:1.07;margin:0 0 20px">The integrations that<br>unblock enterprise deals.</h2>
+    <p style="font-size:16.5px;line-height:1.65;color:#5A5A72;max-width:580px;margin:0 auto 46px">Schools and universities won't buy without SIS and LTI. We ship the plumbing procurement asks for — not the blocker your last build stalled on.</p>
+  </div>
+
+  <div class="iwrap mint">
+    <div class="ilist">
+      <div class="iitem"><span class="idot"></span><div><div class="dsp" style="font-weight:600;font-size:16px;margin-bottom:5px">Canvas &amp; Moodle</div><p style="font-size:13.5px;line-height:1.55;color:#5A5A72;margin:0">Deep-linked courses with roster sync and grade passback.</p></div></div>
+      <div class="iitem"><span class="idot"></span><div><div class="dsp" style="font-weight:600;font-size:16px;margin-bottom:5px">Blackboard &amp; Google Classroom</div><p style="font-size:13.5px;line-height:1.55;color:#5A5A72;margin:0">Assignments and submissions flowing both ways, no CSV drops.</p></div></div>
+      <div class="iitem"><span class="idot"></span><div><div class="dsp" style="font-weight:600;font-size:16px;margin-bottom:5px">Clever &amp; ClassLink</div><p style="font-size:13.5px;line-height:1.55;color:#5A5A72;margin:0">District SIS rostering that provisions thousands of seats overnight.</p></div></div>
+      <div class="iitem"><span class="idot"></span><div><div class="dsp" style="font-weight:600;font-size:16px;margin-bottom:5px">LTI 1.3 &amp; Advantage</div><p style="font-size:13.5px;line-height:1.55;color:#5A5A72;margin:0">Certified launch, Names &amp; Roles, and Assignment &amp; Grade services.</p></div></div>
+      <div class="iitem"><span class="idot"></span><div><div class="dsp" style="font-weight:600;font-size:16px;margin-bottom:5px">SAML / SSO &amp; SCIM</div><p style="font-size:13.5px;line-height:1.55;color:#5A5A72;margin:0">Just-in-time provisioning against the district identity provider.</p></div></div>
+    </div>
+
+    <div class="mock ishot">
+      <div class="ibar">
+        <span class="idots"><i></i><i></i><i></i></span>
+        <span class="mono" style="font-size:10px;color:#9694AE">app.eduvantaworks.dev / integrations</span>
+      </div>
+      <div class="ibody">
+        <div class="ihead">
+          <div>
+            <div class="dsp" style="font-weight:600;font-size:17px;color:#12121C">Integration health</div>
+            <div class="mono" style="font-size:9.5px;color:#9694AE;margin-top:3px">LAST FULL SYNC 4 MIN AGO</div>
+          </div>
+          <span class="mono" style="font-size:9.5px;font-weight:700;color:#3C9A62;background:#E6F6EC;padding:5px 10px;border-radius:99px">ALL SYSTEMS SYNCED</span>
+        </div>
+
+        <div class="istats">
+          <div><div class="mono" style="font-size:8.5px;color:#9694AE;margin-bottom:5px">CONNECTIONS</div><div class="dsp" style="font-weight:700;font-size:20px;color:#12121C">14</div></div>
+          <div><div class="mono" style="font-size:8.5px;color:#9694AE;margin-bottom:5px">RECORDS</div><div class="dsp" style="font-weight:700;font-size:20px;color:#12121C">14,208</div></div>
+          <div><div class="mono" style="font-size:8.5px;color:#9694AE;margin-bottom:5px">GRADES PUSHED</div><div class="dsp" style="font-weight:700;font-size:20px;color:#12121C">3,942</div></div>
+          <div><div class="mono" style="font-size:8.5px;color:#9694AE;margin-bottom:5px">FAILURES</div><div class="dsp" style="font-weight:700;font-size:20px;color:#3C9A62">0</div></div>
+        </div>
+
+        <div class="irows">
+          <div class="irow ihdr"><span class="mono">SOURCE</span><span class="mono">SCOPE</span><span class="mono">RECORDS</span><span class="mono">STATUS</span></div>
+          <div class="irow">
+            <span class="isrc"><i class="ilogo" style="background:#EDEAFE;color:#4536d6">Cv</i>Canvas LTI 1.3</span>
+            <span class="iscope">Roster · Grades</span>
+            <span class="mono irec">8,410</span>
+            <span class="istat"><b class="ibadge"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></b>2m</span>
+          </div>
+          <div class="irow">
+            <span class="isrc"><i class="ilogo" style="background:#EDEAFE;color:#4536d6">Cl</i>Clever SIS</span>
+            <span class="iscope">Rostering</span>
+            <span class="mono irec">4,196</span>
+            <span class="istat"><b class="ibadge" style="animation-delay:.4s"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></b>9m</span>
+          </div>
+          <div class="irow">
+            <span class="isrc"><i class="ilogo" style="background:#EDEAFE;color:#4536d6">Gc</i>Google Classroom</span>
+            <span class="iscope">Assignments</span>
+            <span class="mono irec">1,602</span>
+            <span class="istat"><b class="ibadge" style="animation-delay:.8s"><svg width="8" height="8" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></b>12m</span>
+          </div>
+          <div class="irow">
+            <span class="isrc"><i class="ilogo" style="background:#EDEAFE;color:#4536d6">SS</i>SAML SSO · district IdP</span>
+            <span class="iscope">JIT provisioning</span>
+            <span class="mono irec">—</span>
+            <span class="istat"><span class="mono ilive">● LIVE</span></span>
+          </div>
+        </div>
+
+        <div class="ifoot">
+          <span class="mono" style="font-size:9px;color:#9694AE">SYNC THROUGHPUT · LAST 24H</span>
+          <span class="ispark"><i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:48%"></i><i style="--h:74%"></i><i style="--h:56%"></i><i style="--h:88%"></i><i style="--h:66%"></i><i style="--h:80%"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCIPLINE -->
+<section style="max-width:1060px;margin:0 auto;padding:96px 26px 90px">
+  <div style="text-align:center;margin-bottom:52px">
+    <div class="mono" style="font-size:11px;color:#5B4BF5;letter-spacing:.12em;margin-bottom:22px">THE FUNDAMENTALS</div>
+    <h2 class="dsp sec-h2" style="font-weight:600;font-size:clamp(34px,4.4vw,54px);line-height:1.07;margin:0">The engineering discipline<br>every product company needs.</h2>
+  </div>
+  <div class="dwrap">
+    <div class="dgrid">
+      <div class="dcell">
+        <span class="mono dnum">01</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">Architecture modernisation</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">Move off the monolith that makes every feature a three-week release.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">02</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">Dedicated product teams</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">A senior squad that owns outcomes, not a rotating pool of contractors.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">03</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">Platform reconstruction</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">Rebuild the pieces holding back scale without stopping the roadmap.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">04</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">Automated testing &amp; CI/CD</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">Release during term time without holding your breath.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">05</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">Cloud scaling</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">Handle the September enrolment spike without tripling spend.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">06</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">Product workflow tools</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">Internal admin and ops tooling so your team stops living in spreadsheets.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">07</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">BI &amp; analytics</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">Instrument the product so decisions come from data, not opinion.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">08</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">Secure architecture</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">Student data handled to the standard districts audit against.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">09</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">API &amp; integrations</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">A public API partners can build on, not a webhook per customer.</p>
+      </div>
+      <div class="dcell">
+        <span class="mono dnum">10</span>
+        <div class="dsp" style="font-weight:600;font-size:19px;margin:14px 0 8px">AI roadmap</div>
+        <p style="font-size:14.5px;line-height:1.6;color:#5A5A72;margin:0">A staged plan for AI features that ship, not a demo that never lands.</p>
+      </div>
+  </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="max-width:1200px;margin:0 auto;padding:96px 26px 60px">
+  <div style="text-align:center;margin-bottom:56px">
+    <div class="mono" style="font-size:11px;color:#5B4BF5;letter-spacing:.12em;margin-bottom:22px">HOW WE WORK</div>
+    <h2 class="dsp sec-h2" style="font-weight:600;font-size:clamp(34px,4.4vw,54px);line-height:1.07;margin:0 0 20px">A dedicated product team,<br>embedded in your roadmap.</h2>
+    <p style="font-size:16.5px;line-height:1.7;color:#5A5A72;max-width:620px;margin:0 auto">We don't hand you a discovery deck and disappear. From the first call to the enterprise rollout, the same senior squad stays on your product — measuring completion and retention, not story points.</p>
+  </div>
+
+  <div class="psteps">
+    <div class="pstep">
+      <span class="picon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#5B4BF5" stroke-width="1.9"/><path d="m20 20-3.6-3.6" stroke="#5B4BF5" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+      <div class="mono" style="font-size:10px;color:#5B4BF5;letter-spacing:.12em;margin:16px 0 8px">01 · SCOPE</div>
+      <div class="dsp" style="font-weight:600;font-size:19px;margin:0 0 8px">Pressure-test the problem</div>
+      <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0">A 90-minute session where we challenge your roadmap, not nod at it. You leave with the real problem ranked.</p>
+    </div>
+    <div class="pstep">
+      <span class="picon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.4" stroke="#5B4BF5" stroke-width="1.9"/><path d="M3 20a6 6 0 0 1 12 0M16 5a3.4 3.4 0 0 1 0 6.6M21 20a5 5 0 0 0-4-4.9" stroke="#5B4BF5" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+      <div class="mono" style="font-size:10px;color:#5B4BF5;letter-spacing:.12em;margin:16px 0 8px">02 · EMBED</div>
+      <div class="dsp" style="font-weight:600;font-size:19px;margin:0 0 8px">Stand up the team</div>
+      <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0">Senior engineers in your stand-ups, your tooling, your Slack — inside a week, with domain context on day one.</p>
+    </div>
+    <div class="pstep">
+      <span class="picon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 16 10 10l3.5 3.5L20 7" stroke="#5B4BF5" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h5v5" stroke="#5B4BF5" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div class="mono" style="font-size:10px;color:#5B4BF5;letter-spacing:.12em;margin:16px 0 8px">03 · SHIP</div>
+      <div class="dsp" style="font-weight:600;font-size:19px;margin:0 0 8px">Release in tight loops</div>
+      <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0">Two-week increments behind flags, measured against completion and retention — not story points.</p>
+    </div>
+    <div class="pstep">
+      <span class="picon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3Z" stroke="#5B4BF5" stroke-width="1.9" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#5B4BF5" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div class="mono" style="font-size:10px;color:#5B4BF5;letter-spacing:.12em;margin:16px 0 8px">04 · SCALE</div>
+      <div class="dsp" style="font-weight:600;font-size:19px;margin:0 0 8px">Harden for enterprise</div>
+      <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0">Integrations, compliance, and load work so the next district deal doesn't need a rebuild.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- TEAM / RATES -->
+<section id="team" style="max-width:1240px;margin:0 auto;padding:104px 26px 90px">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:58px">
+    <div>
+      <div class="mono" style="font-size:11px;color:#5B4BF5;letter-spacing:.12em;margin-bottom:22px">THE TEAM</div>
+      <h2 class="dsp sec-h2" style="font-weight:600;font-size:clamp(34px,4.4vw,54px);line-height:1.06;margin:0">EdTech engineers,<br>from $20/hour.</h2>
+    </div>
+    <p style="font-size:16.5px;line-height:1.65;color:#5A5A72;max-width:400px;margin:0">Senior engineers with EdTech product experience — no ramp-up, no learning your domain on your budget.</p>
+  </div>
+
+  <div class="tgrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px">
+
+    <div class="tcard" style="position:relative">
+      <div style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/3.4;background:#EDEAFE;border:3px solid #C9F24D">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&amp;q=80&amp;auto=format&amp;fit=crop" alt="Full-stack EdTech developer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <span class="trate mono" style="position:absolute;top:14px;right:14px;background:#C9F24D;color:#12121C;font-size:12px;font-weight:700;padding:7px 12px;border-radius:99px">$20/hr</span>
+      </div>
+      <div class="dsp" style="font-weight:600;font-size:19px;line-height:1.25;margin:18px 2px 7px">Full-Stack EdTech Developer</div>
+      <div class="mono" style="font-size:10px;color:#5B4BF5;letter-spacing:.08em;margin:0 2px 10px">REACT · NODE · PYTHON</div>
+      <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0 2px">LMS, course delivery, and assessment engines end to end.</p>
+    </div>
+
+    <div class="tcard" style="position:relative">
+      <div style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/3.4;background:#EDEAFE;border:3px solid #C9F24D">
+        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&amp;q=80&amp;auto=format&amp;fit=crop" alt="AI and ML engineer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <span class="trate mono" style="position:absolute;top:14px;right:14px;background:#C9F24D;color:#12121C;font-size:12px;font-weight:700;padding:7px 12px;border-radius:99px">$25/hr</span>
+      </div>
+      <div class="dsp" style="font-weight:600;font-size:19px;line-height:1.25;margin:18px 2px 7px">AI / ML Engineer</div>
+      <div class="mono" style="font-size:10px;color:#5B4BF5;letter-spacing:.08em;margin:0 2px 10px">LLM · RAG · EVALS</div>
+      <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0 2px">Tutors, auto-grading, and adaptive models grounded in your curriculum.</p>
+    </div>
+
+    <div class="tcard" style="position:relative">
+      <div style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/3.4;background:#EDEAFE;border:3px solid #C9F24D">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&amp;q=80&amp;auto=format&amp;fit=crop" alt="Platform and DevOps engineer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <span class="trate mono" style="position:absolute;top:14px;right:14px;background:#C9F24D;color:#12121C;font-size:12px;font-weight:700;padding:7px 12px;border-radius:99px">$30/hr</span>
+      </div>
+      <div class="dsp" style="font-weight:600;font-size:19px;line-height:1.25;margin:18px 2px 7px">Platform / DevOps Engineer</div>
+      <div class="mono" style="font-size:10px;color:#5B4BF5;letter-spacing:.08em;margin:0 2px 10px">AWS · CI/CD · SRE</div>
+      <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0 2px">Cloud scaling, CI/CD, and uptime through enrolment peaks.</p>
+    </div>
+
+    <div class="tcard" style="position:relative">
+      <div style="position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/3.4;background:#EDEAFE;border:3px solid #C9F24D">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&amp;q=80&amp;auto=format&amp;fit=crop" alt="Integrations engineer" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <span class="trate mono" style="position:absolute;top:14px;right:14px;background:#C9F24D;color:#12121C;font-size:12px;font-weight:700;padding:7px 12px;border-radius:99px">$20/hr</span>
+      </div>
+      <div class="dsp" style="font-weight:600;font-size:19px;line-height:1.25;margin:18px 2px 7px">Integrations Engineer</div>
+      <div class="mono" style="font-size:10px;color:#5B4BF5;letter-spacing:.08em;margin:0 2px 10px">LTI · SIS · SSO</div>
+      <p style="font-size:14px;line-height:1.6;color:#5A5A72;margin:0 2px">Canvas, Clever, ClassLink, LTI 1.3, and district SSO shipped to spec.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="arcsec" style="position:relative">
+  <svg viewBox="0 0 1440 110" preserveAspectRatio="none" style="display:block;width:100%;height:92px;margin-bottom:-1px"><path d="M0,110 C480,34 960,34 1440,110 Z" fill="#5B4BF5"/></svg>
+  <div style="background:#5B4BF5;color:#fff;padding:40px 0 130px;position:relative;overflow:hidden">
+    <div class="gridfx2" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;mask-image:radial-gradient(ellipse 70% 76% at 50% 50%,#000 40%,transparent 100%)"></div>
+    <div style="position:absolute;inset:0;background-image:linear-gradient(to right,#fff 1px,transparent 1px),linear-gradient(to bottom,#fff 1px,transparent 1px);background-size:72px 72px;opacity:.07;mask-image:radial-gradient(ellipse 70% 76% at 50% 50%,#000 40%,transparent 100%);pointer-events:none"></div>
+    <div style="max-width:1000px;margin:0 auto;padding:0 26px;text-align:center;position:relative;z-index:2">
+      <h2 class="dsp sec-h2" style="font-weight:600;font-size:clamp(36px,5.2vw,66px);line-height:1.05;margin:0 0 22px">Bring us the roadmap<br>you can't ship fast enough.</h2>
+      <p style="font-size:17.5px;line-height:1.65;color:#DDD7FE;max-width:560px;margin:0 auto 40px">A 30-minute scoping call. We'll pressure-test your biggest EdTech engineering problem and tell you exactly how we'd approach it — before you commit to anything.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn magnet" style="display:inline-flex;align-items:center;gap:10px;background:#C9F24D;color:#12121C;font-weight:700;font-size:16px;padding:16px 30px;border-radius:99px">
+          Book a scoping call
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#12121C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="mailto:hello@eduvantaworks.dev" class="btn plainw" style="display:inline-flex;align-items:center;gap:10px;color:#fff;font-weight:600;font-size:16px;padding:16px 6px">hello@eduvantaworks.dev</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0D0D16;color:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:76px 26px 30px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:44px;flex-wrap:wrap;margin-bottom:60px">
+      <div style="max-width:400px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:18px">
+          <svg width="38" height="38" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="9" fill="#5B4BF5"/><path d="M20 10.5h-8.5v11H20M11.5 16h7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="dsp" style="display:flex;flex-direction:column;line-height:1;font-weight:700;font-size:20px">Eduvanta<span class="lsub" style="font-size:11.5px;font-weight:700;letter-spacing:.01em;color:#8B7CFF;margin-top:2px">Works</span></span>
+        </div>
+        <p style="font-size:15px;line-height:1.7;color:#9C9CB8;margin:0">Product engineering for EdTech companies who need to ship faster than their roadmap allows.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span class="mono" style="font-size:10.5px;color:#5A5A78;letter-spacing:.12em">FOLLOW US</span>
+        <div style="display:flex;gap:12px">
+          <a href="#" class="sico" aria-label="LinkedIn" style="width:46px;height:46px;border-radius:50%;border:1px solid #22223a;display:flex;align-items:center;justify-content:center;color:#9C9CB8">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H3.56V21h3.38V8.5ZM5.25 3a1.96 1.96 0 1 0 0 3.92 1.96 1.96 0 0 0 0-3.92ZM21 14.1c0-3.5-1.87-5.13-4.36-5.13-2.01 0-2.91 1.1-3.41 1.88V8.5H9.85c.04.95 0 12.5 0 12.5h3.38v-6.98c0-.31.02-.62.11-.85.25-.62.82-1.27 1.77-1.27 1.25 0 1.75.95 1.75 2.35V21H21v-6.9Z"/></svg>
+          </a>
+          <a href="#" class="sico" aria-label="X" style="width:46px;height:46px;border-radius:50%;border:1px solid #22223a;display:flex;align-items:center;justify-content:center;color:#9C9CB8">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.53 3h3.2l-6.99 7.99L22 21h-6.44l-5.04-6.6L4.75 21H1.54l7.48-8.55L2 3h6.6l4.56 6.03L17.53 3Zm-1.12 16.06h1.77L7.67 4.84H5.77l10.64 14.22Z"/></svg>
+          </a>
+          <a href="#" class="sico" aria-label="GitHub" style="width:46px;height:46px;border-radius:50%;border:1px solid #22223a;display:flex;align-items:center;justify-content:center;color:#9C9CB8">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+          </a>
+          <a href="mailto:hello@eduvantaworks.dev" class="sico" aria-label="Email" style="width:46px;height:46px;border-radius:50%;border:1px solid #22223a;display:flex;align-items:center;justify-content:center;color:#9C9CB8">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 7.5 8.5 5.5 8.5-5.5" stroke="currentColor" stroke-width="1.8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="dsp" style="font-weight:700;font-size:clamp(30px,9.1vw,126px);line-height:1;white-space:nowrap;color:#26264a;letter-spacing:-.05em;margin-bottom:26px;user-select:none">Eduvanta Works</div>
+    <div class="mono norev" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11.5px;color:#5A5A78;border-top:1px solid #22223a;padding-top:22px">
+      <span>EDTECH PRODUCT ENGINEERING · UK / US / IN</span>
+      <span>© 2026 EDUVANTA WORKS</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  menuRef = React.createRef();
+  componentDidMount() {}
+  litLines() {
+    const lines = Array.prototype.slice.call(document.querySelectorAll('.sline'));
+    if (!lines.length) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const box = document.querySelector('.storytext');
+    if (box) box.classList.add('scrollfx');
+    const upd = () => {
+      const vh = window.innerHeight;
+      for (let i = 0; i < lines.length; i++) {
+        const r = lines[i].getBoundingClientRect();
+        const c = r.top + r.height / 2;
+        const p = Math.min(Math.max((vh * 0.86 - c) / (vh * 0.34), 0), 1);
+        lines[i].style.opacity = String(0.3 + 0.7 * p);
+      }
+      this._lraf = requestAnimationFrame(upd);
+    };
+    upd();
+  }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
