@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#2E3B26"/><path d="M42 30 L42 72 L52 62 L57 60 L70 60 Z" fill="#ffffff" stroke="#43597d" stroke-width="4" stroke-linejoin="round"/></svg>
+</template>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#F4F2EE;color:#14130E;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  a{color:#2E3B26;text-decoration:none;}
+  a:hover{color:#1E34C4;}
+  ::selection{background:#2E3B26;color:#fff;}
+  .gen-btn .gen-label{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width .62s cubic-bezier(0.22,1,0.36,1),opacity .4s ease .06s,margin .62s cubic-bezier(0.22,1,0.36,1);}
+  .gen-btn:hover .gen-label{max-width:200px;opacity:1;margin-left:9px;}
+  .gen-btn:hover .gen-plus{transform:rotate(90deg);}
+  html,body{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'33'%20viewBox%3D'-8%20-8%2072%2094'%3E%3Cpath%20d%3D'M5%207%20Q4%200%2010%204%20L49%2047%20Q51%2049.4%2048%2049.6%20L29%2049.5%20L20%2052.5%20L7%2065%20Q4%2067%204%2062%20Z'%20transform%3D'translate(0,3)'%20fill%3D'none'%20stroke%3D'%23000000'%20stroke-opacity%3D'0.13'%20stroke-width%3D'11'%20stroke-linejoin%3D'round'%20stroke-linecap%3D'round'%2F%3E%3Cpath%20d%3D'M5%207%20Q4%200%2010%204%20L49%2047%20Q51%2049.4%2048%2049.6%20L29%2049.5%20L20%2052.5%20L7%2065%20Q4%2067%204%2062%20Z'%20transform%3D'translate(0,2)'%20fill%3D'%23000000'%20fill-opacity%3D'0.2'%20stroke%3D'%23000000'%20stroke-opacity%3D'0.2'%20stroke-width%3D'7'%20stroke-linejoin%3D'round'%20stroke-linecap%3D'round'%2F%3E%3Cpath%20d%3D'M5%207%20Q4%200%2010%204%20L49%2047%20Q51%2049.4%2048%2049.6%20L29%2049.5%20L20%2052.5%20L7%2065%20Q4%2067%204%2062%20Z'%20fill%3D'%230E0E0E'%20stroke%3D'%23FFFFFF'%20stroke-width%3D'5'%20stroke-linejoin%3D'round'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") 4 5, auto;}
+  a,button,label,summary,select,input[type=submit],[role="button"],.gen-btn,[style*="cursor:pointer"]{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'34'%20height%3D'34'%20viewBox%3D'-2%20-2%2032%2032'%3E%3Cpath%20d%3D'M11%203%20c-0.9%200-1.6%200.7-1.6%201.6%20V13%20L7.6%2011.4%20c-0.8-0.7-1.9-0.6-2.5%200.2%20-0.5%200.6-0.4%201.4%200.1%202%20l3.6%204.3%20c1%201.2%202.5%201.9%204.1%201.9%20h2.3%20c2.8%200%205-2.2%205-5%20V9.2%20c0-0.9-0.7-1.6-1.6-1.6%20-0.3%200-0.6%200.1-0.9%200.3%20-0.1-0.8-0.8-1.4-1.6-1.4%20-0.4%200-0.8%200.2-1.1%200.4%20-0.2-0.7-0.8-1.2-1.5-1.2%20-0.3%200-0.6%200.1-0.9%200.3%20V4.6%20C12.6%203.7%2011.9%203%2011%203%20Z'%20transform%3D'translate(0,3)'%20fill%3D'none'%20stroke%3D'%23000000'%20stroke-opacity%3D'0.13'%20stroke-width%3D'3.4'%20stroke-linejoin%3D'round'%20stroke-linecap%3D'round'%2F%3E%3Cpath%20d%3D'M11%203%20c-0.9%200-1.6%200.7-1.6%201.6%20V13%20L7.6%2011.4%20c-0.8-0.7-1.9-0.6-2.5%200.2%20-0.5%200.6-0.4%201.4%200.1%202%20l3.6%204.3%20c1%201.2%202.5%201.9%204.1%201.9%20h2.3%20c2.8%200%205-2.2%205-5%20V9.2%20c0-0.9-0.7-1.6-1.6-1.6%20-0.3%200-0.6%200.1-0.9%200.3%20-0.1-0.8-0.8-1.4-1.6-1.4%20-0.4%200-0.8%200.2-1.1%200.4%20-0.2-0.7-0.8-1.2-1.5-1.2%20-0.3%200-0.6%200.1-0.9%200.3%20V4.6%20C12.6%203.7%2011.9%203%2011%203%20Z'%20transform%3D'translate(0,2)'%20fill%3D'%23000000'%20fill-opacity%3D'0.2'%20stroke%3D'%23000000'%20stroke-opacity%3D'0.2'%20stroke-width%3D'2.2'%20stroke-linejoin%3D'round'%20stroke-linecap%3D'round'%2F%3E%3Cpath%20d%3D'M11%203%20c-0.9%200-1.6%200.7-1.6%201.6%20V13%20L7.6%2011.4%20c-0.8-0.7-1.9-0.6-2.5%200.2%20-0.5%200.6-0.4%201.4%200.1%202%20l3.6%204.3%20c1%201.2%202.5%201.9%204.1%201.9%20h2.3%20c2.8%200%205-2.2%205-5%20V9.2%20c0-0.9-0.7-1.6-1.6-1.6%20-0.3%200-0.6%200.1-0.9%200.3%20-0.1-0.8-0.8-1.4-1.6-1.4%20-0.4%200-0.8%200.2-1.1%200.4%20-0.2-0.7-0.8-1.2-1.5-1.2%20-0.3%200-0.6%200.1-0.9%200.3%20V4.6%20C12.6%203.7%2011.9%203%2011%203%20Z'%20fill%3D'%230E0E0E'%20stroke%3D'%23FFFFFF'%20stroke-width%3D'1.4'%20stroke-linejoin%3D'round'%2F%3E%3C%2Fsvg%3E") 11 5, pointer !important;}
+  .tt{transform:translateX(0);}
+  .tt-0{animation:tt-to-0 .6s cubic-bezier(0.16,1,0.3,1) both;}
+  .tt-1{animation:tt-to-1 .6s cubic-bezier(0.16,1,0.3,1) both;}
+  .tt-2{animation:tt-to-2 .6s cubic-bezier(0.16,1,0.3,1) both;}
+  @keyframes tt-to-0{from{transform:translateX(-60px);}to{transform:translateX(0);}}
+  @keyframes tt-to-1{from{transform:translateX(-340px);}to{transform:translateX(-400px);}}
+  @keyframes tt-to-2{from{transform:translateX(-740px);}to{transform:translateX(-800px);}}
+  .hero-cta:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(10,10,30,0.28);}
+  .hero-cta:hover .hero-cta-plus{transform:rotate(180deg) scale(1.15);}
+  .li-shake{animation:li-shake 2.5s ease-in-out infinite;}
+  @keyframes li-shake{0%,78%,100%{transform:translateX(0) rotate(0deg);}81%{transform:translateX(-6px) rotate(-1.4deg);}85%{transform:translateX(6px) rotate(1.4deg);}89%{transform:translateX(-4px) rotate(-1deg);}93%{transform:translateX(4px) rotate(0.8deg);}96.5%{transform:translateX(-2px) rotate(0);}}
+  .pi{display:inline-block;}
+  .pi svg{display:block;overflow:visible;}
+  .pi-1 svg line{transform-box:view-box;transform-origin:12px 12px;}
+  .pi-hand-h{animation:pi-spin 12s linear infinite;}
+  .pi-hand-m{animation:pi-spin 2s steps(12,end) infinite;}
+  @keyframes pi-spin{to{transform:rotate(360deg);}}
+  .pi-2 svg path{stroke-dasharray:14;animation:pi-write 3.4s ease-in-out infinite;}
+  @keyframes pi-write{0%{stroke-dashoffset:14;}45%,100%{stroke-dashoffset:0;}}
+  .pi-3 svg > path:first-child{stroke-dasharray:44;animation:pi-bars 3.6s ease-in-out infinite;}
+  @keyframes pi-bars{0%,10%{stroke-dashoffset:44;}55%,100%{stroke-dashoffset:0;}}
+  .pi-dot{transform-box:view-box;transform-origin:12px 12px;animation:pi-orbit 5s linear infinite;}
+  @keyframes pi-orbit{to{transform:rotate(360deg);}}
+  #li-hint{animation:li-hint 2.5s ease-in-out infinite;}
+  @keyframes li-hint{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-5px);}}
+  @keyframes drafth-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+  .rise-w{opacity:0;transform:translateY(105%);}
+  .rise-on .rise-w{animation:drafth-rise .72s cubic-bezier(0.22,1,0.36,1) both;animation-delay:calc(var(--wi) * .07s);}
+  @keyframes drafth-rise{from{opacity:0;transform:translateY(105%);}to{opacity:1;transform:translateY(0);}}
+  .faq-open{animation:faq-open .34s cubic-bezier(0.22,1,0.36,1) both;}
+  @keyframes faq-open{from{opacity:0;max-height:0;}to{opacity:1;max-height:340px;}}
+  @media (max-width:1024px){
+    .tst-row{grid-template-columns:1fr !important;}
+    .tst-card{margin-top:0 !important;min-height:0 !important;}
+    .tst-wrap{padding:72px 24px !important;}
+  }
+  .tab-bar{animation:tab-fill 8s linear both;}
+  @keyframes tab-fill{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+  .tabbar-scroll::-webkit-scrollbar{display:none;}
+  .tabbar-scroll{scrollbar-width:none;}
+  @media (max-width:900px){.tabbar-scroll{justify-content:flex-start !important;}}
+  @keyframes drafth-word{from{color:#E7ECE1;}to{color:#B7D89A;}}
+  .sol-word{position:relative;display:inline-block;}
+  .sol-word::after{content:'';position:absolute;left:0;right:0;bottom:-0.12em;height:2px;background:#B7D89A;transform-origin:left center;animation:sol-underline .55s cubic-bezier(0.22,1,0.36,1) both;}
+  @keyframes sol-underline{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+  @keyframes drafth-turn-l{from{transform:rotateY(0deg) rotateZ(0) translateX(0) scale(1);}to{transform:rotateY(-18deg) rotateZ(1.6deg) translateX(-14px) scale(1.02);}}
+  @keyframes drafth-turn-r{from{transform:rotateY(0deg) rotateZ(0) translateX(0) scale(1);}to{transform:rotateY(18deg) rotateZ(-1.6deg) translateX(14px) scale(1.02);}}
+  @keyframes drafth-pop{from{opacity:0;transform:translateY(-50%) scale(0.92);}to{opacity:1;transform:translateY(-50%) scale(1);}}
+  @keyframes drafth-face{0%{opacity:0;transform:scale(0.9) translateY(8px);}5%{opacity:1;transform:scale(1) translateY(0);}28%{opacity:1;transform:scale(1) translateY(0);}34%{opacity:0;transform:scale(0.9) translateY(-8px);}100%{opacity:0;}}
+  @keyframes drafth-marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @keyframes mesh-a{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(46%,18%) scale(1.2);}66%{transform:translate(18%,42%) scale(0.9);}}
+  @keyframes mesh-b{0%,100%{transform:translate(0,0) scale(1.06);}33%{transform:translate(-38%,26%) scale(0.9);}66%{transform:translate(24%,-22%) scale(1.22);}}
+  @keyframes mesh-c{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(-44%,-24%) scale(1.24);}66%{transform:translate(-14%,30%) scale(0.92);}}
+  @keyframes mesh-d{0%,100%{transform:translate(0,0) scale(1.1);}33%{transform:translate(30%,-34%) scale(0.9);}66%{transform:translate(-32%,-12%) scale(1.18);}}
+  @media (max-width:860px){
+    .hero-banner{height:auto !important;min-height:100vh !important;}
+    .hero-grid{grid-template-columns:1fr !important;align-items:stretch !important;}
+    .hero-title{padding:150px 24px 40px !important;}
+    .hero-boxes{border-left:none !important;padding-top:0 !important;}
+    .hero-boxes > div{padding-left:24px !important;padding-right:24px !important;}
+  }
+  @keyframes drafth-blink{0%,100%{opacity:1;}50%{opacity:0;}}
+  @keyframes drafth-float{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-10px) rotate(var(--r,0deg));}}
+  @keyframes drafth-drift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  .sol-card{animation:drafth-swipe .95s cubic-bezier(0.65,0,0.35,1) both;}
+  @keyframes drafth-swipe{from{opacity:0;transform:translateX(calc(var(--bx,0px) + 64px)) rotate(var(--rot,0deg));}to{opacity:1;transform:translateX(var(--bx,0px)) rotate(var(--rot,0deg));}}
+  @keyframes drafth-glow{0%,100%{transform:translate3d(-6%,0,0) scale(1);}50%{transform:translate3d(6%,0,0) scale(1.08);}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="overflow-x:clip;">
+
+  <nav style="position:absolute;top:0;left:0;right:0;z-index:50;background:transparent;pointer-events:none;">
+    <div style="padding:16px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;pointer-events:none;">
+      <div style="display:inline-flex;align-items:center;gap:44px;pointer-events:auto;">
+        <img src="assets/drafth-logo.png" alt="Drafth" style="height:30px;width:auto;display:block;filter:brightness(0) invert(1);">
+        <div style="display:flex;align-items:center;gap:30px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;">
+          <a href="#" style="color:#fff;">About us</a>
+          <a href="#blog" style="color:#fff;">Blog</a>
+          <a href="#" style="color:#fff;">Contact us</a>
+        </div>
+      </div>
+      <a href="#" class="gen-btn" style="pointer-events:auto;display:inline-flex;align-items:center;background:#F4F2EE;color:#14130E;font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;height:48px;padding:0 12px;border-radius:14px;box-shadow:0 10px 28px rgba(10,10,30,0.3);"><span class="gen-plus" style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;transition:transform .62s cubic-bezier(0.22,1,0.36,1);font-size:22px;line-height:1;">+</span><span class="gen-label">Generate my first post</span></a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO BANNER (animated mesh gradient) ===== -->
+  <div class="hero-banner" style="position:relative;overflow:hidden;height:100vh;display:flex;flex-direction:column;background:#3A0B2E;">
+    <div style="position:absolute;inset:-18%;pointer-events:none;">
+      <div style="position:absolute;left:-8%;top:-10%;width:62%;height:70%;border-radius:50%;background:radial-gradient(closest-side,#4B0F3A,#4B0F3A 45%,transparent 72%);filter:blur(90px);animation:mesh-a 18s ease-in-out infinite;"></div>
+      <div style="position:absolute;left:18%;top:8%;width:62%;height:72%;border-radius:50%;background:radial-gradient(closest-side,#B5401A,#B5401A 44%,transparent 72%);filter:blur(90px);animation:mesh-b 20s ease-in-out infinite;"></div>
+      <div style="position:absolute;left:38%;top:34%;width:66%;height:70%;border-radius:50%;background:radial-gradient(closest-side,#E8523F,#E8523F 42%,transparent 72%);filter:blur(95px);animation:mesh-c 17s ease-in-out infinite;"></div>
+      <div style="position:absolute;left:52%;top:52%;width:64%;height:66%;border-radius:50%;background:radial-gradient(closest-side,#F0247E,#F0247E 42%,transparent 72%);filter:blur(100px);animation:mesh-d 19s ease-in-out infinite;"></div>
+    </div>
+
+    <div class="hero-grid" style="position:relative;z-index:2;flex:1;min-height:0;display:grid;grid-template-columns:1fr 34%;align-items:end;">
+      <h1 class="hero-title" style="font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;color:#fff;font-size:clamp(30px,4.4vw,72px);line-height:0.98;letter-spacing:-0.005em;margin:0;padding:0 56px max(58px,clamp(44px,9vh,96px));">Never wonder what<br>to post on <span id="li-slot" style="position:relative;display:inline-block;vertical-align:baseline;"><span id="li-word" class="li-shake" style="display:inline-block;">LinkedIn</span><span id="li-btn" style="position:fixed;left:0;top:0;display:inline-block;font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;color:#fff;white-space:nowrap;opacity:0;pointer-events:none;will-change:transform;z-index:70;">Sign up</span><span id="li-hint" style="position:absolute;left:50%;top:100%;margin-top:16px;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.6px solid rgba(255,255,255,0.85);pointer-events:none;transition:opacity .26s ease;"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="display:block;width:17px;height:17px;transform:rotate(180deg);"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></span> again.</h1>
+
+      <div class="hero-boxes" style="align-self:stretch;min-height:0;overflow:hidden;display:grid;grid-template-rows:repeat(3,minmax(0,1fr));border-left:1px solid rgba(255,255,255,0.28);">
+        <div style="position:relative;z-index:60;padding:0 32px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px;">
+          <div style="font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.72);">Follow us</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <a href="#" style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.32);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 auto;"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8c0-.86.24-1.45 1.5-1.45H16.7V3.9c-.3-.04-1.32-.13-2.5-.13-2.48 0-4.18 1.51-4.18 4.29V10H7.2v3h2.82v8h3.48z"/></svg></a>
+            <a href="#" style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.32);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 auto;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="#" style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.32);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 auto;"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M17.6 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.2 21H2.1l7.3-8.3L2 3h6.4l4.4 5.8L17.6 3zm-1.1 16.1h1.7L7.6 4.8H5.8l10.7 14.3z"/></svg></a>
+            <a href="#" style="width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.32);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 auto;"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.94 5a1.94 1.94 0 11-3.88 0 1.94 1.94 0 013.88 0zM3.56 8.75h2.75V21H3.56V8.75zm4.5 0h2.63v1.67h.04c.37-.7 1.27-1.44 2.6-1.44 2.78 0 3.29 1.83 3.29 4.21V21h-2.75v-5.45c0-1.3-.02-2.97-1.81-2.97-1.82 0-2.1 1.42-2.1 2.88V21H8.06V8.75z"/></svg></a>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.28);padding:8px 32px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;">
+          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:18px;line-height:1.34;color:#fff;margin:0;">Drafth turns your expertise into a steady stream of scroll-stopping LinkedIn posts. It learns how you write and shapes drafts that sound unmistakably like you.</p>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.28);border-bottom:1px solid rgba(255,255,255,0.28);padding:8px 32px;min-height:0;position:relative;overflow:hidden;">
+          <sc-for list="{{ heroQuotes }}" as="q" hint-placeholder-count="1">
+            <div style="{{ q.style }}">
+              <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:17px;line-height:1.4;color:#fff;margin:0 0 10px;">&ldquo;{{ q.text }}&rdquo;</p>
+              <div style="display:flex;align-items:center;gap:11px;">
+                <span style="{{ q.avatar }}"></span>
+                <span style="font-family:'Inter',sans-serif;font-size:14.5px;font-weight:500;line-height:1.3;color:rgba(255,255,255,0.9);">{{ q.name }}<br><span style="font-size:12.5px;font-weight:400;color:rgba(255,255,255,0.62);">{{ q.role }}</span></span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- /banner -->
+
+  <!-- ===== STATEMENT ===== -->
+  <section id="statement" style="max-width:1440px;margin:0 auto;padding:148px 40px 148px;">
+    <div data-reveal style="display:flex;align-items:center;gap:14px;margin-bottom:28px;">
+      <span style="font-family:'Inter',sans-serif;font-size:34px;line-height:1;color:#14130E;display:inline-block;animation:drafth-spin 9s linear infinite;">&#10057;</span>
+      <span style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;line-height:1;color:#14130E;">What Drafth is for</span>
+    </div>
+    <h2 data-reveal style="font-family:'Crimson Pro',serif;font-weight:600;font-size:clamp(34px,6.1vw,104px);line-height:1.12;letter-spacing:-0.025em;color:#14130E;margin:0;max-width:none;">
+      <span style="display:block;overflow:hidden;padding-bottom:0.18em;margin-bottom:-0.18em;"><span class="rise-w" style="display:inline-block;--wi:0;">Your</span> <span class="rise-w" style="display:inline-block;--wi:1;">expertise</span> <span class="rise-w" style="display:inline-block;--wi:2;">is</span> <span class="rise-w" style="display:inline-block;--wi:3;">the</span> <span class="rise-w" style="display:inline-block;--wi:4;">product</span> <span class="rise-w" style="display:inline-block;--wi:5;">&mdash;</span></span>
+      <span style="display:block;overflow:hidden;padding-bottom:0.18em;margin-bottom:-0.18em;"><span class="rise-w" style="display:inline-block;--wi:6;">posting</span> <span class="rise-w" style="display:inline-block;--wi:7;">it</span> <span class="rise-w" style="display:inline-block;--wi:8;">is</span> <span class="rise-w" style="display:inline-block;--wi:9;">the</span> <span class="rise-w" style="display:inline-block;--wi:10;">work</span> <span class="rise-w" style="display:inline-block;--wi:11;"><span style="color:#4A7A44;">Drafth</span></span> <span class="rise-w" style="display:inline-block;--wi:12;">handles.</span></span>
+    </h2>
+  </section>
+
+  <!-- ===== METRICS ===== -->
+  <section id="metrics" style="position:relative;">
+    <div style="max-width:1440px;margin:0 auto;padding:0 40px;">
+      <div style="border-top:1px solid rgba(20,19,14,0.16);"></div>
+    </div>
+    <div id="metrics-track" style="position:relative;max-width:1440px;margin:0 auto;padding:96px 40px 120px;display:grid;grid-template-columns:minmax(0,0.64fr) minmax(0,1.36fr);gap:44px;align-items:start;">
+      <div id="video-slot" style="position:relative;min-height:300px;">
+        <div id="video-frame" style="position:relative;width:100%;aspect-ratio:16/10;border-radius:18px;overflow:hidden;background:linear-gradient(150deg,#1E2817,#141B10 60%,#10160C);transform-origin:left top;will-change:transform;">
+          <div id="video-ph" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#B3BCA8;font-family:'Inter',sans-serif;"><div id="video-ph-inner" style="display:flex;flex-direction:column;align-items:center;gap:14px;transform-origin:center center;">
+            <span style="width:58px;height:58px;border-radius:50%;border:1px solid rgba(255,255,255,0.34);display:flex;align-items:center;justify-content:center;font-size:18px;color:#F6F7F2;">&#9654;</span>
+            <span style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;">Product tour</span>
+          </div></div>
+        </div>
+      </div>
+
+      <div id="metrics-copy" style="transition:opacity .25s linear;">
+        <p data-reveal style="font-family:'Inter',sans-serif;font-weight:400;font-size:clamp(20px,2.3vw,30px);line-height:1.45;letter-spacing:-0.01em;color:#14130E;margin:0;max-width:42ch;">
+          Drafth studies how your audience actually reads, then shapes every draft around it &mdash; a posting habit you can keep, and a feed that compounds.
+        </p>
+        <div data-reveal style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px;align-items:start;">
+          <div>
+            <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(30px,3.2vw,46px);line-height:1;letter-spacing:-0.03em;color:#14130E;">4,200+</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;line-height:1.5;color:#57604F;margin-top:14px;">Professionals</div>
+          </div>
+          <div>
+            <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(30px,3.2vw,46px);line-height:1;letter-spacing:-0.03em;color:#14130E;">12 min</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;line-height:1.5;color:#57604F;margin-top:14px;">Drafting</div>
+          </div>
+          <div>
+            <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(30px,3.2vw,46px);line-height:1;letter-spacing:-0.03em;color:#14130E;">3&times;</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;line-height:1.5;color:#57604F;margin-top:14px;">Consistency</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROBLEM ===== -->
+  <section id="problem" style="padding:120px 0 0;">
+    <div data-reveal style="max-width:1440px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px;">
+        <span style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;line-height:1;color:#14130E;">Problem statement</span>
+      </div>
+      <h2 style="font-family:'Crimson Pro',serif;font-weight:700;font-size:clamp(34px,4.6vw,58px);line-height:1.12;letter-spacing:-0.02em;margin:0 0 56px;">Most professionals don't lack <span style="font-style:italic;font-weight:500;color:#4A7A44;">expertise.</span><br>They lack a content <span style="font-style:italic;font-weight:500;color:#4A7A44;">system.</span></h2>
+    </div>
+    <div data-reveal style="border-top:1px dashed rgba(20,19,14,0.28);border-bottom:1px dashed rgba(20,19,14,0.28);display:grid;grid-template-columns:repeat(4,1fr);">
+      <div style="padding:44px 34px 48px;display:flex;flex-direction:column;min-height:330px;justify-content:flex-start;">
+        <div class="pi pi-1" style="height:126px;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#14130E" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><line class="pi-hand-h" x1="12" y1="12" x2="12" y2="7.6" stroke-linecap="round"/><line class="pi-hand-m" x1="12" y1="12" x2="15.6" y2="13.9" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.015em;color:#14130E;margin:0 0 10px;">No idea what to post</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#57604F;margin:0;">You sit down to write and every idea that felt obvious all week quietly disappears.</p>
+      </div>
+      <div style="border-left:1px dashed rgba(20,19,14,0.28);padding:44px 34px 48px;display:flex;flex-direction:column;min-height:330px;justify-content:flex-start;">
+        <div class="pi pi-2" style="height:126px;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#14130E" stroke-width="1.6"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M8 9h8M8 13h5"/></svg></div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.015em;color:#14130E;margin:0 0 10px;">Blank page syndrome</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#57604F;margin:0;">Starting a post often takes longer than writing the thing you actually wanted to say.</p>
+      </div>
+      <div style="border-left:1px dashed rgba(20,19,14,0.28);padding:44px 34px 48px;display:flex;flex-direction:column;min-height:330px;justify-content:flex-start;">
+        <div class="pi pi-3" style="height:126px;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#14130E" stroke-width="1.6"><path d="M4 17V9M9.3 17V5M14.7 17v-6M20 17V7"/><path d="M3 20.5h18"/></svg></div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.015em;color:#14130E;margin:0 0 10px;">Inconsistent posting</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#57604F;margin:0;">You post in bursts, then go quiet for weeks, and the momentum resets every time.</p>
+      </div>
+      <div style="border-left:1px dashed rgba(20,19,14,0.28);padding:44px 34px 48px;display:flex;flex-direction:column;min-height:330px;justify-content:flex-start;">
+        <div class="pi pi-4" style="height:126px;"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#14130E" stroke-width="1.6"><path d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5"/><path d="M12 3.5v8.5l6 3.4"/><circle class="pi-dot" cx="12" cy="0.5" r="1.5"/></svg></div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.015em;color:#14130E;margin:0 0 10px;">No sense of what works</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.55;color:#57604F;margin:0;">Nothing tells you which posts earned reach, so every week is guesswork again.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOLUTION (scroll-driven) ===== -->
+  <section id="solution" style="position:relative;background:linear-gradient(170deg,#1E2817 0%,#16200F 60%,#121A0C 100%);">
+    <div id="sol-track" style="position:relative;height:320vh;">
+      <div class="sol-sentinel" data-idx="-1" style="position:absolute;left:0;top:16%;width:1px;height:1px;"></div>
+      <div class="sol-sentinel" data-idx="0" style="position:absolute;left:0;top:30%;width:1px;height:1px;"></div>
+      <div class="sol-sentinel" data-idx="1" style="position:absolute;left:0;top:50%;width:1px;height:1px;"></div>
+      <div class="sol-sentinel" data-idx="2" style="position:absolute;left:0;top:71%;width:1px;height:1px;"></div>
+      <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;">
+        <div style="width:100%;max-width:1200px;margin:0 auto;padding:0 40px;position:relative;min-height:96vh;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+
+          <!-- STEP 0 cards: Connecting professionals -->
+          <sc-if value="{{ isStep0 }}">
+            <div>
+              <div class="sol-card" style="position:absolute;left:0;top:clamp(12px,7%,calc(50vh - 258px));width:300px;--rot:-5deg;animation-delay:0s;background:#FFFFFF;border:1px solid rgba(20,19,14,0.1);border-radius:14px;box-shadow:0 20px 46px rgba(20,19,14,0.13);padding:16px 18px;display:flex;align-items:center;gap:13px;">
+                <div style="width:50px;height:50px;border-radius:50%;flex:0 0 auto;background:linear-gradient(135deg,#88A06B,#3E6B39);"></div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:14.5px;color:#14130E;">Sarah Jantsen</div>
+                  <div style="font-family:'Inter',sans-serif;font-size:12px;color:#6E7568;margin-top:1px;">Founder · Lever Studio</div>
+                </div>
+                <div style="background:#DDE4D6;color:#2E3B26;font-family:'Inter',sans-serif;font-weight:600;font-size:12px;padding:7px 12px;border-radius:8px;white-space:nowrap;">+ Connect</div>
+              </div>
+              <div class="sol-card" style="position:absolute;right:0;top:clamp(12px,7%,calc(50vh - 258px));width:280px;height:min(158px,calc(50vh - 114px));--rot:5deg;animation-delay:.12s;border-radius:14px;overflow:hidden;box-shadow:0 20px 46px rgba(20,19,14,0.15);background-image:url('https://picsum.photos/seed/drafth-people/560/320');background-size:cover;background-position:center;">
+                <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(15,20,12,0.74));"></div>
+                <div style="position:absolute;left:16px;bottom:13px;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;">Real professionals, real reach</div>
+              </div>
+              <div class="sol-card" style="position:absolute;bottom:clamp(12px,7%,calc(50vh - 258px));right:0;width:300px;--rot:-2deg;animation-delay:.24s;background:#FFFFFF;border:1px solid rgba(20,19,14,0.1);border-radius:14px;box-shadow:0 20px 46px rgba(20,19,14,0.13);padding:16px 18px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;"><span style="font-family:'Inter',sans-serif;font-weight:700;font-size:13px;color:#14130E;">Audience match</span><span style="font-family:'Inter',sans-serif;font-weight:700;font-size:12px;color:#2E3B26;background:#DDE4D6;padding:3px 8px;border-radius:999px;">94%</span></div>
+                <div style="display:flex;gap:7px;">
+                  <span style="font-family:'Inter',sans-serif;font-size:11.5px;color:#3E4A34;background:#EFF2EB;padding:5px 10px;border-radius:999px;">Founders</span>
+                  <span style="font-family:'Inter',sans-serif;font-size:11.5px;color:#3E4A34;background:#EFF2EB;padding:5px 10px;border-radius:999px;">Recruiters</span>
+                  <span style="font-family:'Inter',sans-serif;font-size:11.5px;color:#3E4A34;background:#EFF2EB;padding:5px 10px;border-radius:999px;">Peers</span>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- STEP 1 cards: Expertise -->
+          <sc-if value="{{ isStep1 }}">
+            <div>
+              <div class="sol-card" style="position:absolute;left:0;top:clamp(12px,7%,calc(50vh - 258px));width:300px;--rot:-5deg;animation-delay:0s;background:#FFFFFF;border:1px solid rgba(20,19,14,0.1);border-radius:14px;box-shadow:0 20px 46px rgba(20,19,14,0.13);padding:16px 18px;">
+                <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:13px;color:#14130E;margin-bottom:8px;">Knowledge mined</div>
+                <div style="display:flex;flex-direction:column;gap:7px;">
+                  <div style="height:8px;border-radius:999px;background:#DDE4D6;width:92%;"></div>
+                  <div style="height:8px;border-radius:999px;background:#DDE4D6;width:74%;"></div>
+                  <div style="height:8px;border-radius:999px;background:#EFF2EB;width:58%;"></div>
+                </div>
+                <div style="font-family:'Inter',sans-serif;font-size:11.5px;color:#8A917F;margin-top:10px;">Pulled from your day-to-day work</div>
+              </div>
+              <div class="sol-card" style="position:absolute;right:0;top:clamp(12px,7%,calc(50vh - 258px));width:270px;height:min(150px,calc(50vh - 114px));--rot:5deg;animation-delay:.12s;border-radius:14px;overflow:hidden;box-shadow:0 20px 46px rgba(20,19,14,0.15);background-image:url('https://picsum.photos/seed/drafth-work/540/300');background-size:cover;background-position:center;">
+                <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(15,20,12,0.74));"></div>
+                <div style="position:absolute;left:16px;bottom:13px;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;">Your work, your authority</div>
+              </div>
+              <div class="sol-card" style="position:absolute;bottom:clamp(12px,7%,calc(50vh - 258px));right:0;width:300px;--rot:-2deg;animation-delay:.24s;background:#FFFFFF;border:1px solid rgba(20,19,14,0.1);border-radius:14px;box-shadow:0 20px 46px rgba(20,19,14,0.13);padding:16px 18px;">
+                <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:13px;color:#14130E;margin-bottom:10px;">3 ideas ready</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;align-items:center;gap:9px;font-family:'Inter',sans-serif;font-size:12.5px;color:#3E4A34;"><span style="width:6px;height:6px;border-radius:50%;background:#2E3B26;"></span>The hiring mistake I keep seeing</div>
+                  <div style="display:flex;align-items:center;gap:9px;font-family:'Inter',sans-serif;font-size:12.5px;color:#3E4A34;"><span style="width:6px;height:6px;border-radius:50%;background:#2E3B26;"></span>Why we killed our best feature</div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- STEP 2 cards: Storytelling -->
+          <sc-if value="{{ isStep2 }}">
+            <div>
+              <div class="sol-card" style="position:absolute;left:0;top:clamp(12px,7%,calc(50vh - 258px));width:300px;--rot:-5deg;animation-delay:0s;background:#FFFFFF;border:1px solid rgba(20,19,14,0.1);border-radius:14px;box-shadow:0 20px 46px rgba(20,19,14,0.13);padding:16px 18px;">
+                <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:13px;color:#14130E;margin-bottom:8px;">Scroll-stopping hook</div>
+                <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;color:#2C3626;margin:0;">"I used to think consistency was about discipline. It's not."</p>
+              </div>
+              <div class="sol-card" style="position:absolute;right:0;top:clamp(12px,7%,calc(50vh - 258px));width:280px;height:min(150px,calc(50vh - 114px));--rot:5deg;animation-delay:.12s;border-radius:14px;overflow:hidden;box-shadow:0 20px 46px rgba(20,19,14,0.15);background-image:url('https://picsum.photos/seed/drafth-story/560/300');background-size:cover;background-position:center;">
+                <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(15,20,12,0.74));"></div>
+                <div style="position:absolute;left:16px;bottom:13px;color:#fff;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;">Stories people remember</div>
+              </div>
+              <div class="sol-card" style="position:absolute;bottom:clamp(12px,7%,calc(50vh - 258px));right:0;width:300px;--rot:-2deg;animation-delay:.24s;background:#FFFFFF;border:1px solid rgba(20,19,14,0.1);border-radius:14px;box-shadow:0 20px 46px rgba(20,19,14,0.13);padding:16px 18px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-family:'Inter',sans-serif;font-weight:700;font-size:13px;color:#14130E;">Account growth</span><span style="font-family:'Inter',sans-serif;font-weight:700;font-size:12px;color:#2E3B26;background:#DDE4D6;padding:3px 8px;border-radius:999px;">+248%</span></div>
+                <svg viewBox="0 0 260 60" width="100%" height="52" style="margin-top:10px;display:block;"><defs><linearGradient id="gchart" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E3B26" stop-opacity="0.24"/><stop offset="1" stop-color="#2E3B26" stop-opacity="0"/></linearGradient></defs><path d="M2 52 L44 45 L86 48 L128 32 L170 34 L212 16 L258 5 L258 60 L2 60 Z" fill="url(#gchart)"/><path d="M2 52 L44 45 L86 48 L128 32 L170 34 L212 16 L258 5" fill="none" stroke="#2E3B26" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="258" cy="5" r="4" fill="#2E3B26"/></svg>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- center copy -->
+          <div style="text-align:center;max-width:680px;position:relative;z-index:2;">
+            <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#F6F7F2;margin-bottom:20px;">Solution</div>
+            <h2 style="font-family:'Crimson Pro',serif;font-weight:700;font-size:clamp(34px,3.9vw,52px);line-height:1.1;letter-spacing:-0.02em;margin:0 0 12px;color:#F6F7F2;">That's where Drafth comes in.</h2>
+            <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(23px,2.6vw,34px);line-height:1.32;letter-spacing:-0.01em;margin:0;color:#E7ECE1;">
+              Drafth brings everything together <sc-if value="{{ solOn0 }}"><span class="sol-word" style="font-weight:300;color:#B7D89A;animation:drafth-word .4s ease both;">connecting professionals</span></sc-if><sc-if value="{{ solOff0 }}" hint-placeholder-val="{{ true }}"><span style="font-weight:300;color:#E7ECE1;">connecting professionals</span></sc-if>, <sc-if value="{{ solOn1 }}"><span class="sol-word" style="font-weight:300;color:#B7D89A;animation:drafth-word .4s ease both;">expertise</span></sc-if><sc-if value="{{ solOff1 }}"><span style="font-weight:300;color:#E7ECE1;">expertise</span></sc-if>, and <sc-if value="{{ solOn2 }}"><span class="sol-word" style="font-weight:300;color:#B7D89A;animation:drafth-word .4s ease both;">storytelling</span></sc-if><sc-if value="{{ solOff2 }}"><span style="font-weight:300;color:#E7ECE1;">storytelling</span></sc-if> into one seamless content platform.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    </div>
+    <div style="background:#F4F2EE;">
+    <!-- product / tabs (lands here after the scroll) -->
+    <div style="max-width:1200px;margin:0 auto;padding:148px 40px;">
+      <div class="tabbar-scroll" style="display:flex;justify-content:center;overflow-x:auto;padding-bottom:2px;">
+        <div style="display:inline-flex;align-items:center;gap:2px;padding:6px;background:#EDEAE4;border-radius:999px;flex:0 0 auto;">
+          <sc-if value="{{ isTab0 }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ setTab0 }}" style="position:relative;display:inline-flex;align-items:center;gap:11px;white-space:nowrap;padding:15px 30px;border-radius:999px;background:#FFFFFF;box-shadow:0 1px 3px rgba(20,19,14,0.10);color:#14130E;font-family:'Inter',sans-serif;font-weight:500;font-size:16px;cursor:pointer;overflow:hidden;">
+              <span style="display:inline-flex;color:#14130E;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>Easy setup
+              <span style="position:absolute;left:22px;right:22px;bottom:7px;height:2px;border-radius:2px;background:rgba(20,19,14,0.10);overflow:hidden;"><span class="tab-bar" style="display:block;height:100%;background:#2E3B26;transform-origin:left center;"></span></span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notTab0 }}">
+            <div onClick="{{ setTab0 }}" style="display:inline-flex;align-items:center;gap:11px;white-space:nowrap;padding:15px 30px;border-radius:999px;background:transparent;color:#8A9180;font-family:'Inter',sans-serif;font-weight:400;font-size:16px;cursor:pointer;transition:color .25s ease;">
+              <span style="display:inline-flex;color:#A3A99A;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>Easy setup
+            </div>
+          </sc-if>
+          <sc-if value="{{ isTab1 }}">
+            <div onClick="{{ setTab1 }}" style="position:relative;display:inline-flex;align-items:center;gap:11px;white-space:nowrap;padding:15px 30px;border-radius:999px;background:#FFFFFF;box-shadow:0 1px 3px rgba(20,19,14,0.10);color:#14130E;font-family:'Inter',sans-serif;font-weight:500;font-size:16px;cursor:pointer;overflow:hidden;">
+              <span style="display:inline-flex;color:#14130E;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6.5l9 4.5 9-4.5L12 2Z"/><path d="M3 12l9 4.5L21 12"/><path d="M3 17.5 12 22l9-4.5"/></svg></span>Collaborate
+              <span style="position:absolute;left:22px;right:22px;bottom:7px;height:2px;border-radius:2px;background:rgba(20,19,14,0.10);overflow:hidden;"><span class="tab-bar" style="display:block;height:100%;background:#2E3B26;transform-origin:left center;"></span></span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notTab1 }}">
+            <div onClick="{{ setTab1 }}" style="display:inline-flex;align-items:center;gap:11px;white-space:nowrap;padding:15px 30px;border-radius:999px;background:transparent;color:#8A9180;font-family:'Inter',sans-serif;font-weight:400;font-size:16px;cursor:pointer;transition:color .25s ease;">
+              <span style="display:inline-flex;color:#A3A99A;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6.5l9 4.5 9-4.5L12 2Z"/><path d="M3 12l9 4.5L21 12"/><path d="M3 17.5 12 22l9-4.5"/></svg></span>Collaborate
+            </div>
+          </sc-if>
+          <sc-if value="{{ isTab2 }}">
+            <div onClick="{{ setTab2 }}" style="position:relative;display:inline-flex;align-items:center;gap:11px;white-space:nowrap;padding:15px 30px;border-radius:999px;background:#FFFFFF;box-shadow:0 1px 3px rgba(20,19,14,0.10);color:#14130E;font-family:'Inter',sans-serif;font-weight:500;font-size:16px;cursor:pointer;overflow:hidden;">
+              <span style="display:inline-flex;color:#14130E;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 3.5L21 6"/><path d="M16 6h5v5"/></svg></span>Track growth
+              <span style="position:absolute;left:22px;right:22px;bottom:7px;height:2px;border-radius:2px;background:rgba(20,19,14,0.10);overflow:hidden;"><span class="tab-bar" style="display:block;height:100%;background:#2E3B26;transform-origin:left center;"></span></span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notTab2 }}">
+            <div onClick="{{ setTab2 }}" style="display:inline-flex;align-items:center;gap:11px;white-space:nowrap;padding:15px 30px;border-radius:999px;background:transparent;color:#8A9180;font-family:'Inter',sans-serif;font-weight:400;font-size:16px;cursor:pointer;transition:color .25s ease;">
+              <span style="display:inline-flex;color:#A3A99A;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 3.5L21 6"/><path d="M16 6h5v5"/></svg></span>Track growth
+            </div>
+          </sc-if>
+        </div>
+      </div>
+
+      <div style="height:46px;"></div>
+
+      <div style="border:1px solid rgba(20,19,14,0.12);border-radius:18px;overflow:hidden;background:#FFFFFF;">
+        <div style="display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid rgba(20,19,14,0.1);background:#F7F5F0;">
+          <span style="width:10px;height:10px;border-radius:50%;background:#D9D5CB;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#D9D5CB;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#D9D5CB;"></span>
+          <div style="flex:1;display:flex;justify-content:center;"><div style="font-family:'Inter',sans-serif;font-size:12px;color:#8A9180;">app.drafth.ai</div></div>
+          <span style="width:44px;"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);min-height:470px;">
+          <aside style="min-width:0;border-right:1px solid rgba(20,19,14,0.08);background:#FBFAF6;padding:20px 16px;display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;align-items:center;gap:9px;"><img src="assets/drafth-logo.png" alt="Drafth" style="height:24px;width:auto;"></div>
+            <button style="display:flex;align-items:center;gap:8px;justify-content:center;background:#2E3B26;color:#F4F6F1;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;padding:11px;border-radius:10px;cursor:pointer;">+ New draft</button>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4"><sc-if value="{{ n.on }}"><div style="font-family:'Inter',sans-serif;font-size:13.5px;padding:9px 12px;border-radius:9px;cursor:pointer;background:#EAF1E6;color:#3E6B39;font-weight:600;">{{ n.label }}</div></sc-if><sc-if value="{{ n.off }}" hint-placeholder-val="{{ true }}"><div style="font-family:'Inter',sans-serif;font-size:13.5px;padding:9px 12px;border-radius:9px;cursor:pointer;color:#57604F;">{{ n.label }}</div></sc-if></sc-for>
+            </div>
+            <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid rgba(20,19,14,0.08);">
+              <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#3E6B39,#88A06B);"></div>
+              <div style="font-family:'Inter',sans-serif;font-size:12.5px;"><div style="font-weight:600;color:#1F2A1A;">Alex Morgan</div><div style="color:#8A877C;">Pro plan</div></div>
+            </div>
+          </aside>
+
+          <div style="padding:34px 36px;position:relative;">
+            <sc-if value="{{ isIdeation }}" hint-placeholder-val="{{ true }}">
+              <div>
+                <div style="text-align:center;max-width:540px;margin:16px auto 8px;">
+                  <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#3E6B39,#88A06B);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;">&#10022;</div>
+                  <h3 style="font-family:'Crimson Pro',serif;font-weight:700;font-size:27px;letter-spacing:-0.02em;margin:0 0 8px;color:#1F2A1A;">What can I help you write?</h3>
+                  <p style="font-family:'Inter',sans-serif;color:#57604F;font-size:15px;margin:0;line-height:1.5;">Pick a starting point or describe your idea &mdash; Drafth shapes it into a post.</p>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:580px;margin:28px auto 0;">
+                  <sc-for list="{{ starters }}" as="st" hint-placeholder-count="4">
+                    <div style="border:1px solid rgba(20,19,14,0.1);background:#FBFAF6;border-radius:12px;padding:16px;cursor:pointer;">
+                      <div style="font-family:'Crimson Pro',serif;font-weight:700;font-size:15px;margin-bottom:5px;color:#1F2A1A;">{{ st.t }}</div>
+                      <div style="font-family:'Inter',sans-serif;color:#6E7568;font-size:13px;line-height:1.45;">{{ st.d }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="max-width:580px;margin:24px auto 0;display:flex;align-items:center;gap:10px;border:1px solid rgba(20,19,14,0.14);background:#fff;border-radius:12px;padding:12px 14px;">
+                  <span style="font-family:'Inter',sans-serif;color:#A7AC9E;font-size:14px;flex:1;">Describe what you want to post about&hellip;</span>
+                  <span style="width:32px;height:32px;border-radius:8px;background:#2E3B26;color:#fff;display:flex;align-items:center;justify-content:center;">&uarr;</span>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isGenerate }}">
+              <div style="max-width:620px;margin:0 auto;">
+                <div style="display:flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:12.5px;color:#3E6B39;font-weight:600;margin-bottom:16px;"><span style="width:7px;height:7px;border-radius:50%;background:#3E6B39;"></span>Drafting your post&hellip;</div>
+                <div style="border:1px solid rgba(20,19,14,0.1);border-radius:14px;padding:20px;background:#fff;">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                    <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#3E6B39,#88A06B);"></div>
+                    <div style="font-family:'Inter',sans-serif;"><div style="font-weight:600;font-size:13.5px;color:#1F2A1A;">Alex Morgan</div><div style="color:#8A877C;font-size:12px;">Founder &middot; 12,480 followers</div></div>
+                  </div>
+                  <p style="font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.6;color:#2C3626;margin:0;">I used to think consistency was about discipline.<br><br>It's not. It's about having a <b>system</b>.<br><br>For two years I posted whenever inspiration struck &mdash; which meant almost never. Then I changed one thing<span style="display:inline-block;width:9px;height:17px;background:#3E6B39;margin-left:2px;vertical-align:-3px;animation:drafth-blink 1s step-end infinite;"></span></p>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:16px;font-family:'Inter',sans-serif;">
+                  <span style="font-size:12.5px;padding:8px 14px;border-radius:999px;background:#EAF1E6;color:#3E6B39;font-weight:600;">Regenerate</span>
+                  <span style="font-size:12.5px;padding:8px 14px;border-radius:999px;border:1px solid rgba(20,19,14,0.12);color:#57604F;">Add a hook</span>
+                  <span style="font-size:12.5px;padding:8px 14px;border-radius:999px;border:1px solid rgba(20,19,14,0.12);color:#57604F;">Shorten</span>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isRefine }}">
+              <div style="max-width:620px;margin:0 auto;">
+                <div style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#57604F;margin-bottom:14px;">Tune the voice</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+                  <sc-for list="{{ tones }}" as="tn" hint-placeholder-count="3"><div style="{{ tn.style }}">{{ tn.label }}</div></sc-for>
+                </div>
+                <div style="border:1px solid rgba(20,19,14,0.1);border-radius:14px;padding:20px;background:#fff;font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.65;color:#2C3626;">
+                  Consistency isn't about discipline. <span style="background:#EAF1E6;border-bottom:2px solid #3E6B39;">It's about a system you can actually keep.</span><br><br>Here's the exact workflow I use to publish 4x a week &mdash; without it ever feeling like a chore. <span style="background:#FFF3D6;border-bottom:2px solid #E6BD5C;">(tighter hook suggested)</span>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px;">
+                  <span style="font-family:'Inter',sans-serif;font-size:13px;padding:9px 18px;border-radius:10px;background:#2E3B26;color:#fff;font-weight:600;">Schedule post</span>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MIND (interactive human) ===== -->
+  <section id="mind" style="position:relative;background:linear-gradient(170deg,#1E2817 0%,#141B10 60%,#10160C 100%);overflow:hidden;">
+    <div style="max-width:1200px;margin:0 auto;padding:104px 40px 96px;">
+      <div data-reveal style="text-align:center;max-width:680px;margin:0 auto 8px;">
+        <div style="display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#F6F7F2;margin-bottom:22px;">Why Drafth</div>
+        <h2 style="font-family:'Crimson Pro',serif;font-weight:700;font-size:clamp(30px,3.6vw,50px);line-height:1.1;letter-spacing:-0.02em;margin:0;color:#F6F7F2;">Your whole content brain, in one place.</h2>
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:17px;line-height:1.55;color:#B3BCA8;margin:16px auto 0;max-width:44ch;">Hover each point to see what Drafth quietly handles for you.</p>
+      </div>
+
+      <div data-reveal style="position:relative;height:640px;perspective:1300px;">
+        <div style="position:absolute;left:50%;top:46%;width:620px;height:620px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side, rgba(156,177,140,0.34), rgba(120,150,110,0.12) 58%, transparent 76%);filter:blur(10px);pointer-events:none;"></div>
+        <div style="position:absolute;left:50%;top:50%;width:520px;height:650px;transform:translate(-50%,-50%);pointer-events:none;">
+          <sc-if value="{{ roboMid }}" hint-placeholder-val="{{ true }}"><img src="assets/robo-hero-cut.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;-webkit-mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);transform-origin:50% 38%;filter:drop-shadow(0 30px 60px rgba(0,0,0,0.42));pointer-events:none;"></sc-if>
+          <sc-if value="{{ roboLeft }}"><img src="assets/robo-hero-cut.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;-webkit-mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);transform-origin:50% 38%;transform:rotateY(-18deg) rotateZ(1.6deg) translateX(-14px) scale(1.02);animation:drafth-turn-l .7s cubic-bezier(0.34,1.06,0.4,1) both;filter:drop-shadow(0 30px 60px rgba(0,0,0,0.42));pointer-events:none;"></sc-if>
+          <sc-if value="{{ roboRight }}"><img src="assets/robo-hero-cut.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;-webkit-mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);transform-origin:50% 38%;transform:rotateY(18deg) rotateZ(-1.6deg) translateX(14px) scale(1.02);animation:drafth-turn-r .7s cubic-bezier(0.34,1.06,0.4,1) both;filter:drop-shadow(0 30px 60px rgba(0,0,0,0.42));pointer-events:none;"></sc-if>
+        </div>
+        <sc-for list="{{ orbs }}" as="o" hint-placeholder-count="5">
+          <div class="mind-point" style="{{ o.wrap }}" onMouseEnter="{{ o.enter }}" onMouseLeave="{{ o.leave }}">
+            <sc-if value="{{ o.off }}" hint-placeholder-val="{{ true }}"><div class="mind-orb" style="{{ o.orbBase }}"></div></sc-if>
+            <sc-if value="{{ o.on }}">
+              <div class="mind-card" style="{{ o.cardOn }}">
+                <div style="font-family:'Crimson Pro',serif;font-weight:700;font-size:18px;letter-spacing:-0.01em;color:#14130E;margin-bottom:6px;">{{ o.title }}</div>
+                <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:13.5px;line-height:1.55;color:#57604F;margin:0;">{{ o.text }}</p>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BENEFITS ===== -->
+  <section id="benefits" style="max-width:1440px;margin:0 auto;padding:148px 40px 0;">
+    <div data-reveal style="max-width:760px;margin-bottom:54px;">
+      <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#14130E;margin-bottom:22px;">The Results</div>
+      <h2 style="font-family:'Crimson Pro',serif;font-weight:600;font-size:clamp(32px,4vw,54px);line-height:1.08;letter-spacing:-0.03em;color:#14130E;margin:0;">
+        Turn your expertise into consistent LinkedIn <span style="font-family:'Crimson Pro',serif;font-style:italic;font-weight:400;color:#4A7A44;">growth.</span>
+      </h2>
+    </div>
+    <div data-reveal style="border-top:1px dashed rgba(20,19,14,0.28);border-bottom:1px dashed rgba(20,19,14,0.28);display:grid;grid-template-columns:repeat(3,1fr);">
+      <div style="padding:46px 34px 50px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:auto;">
+          <span style="font-family:'Crimson Pro',serif;font-weight:600;font-size:clamp(52px,5.4vw,74px);line-height:0.9;letter-spacing:-0.04em;color:#14130E;">10</span>
+          <span style="font-family:'Crimson Pro',serif;font-weight:500;font-size:26px;color:#4A7A44;">x</span>
+        </div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:17px;letter-spacing:-0.01em;color:#14130E;margin:34px 0 9px;">Faster content ideation</h3>
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:14.5px;line-height:1.6;color:#57604F;margin:0;">Go from blank page to a shortlist of on-brand angles in seconds, not hours.</p>
+      </div>
+      <div style="padding:46px 34px 50px;border-left:1px dashed rgba(20,19,14,0.28);display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:auto;">
+          <span style="font-family:'Crimson Pro',serif;font-weight:600;font-size:clamp(52px,5.4vw,74px);line-height:0.9;letter-spacing:-0.04em;color:#14130E;">70</span>
+          <span style="font-family:'Crimson Pro',serif;font-weight:500;font-size:26px;color:#4A7A44;">%</span>
+        </div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:17px;letter-spacing:-0.01em;color:#14130E;margin:34px 0 9px;">Less writing time</h3>
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:14.5px;line-height:1.6;color:#57604F;margin:0;">Drafts arrive nearly done. You edit and approve instead of starting from zero.</p>
+      </div>
+      <div style="padding:46px 34px 50px;border-left:1px dashed rgba(20,19,14,0.28);display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:auto;">
+          <span style="font-family:'Crimson Pro',serif;font-weight:600;font-size:clamp(52px,5.4vw,74px);line-height:0.9;letter-spacing:-0.04em;color:#14130E;">3</span>
+          <span style="font-family:'Crimson Pro',serif;font-weight:500;font-size:26px;color:#4A7A44;">x</span>
+        </div>
+        <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:17px;letter-spacing:-0.01em;color:#14130E;margin:34px 0 9px;">More consistent posting</h3>
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:14.5px;line-height:1.6;color:#57604F;margin:0;">A repeatable system means you show up week after week &mdash; not just when inspired.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG ===== -->
+  <section id="blog" style="max-width:1440px;margin:0 auto;padding:148px 40px 0;">
+    <div data-reveal style="max-width:640px;margin-bottom:54px;">
+      <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#14130E;margin-bottom:22px;">The Blog</div>
+      <h2 style="font-family:'Crimson Pro',serif;font-weight:600;font-size:clamp(30px,3.6vw,48px);line-height:1.1;letter-spacing:-0.03em;color:#14130E;margin:0;text-wrap:balance;">Insights on building a stronger personal brand on LinkedIn.</h2>
+    </div>
+
+    <div data-reveal style="border-top:1px dashed rgba(20,19,14,0.28);border-bottom:1px dashed rgba(20,19,14,0.28);display:grid;grid-template-columns:1.05fr 0.95fr;">
+      <div style="padding:52px 56px 56px 0;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;gap:14px;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#8A917F;margin-bottom:28px;">
+          <span style="color:#4A7A44;">Featured</span><span style="width:16px;height:1px;background:#C2C7B8;"></span>Playbook &middot; 6 min read
+        </div>
+        <h3 style="font-family:'Crimson Pro',serif;font-weight:600;font-size:clamp(26px,2.9vw,38px);line-height:1.12;letter-spacing:-0.025em;color:#14130E;margin:0 0 18px;">Written for professionals. Powered by experience.</h3>
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:15.5px;line-height:1.65;color:#57604F;margin:0 0 34px;max-width:46ch;">Great content isn't invented &mdash; it's extracted. Here's how the sharpest operators mine their day-to-day work for posts that actually land, and how to build a system that never runs dry.</p>
+        <a href="#" style="margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;color:#14130E;border-bottom:1px solid #14130E;padding-bottom:5px;">Read more <span style="font-size:15px;">&rarr;</span></a>
+      </div>
+      <div style="position:relative;border-left:1px dashed rgba(20,19,14,0.28);min-height:360px;overflow:hidden;">
+        <div style="position:absolute;inset:0;background-image:url('https://loremflickr.com/900/700/writing,desk,laptop?lock=41');background-size:cover;background-position:center;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section style="background:#F4F2EE;">
+    <div class="tst-wrap" style="max-width:1360px;margin:0 auto;padding:120px 24px 230px;">
+      <div class="tst-row" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start;">
+        <div class="tst-card" style="margin-top:0px;background:#FAFAF9;border-radius:28px;box-shadow:0 2px 40px rgba(0,0,0,0.03);padding:40px;min-height:404px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <span style="flex:0 0 auto;width:60px;font-family:'Inter',sans-serif;font-size:90px;line-height:0.72;color:#DCDAD5;">&ldquo;</span>
+            <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:24px;line-height:1.4;color:#3A3A38;margin:0;max-width:19ch;">I went from posting once a month to three times a week, and my inbound doubled.</p>
+          </div>
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:36px;">
+            <div style="min-width:0;">
+              <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px;color:#141414;">Sarah Jantsen</div>
+              <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:15px;line-height:1.4;color:#6B6B68;margin-top:4px;max-width:15ch;">Founder at Lever Studio</div>
+            </div>
+            <div class="tst-av" style="flex:0 0 auto;width:150px;height:150px;border-radius:22px;margin:0 -8px -12px 0;background-image:url('https://picsum.photos/seed/drafth-face-31/300/300');background-size:cover;background-position:center;background-color:#E4E2DC;"></div>
+          </div>
+        </div>
+        <div class="tst-card" style="margin-top:55px;background:#FAFAF9;border-radius:28px;box-shadow:0 2px 40px rgba(0,0,0,0.03);padding:40px;min-height:382px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <span style="flex:0 0 auto;width:60px;font-family:'Inter',sans-serif;font-size:90px;line-height:0.72;color:#DCDAD5;">&ldquo;</span>
+            <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:24px;line-height:1.4;color:#3A3A38;margin:0;max-width:19ch;">It finally sounds like me. Clients think I write every post myself.</p>
+          </div>
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:36px;">
+            <div style="min-width:0;">
+              <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px;color:#141414;">Marcus Lee</div>
+              <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:15px;line-height:1.4;color:#6B6B68;margin-top:4px;max-width:15ch;">Fractional CMO at Northbeam</div>
+            </div>
+            <div class="tst-av" style="flex:0 0 auto;width:150px;height:150px;border-radius:22px;margin:0 -8px -12px 0;background-image:url('https://picsum.photos/seed/drafth-face-44/300/300');background-size:cover;background-position:center;background-color:#E4E2DC;"></div>
+          </div>
+        </div>
+        <div class="tst-card" style="margin-top:110px;background:#FAFAF9;border-radius:28px;box-shadow:0 2px 40px rgba(0,0,0,0.03);padding:40px;min-height:382px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <span style="flex:0 0 auto;width:60px;font-family:'Inter',sans-serif;font-size:90px;line-height:0.72;color:#DCDAD5;">&ldquo;</span>
+            <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:24px;line-height:1.4;color:#3A3A38;margin:0;max-width:19ch;">I never leave without three posts I actually want to publish.</p>
+          </div>
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:36px;">
+            <div style="min-width:0;">
+              <div style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px;color:#141414;">Priya Nair</div>
+              <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:15px;line-height:1.4;color:#6B6B68;margin-top:4px;max-width:15ch;">Product Consultant at Hallow</div>
+            </div>
+            <div class="tst-av" style="flex:0 0 auto;width:150px;height:150px;border-radius:22px;margin:0 -8px -12px 0;background-image:url('https://picsum.photos/seed/drafth-face-57/300/300');background-size:cover;background-position:center;background-color:#E4E2DC;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section style="max-width:720px;margin:0 auto;padding:120px 40px;">
+    <div data-reveal style="text-align:center;margin-bottom:56px;">
+      <h2 style="font-family:'Crimson Pro',serif;font-weight:600;font-size:clamp(32px,3.8vw,46px);line-height:1.1;letter-spacing:-0.025em;color:#14130E;margin:0 0 16px;">Your questions, answered</h2>
+      <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:16.5px;line-height:1.6;color:#57604F;margin:0;">Get quick answers to the most common questions about our platform and services.</p>
+    </div>
+    <div data-reveal>
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+        <div style="border-bottom:1px solid rgba(20,19,14,0.14);">
+          <div onClick="{{ f.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0;cursor:pointer;">
+            <span style="{{ f.q }}">{{ f.question }}</span>
+            <span style="{{ f.icon }}">{{ f.sign }}</span>
+          </div>
+          <sc-if value="{{ f.open }}">
+            <div class="faq-open" style="overflow:hidden;">
+              <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#57604F;margin:0;padding:0 48px 28px 0;">{{ f.answer }}</p>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ===== CTA + FOOTER ===== -->
+  <footer style="max-width:1440px;margin:148px auto 0;padding:0 40px 44px;">
+    <div data-reveal style="position:relative;overflow:hidden;border-radius:16px;padding:88px 56px;background:linear-gradient(168deg,#233019 0%,#1A2413 58%,#141C0E 100%);">
+      <div style="position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(156,177,140,0.5),transparent);"></div>
+      <div style="position:relative;max-width:640px;">
+        <div style="font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#9CB18C;margin-bottom:26px;">Get started</div>
+        <h2 style="font-family:'Crimson Pro',serif;font-weight:600;color:#F6F7F2;font-size:clamp(32px,4.6vw,58px);line-height:1.04;letter-spacing:-0.03em;margin:0 0 20px;">Start writing posts worth <span style="font-family:'Crimson Pro',serif;font-style:italic;font-weight:400;color:#B7D89A;">reading.</span></h2>
+        <p style="font-family:'Inter',sans-serif;font-weight:300;color:#B9C2AE;font-size:17px;line-height:1.6;max-width:44ch;margin:0 0 38px;">Join thousands of professionals turning their expertise into consistent LinkedIn growth with Drafth.</p>
+        <a href="#" style="display:inline-flex;align-items:center;gap:11px;background:#F6F7F2;color:#14130E;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:16px 26px;border-radius:10px;"><span style="font-size:18px;line-height:1;">+</span>Start writing free</a>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;border-top:1px dashed rgba(20,19,14,0.28);margin-top:44px;padding:26px 0 0;">
+      <div style="display:flex;align-items:center;gap:11px;">
+        <img src="assets/drafth-logo.png" alt="Drafth" style="height:22px;width:auto;display:block;">
+        <span style="font-family:'Inter',sans-serif;font-weight:300;font-size:13px;color:#8A917F;">&copy; 2026</span>
+      </div>
+      <div style="display:flex;gap:30px;font-family:'Inter',sans-serif;font-weight:400;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;">
+        <a href="#" style="color:#57604F;">Privacy</a>
+        <a href="#" style="color:#57604F;">Terms</a>
+        <a href="#" style="color:#57604F;">Contact</a>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:940}}">
+class Component extends DCLogic {
+  state = { tab: 0, tIndex: 0, solIndex: -1, faceIdx: -1, hqIndex: 0, faqOpen: 0 };
+
+  rootRef = React.createRef();
+
+  componentDidMount() {
+    const root = this.rootRef.current;
+    if (!root) return;
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    els.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1)';
+      el.style.willChange = 'opacity, transform';
+    });
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el) => io.observe(el));
+    } else {
+      els.forEach(reveal);
+    }
+
+    // metrics video frame: scroll-driven glide down, grow, centre, then autoplay
+    const vf = document.getElementById('video-frame');
+    const vslot = document.getElementById('video-slot');
+    const vid = document.getElementById('metrics-video');
+    const vph = document.getElementById('video-ph');
+    if (vf && vslot) {
+      const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      const tickVideo = () => {
+        const track = document.getElementById('metrics-track');
+        if (track) {
+          const r = track.getBoundingClientRect();
+          const vh = window.innerHeight;
+          // 0 while the section enters, 1 once it is settled mid-viewport
+          const raw = (vh - r.top) / (vh + r.height * 0.55);
+          const p = ease(Math.min(Math.max(raw, 0), 1));
+          const s = vslot.getBoundingClientRect();
+          const copy = document.getElementById('metrics-copy');
+          // phase 1 (p 0 -> .5): glide straight down at the SAME size, until the frame's
+          //   top sits 50px below the last line of the copy
+          // phase 2 (p .5 -> 1): grow from the LEFT edge (which never moves) out to the
+          //   right end of the grid, so it never overlays the copy; then the effect stops
+          const t1 = ease(Math.min(p / 0.5, 1));
+          const t2 = ease(Math.max((p - 0.5) / 0.5, 0));
+          const copyRect = copy ? copy.getBoundingClientRect() : null;
+          const travel = copyRect ? Math.max(copyRect.bottom + 50 - s.top, 0) : Math.max(vh * 0.22, 120);
+          const gridRight = track.getBoundingClientRect().right - 40;
+          const targetW = Math.max(gridRight - s.left, s.width);
+          const scale = 1 + (targetW / Math.max(s.width, 1) - 1) * t2;
+          const dx = 0;
+          const dy = travel * t1;
+          if (copy) { copy.style.opacity = String(1 - 0.55 * t2); }
+          // reserve exactly the room the frame will occupy at full scale, so the next
+          // section can never be overlapped regardless of viewport width
+          const flatten = 1 - 0.15 * t2;
+          const fullH = targetW * (10 / 16) * 0.85;
+          const need = Math.ceil(travel + fullH - s.height + 96);
+          if (this._vidPad !== need) { this._vidPad = need; track.style.paddingBottom = need + 'px'; }
+          const inv = 1 / Math.max(scale, 1);
+          const phi = document.getElementById('video-ph-inner');
+          if (phi) phi.style.transform = 'scale(' + inv.toFixed(4) + ',' + (inv / flatten).toFixed(4) + ')';
+          vf.style.borderRadius = (18 * inv).toFixed(2) + 'px / ' + (18 * inv / flatten).toFixed(2) + 'px';
+          vf.style.transform = 'translate3d(' + dx.toFixed(2) + 'px,' + dy.toFixed(2) + 'px,0) scale(' + scale.toFixed(4) + ',' + (scale * flatten).toFixed(4) + ')';
+          if (vid && vid.currentSrc) {
+            if (p > 0.88 && vid.paused) { vid.play().catch(() => {}); if (vph) vph.style.opacity = '0'; }
+            if (p < 0.6 && !vid.paused) { vid.pause(); if (vph) vph.style.opacity = '1'; }
+          }
+        }
+        this._vidRAF = requestAnimationFrame(tickVideo);
+      };
+      if (vph) vph.style.transition = 'opacity .5s ease';
+      if (this._vidRAF) cancelAnimationFrame(this._vidRAF);
+      this._vidRAF = requestAnimationFrame(tickVideo);
+    }
+
+    this._fallback = setTimeout(() => els.forEach(reveal), 2500);
+
+    // LINKEDIN <-> SIGN UP. Hit-tested on every pointer move (no mouseenter, which
+    // proved unreliable here); the morphed word then sticks to the cursor and
+    // disappears as soon as the pointer leaves the banner.
+    const liSlot = document.getElementById('li-slot');
+    const liWord = document.getElementById('li-word');
+    const liBtn = document.getElementById('li-btn');
+    const liBanner = document.querySelector('.hero-banner');
+    if (liSlot && liWord && liBtn && liBanner && !liSlot.dataset.wired) {
+      liSlot.dataset.wired = '1';
+      let on = false;
+      let cx = 0, cy = 0, tx = 0, ty = 0, raf = 0;
+
+      const syncType = () => {
+        const cs = getComputedStyle(liWord);
+        liBtn.style.fontSize = cs.fontSize;
+        liBtn.style.lineHeight = cs.lineHeight;
+        liBtn.style.letterSpacing = cs.letterSpacing;
+      };
+      const place = (x, y) => {
+        const w = liBtn.offsetWidth, hh = liBtn.offsetHeight;
+        liBtn.style.transform = 'translate3d(' + (x - w / 2) + 'px,' + (y - hh / 2) + 'px,0)';
+      };
+      const draw = () => {
+        tx += (cx - tx) * 0.28;
+        ty += (cy - ty) * 0.28;
+        const w = liBtn.offsetWidth, hh = liBtn.offsetHeight;
+        liBtn.style.transform = 'translate3d(' + (tx - w / 2) + 'px,' + (ty - hh / 2) + 'px,0)';
+        raf = on ? requestAnimationFrame(draw) : 0;
+      };
+      let suppressed = false;  // must exit the word's box before it can morph again
+      let morphing = false;    // morph plays in place first, then the text sticks to cursor
+      let canRevert = false;   // set once the cursor has genuinely left the word after morphing
+      const hint = document.getElementById('li-hint');
+
+      const activate = (x, y) => {
+        if (on) return;
+        on = true;
+        morphing = true;
+        canRevert = false;
+        syncType();
+        const r = liWord.getBoundingClientRect();
+        // start centred on the word: the morph happens in place
+        cx = tx = r.left + r.width / 2;
+        cy = ty = r.top + r.height / 2;
+        liWord.classList.remove('li-shake');
+        liWord.style.transition = 'opacity .26s ease, transform .26s cubic-bezier(0.22,1,0.36,1)';
+        liWord.style.opacity = '0';
+        liWord.style.transform = 'scale(0.88)';
+        if (hint) hint.style.opacity = '0';
+        liBtn.style.transition = 'none';
+        place(tx, ty);
+        void liBtn.offsetWidth;            // commit the position before fading in
+        liBtn.style.transition = 'opacity .26s ease';
+        liBtn.style.opacity = '1';
+        if (!raf) raf = requestAnimationFrame(draw);
+        // once the in-place morph has played, hand over to the cursor
+        setTimeout(() => {
+          if (!on) return;
+          morphing = false;
+          if (lastX != null) { cx = lastX; cy = lastY; }
+        }, 300);
+      };
+      const deactivate = () => {
+        if (!on) return;
+        on = false;
+        morphing = false;
+        liBtn.style.opacity = '0';
+        liWord.style.opacity = '1';
+        liWord.style.transform = 'scale(1)';
+        if (hint) hint.style.opacity = '1';
+        setTimeout(() => { if (!on) liWord.classList.add('li-shake'); }, 300);
+      };
+      const overWord = (x, y) => {
+        const r = liSlot.getBoundingClientRect();
+        return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+      };
+      let lastX = null, lastY = null;
+      const move = (e) => {
+        lastX = e.clientX; lastY = e.clientY;
+        if (!morphing) { cx = e.clientX; cy = e.clientY; }
+        const b = liBanner.getBoundingClientRect();
+        const inBanner = e.clientX >= b.left && e.clientX <= b.right && e.clientY >= b.top && e.clientY <= b.bottom;
+        if (!inBanner) { deactivate(); suppressed = false; return; }
+        const over = overWord(e.clientX, e.clientY);
+        if (!over) { suppressed = false; if (on && !morphing) canRevert = true; return; }
+        // hovering the word's space: morph in, or morph back once it has been taken away
+        if (!on && !suppressed) activate(e.clientX, e.clientY);
+        else if (on && !morphing && canRevert) { deactivate(); suppressed = true; }
+      };
+      window.addEventListener('pointermove', move, { passive: true });
+      window.addEventListener('scroll', () => {
+        const b = liBanner.getBoundingClientRect();
+        if (b.bottom <= 0 || b.top >= window.innerHeight) deactivate();
+      }, { passive: true, capture: true });
+      window.addEventListener('blur', deactivate);
+      window.addEventListener('resize', syncType, { passive: true });
+      syncType();
+    }
+
+    // The runtime mounts twice and unmounts the first instance, which killed both
+    // setInterval handles and this instance's rAF ids. So: always publish the newest
+    // instance, and run ONE global rotation loop that is never registered twice and
+    // is never cancelled by any unmount.
+    window.__drafthLive = this;
+    if (!window.__drafthRot) {
+      // setInterval, not rAF: rAF is suspended while the page/preview is hidden.
+      // Registered once on window and never cleared, so no unmount can kill it.
+      window.__drafthRot = { tab: 0, quote: 0 };
+      setInterval(() => {
+        const st = window.__drafthRot;
+        const L = window.__drafthLive;
+        if (!L || !L.state) return;
+        const now = Date.now();
+        if (!st.tab) { st.tab = now; st.quote = now; return; }
+        if (L.state.tabAuto !== false && now - st.tab >= 8000) {
+          st.tab = now;
+          L.setState((s) => ({ tab: (s.tab + 1) % 3 }));
+        }
+        if (now - st.quote >= 5200) {
+          st.quote = now;
+          L.setState((s) => ({ hqIndex: (s.hqIndex + 1) % 4 }));
+        }
+      }, 250);
+    }
+
+    // Solution section: normal scroll. Steps advance from the section's own scroll
+    // progress while it is pinned, and hold at the last step once fully reached.
+    const setStep = (i) => { if (i !== this.state.solIndex) this.setState({ solIndex: i }); };
+    const solTick = () => {
+      const track = document.getElementById('sol-track');
+      if (track) {
+        const r = track.getBoundingClientRect();
+        const total = track.offsetHeight - window.innerHeight;
+        if (total > 0) {
+          const p = Math.min(Math.max(-r.top / total, 0), 1);
+          let idx;
+          // four equal scroll steps: none -> connecting -> expertise -> storytelling
+          if (p < 0.25) idx = -1;
+          else if (p < 0.50) idx = 0;
+          else if (p < 0.75) idx = 1;
+          else idx = 2;
+          setStep(idx);
+        }
+      }
+      this._solRAF = requestAnimationFrame(solTick);
+    };
+    this._solRAF = requestAnimationFrame(solTick);
+    // statement headline: play the line-rise only when the section scrolls into view
+    const stmt = document.getElementById('statement');
+    if (stmt && 'IntersectionObserver' in window) {
+      const rio = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('rise-on'); rio.unobserve(e.target); }
+        });
+      }, { threshold: 0.25 });
+      rio.observe(stmt);
+    } else if (stmt) {
+      stmt.classList.add('rise-on');
+    }
+    this._fallback = setTimeout(() => els.forEach(reveal), 2500);
+
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._fallback);
+    if (this._vidRAF) cancelAnimationFrame(this._vidRAF);
+    if (this._solRAF) cancelAnimationFrame(this._solRAF);
+    if (this._mindRAF) cancelAnimationFrame(this._mindRAF);
+  }
+
+  toneChip(active) {
+    return `font-family:'Inter',sans-serif;text-align:center;font-size:13px;font-weight:600;padding:11px;border-radius:10px;cursor:pointer;border:1px solid ${active ? '#3E6B39' : 'rgba(20,19,14,0.12)'};background:${active ? '#EAF1E6' : '#FBFAF6'};color:${active ? '#3E6B39' : '#57604F'};`;
+  }
+
+  mindComputed() {
+    const fi = this.state.faceIdx;
+    const data = [
+      { dir: -1, pos: 'left:4%;top:9%;', side: 'left',  grad: 'radial-gradient(circle at 34% 28%, #ffffff, #E6EBDF 46%, #9CB18C 78%, #6F8C60)', title: 'Endless ideas', text: 'Never face a blank page — fresh, on-brand angles drawn straight from your expertise.' },
+      { dir: -1, pos: 'left:20%;top:40%;', side: 'left', small: true, grad: 'radial-gradient(circle at 34% 28%, #ffffff, #DDE4D6 50%, #88A06B 82%)', title: 'Your voice, kept', text: 'Every draft still sounds unmistakably like you — never generic AI filler.' },
+      { dir: -1, pos: 'left:7%;top:70%;', side: 'left', grad: 'radial-gradient(circle at 34% 28%, #ffffff, #E8EDE2 48%, #7E9A6C 82%)', title: 'Consistency on autopilot', text: 'Show up 4× a week without the weekly scramble or burnout.' },
+      { dir: 1, pos: 'right:6%;top:13%;', side: 'right', grad: 'radial-gradient(circle at 34% 28%, #ffffff, #D8E0CE 46%, #9CB18C 80%)', title: 'Hooks that land', text: 'Openers engineered to stop the scroll and pull readers into your post.' },
+      { dir: 1, pos: 'right:5%;top:64%;', side: 'right', grad: 'radial-gradient(circle at 34% 28%, #ffffff, #E2E9DA 46%, #6F8C60 82%)', title: 'Growth you can see', text: 'Turn posts into followers, inbound, and reach you can actually measure.' },
+    ];
+    const dir = fi >= 0 ? data[fi].dir : 0;
+    const orbs = data.map((d, i) => {
+      const on = fi === i;
+      const sz = d.small ? 40 : 54;
+      return {
+        title: d.title, text: d.text,
+        enter: () => this.setState({ faceIdx: i }),
+        leave: () => this.setState((s) => (s.faceIdx === i ? { faceIdx: -1 } : null)),
+        on: on,
+        off: !on,
+        wrap: `position:absolute;${d.pos}width:${sz}px;height:${sz}px;z-index:${on ? 6 : 3};`,
+        orbBase: `position:absolute;inset:0;border-radius:50%;cursor:pointer;background:${d.grad};box-shadow:0 10px 26px rgba(150,120,90,0.28), inset 0 2px 5px rgba(255,255,255,0.6);animation:drafth-float ${5 + (i % 3)}s ease-in-out infinite;`,
+        cardOn: `position:absolute;top:50%;${d.side === 'left' ? 'left:0;' : 'right:0;'}width:min(258px,74vw);background:#FFFFFF;border:1px solid rgba(20,19,14,0.08);border-radius:16px;padding:16px 18px;box-shadow:0 22px 50px rgba(20,19,14,0.16);transform:translateY(-50%);animation:drafth-pop .42s cubic-bezier(0.22,1,0.36,1) both;z-index:7;`,
+      };
+    });
+    return { orbs, dir };
+  }
+
+  renderVals() {
+    const tab = this.state.tab;
+    const tIndex = this.state.tIndex;
+
+    const bar = (h, blue) => `flex:1;height:${h}%;border-radius:4px;background:${blue ? '#2E3B26' : 'rgba(20,19,14,0.14)'};`;
+    const barLight = (h, on) => `flex:1;height:${h}%;border-radius:4px;background:${on ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.22)'};`;
+
+    const si = this.state.solIndex;
+    const mind = this.mindComputed();
+    const solWord = (on) => on
+      ? "font-weight:300;color:#9CB18C;transition:color .4s ease;"
+      : "font-weight:300;color:#14130E;transition:color .4s ease;";
+
+    return {
+      rootRef: this.rootRef,
+
+      solOn0: si === 0, solOff0: si !== 0,
+      solOn1: si === 1, solOff1: si !== 1,
+      solOn2: si >= 2, solOff2: si < 2,
+
+      heroQuotes: [
+        { text: 'Once a month to three times a week — my inbound doubled.', name: 'Sarah Jantsen', role: 'Founder, Lever Studio', seed: 31 },
+        { text: 'It finally sounds like me. Clients think I write every post myself.', name: 'Marcus Lee', role: 'Fractional CMO', seed: 44 },
+        { text: 'I never leave without three posts I actually want to publish.', name: 'Priya Nair', role: 'Product Consultant', seed: 57 },
+        { text: 'My network grew more in three months than in three years.', name: 'David Okafor', role: 'Sales Leader', seed: 68 },
+      ].map((q, i) => ({
+        text: q.text, name: q.name, role: q.role,
+        avatar: `width:40px;height:40px;border-radius:50%;flex:0 0 auto;background-image:url('https://loremflickr.com/120/120/portrait,person?lock=${q.seed}');background-size:cover;background-position:center;`,
+        style: `position:absolute;left:32px;right:32px;top:50%;transform:translateY(-50%);transition:opacity .7s ease;opacity:${this.state.hqIndex === i ? 1 : 0};pointer-events:${this.state.hqIndex === i ? 'auto' : 'none'};`,
+      })),
+      orbs: mind.orbs,
+      isStep0: si === 0,
+      isStep1: si === 1,
+      isStep2: si >= 2,
+
+      marqueeItems: (() => {
+        const base = [
+          ['01','Founders','founder,office,portrait'],
+          ['02','Coaches','coach,speaker,audience'],
+          ['03','Consultants','consultant,meeting,presentation'],
+          ['04','Recruiters','interview,office,handshake'],
+          ['05','Marketers','marketing,team,office'],
+          ['06','Sales leaders','sales,presentation,team'],
+          ['07','Designers','designer,laptop,desk'],
+          ['08','Investors','boardroom,business,meeting'],
+        ].map(([num, name, q], i) => ({
+          num, name,
+          imgStyle: `width:100%;height:100%;background-image:url('https://loremflickr.com/240/160/${q}?lock=${i + 11}');background-size:cover;background-position:center;`,
+        }));
+        return [...base, ...base];
+      })(),
+
+      problems: [
+        { num: '(1)', title: 'No idea what to post', body: 'You have the knowledge. Finding content ideas is the hard part.' },
+        { num: '(2)', title: 'Blank page syndrome', body: 'Starting a LinkedIn post often takes longer than writing it.' },
+        { num: '(3)', title: 'Inconsistent posting', body: "Creating content is difficult when you're busy doing the actual work." },
+      ],
+
+      setTab0: () => { if (window.__drafthRot) window.__drafthRot.tab = Date.now(); this.setState({ tab: 0, tabAuto: false }); },
+      setTab1: () => { if (window.__drafthRot) window.__drafthRot.tab = Date.now(); this.setState({ tab: 1, tabAuto: false }); },
+      setTab2: () => { if (window.__drafthRot) window.__drafthRot.tab = Date.now(); this.setState({ tab: 2, tabAuto: false }); },
+      faqs: [
+        { question: 'How does Drafth learn my voice?', answer: 'You connect your existing posts and answer a short set of prompts about how you think and talk. Drafth builds a voice profile from that and applies it to every draft, so the output reads like you wrote it rather than a template.' },
+        { question: 'Do I still have to write anything?', answer: 'Only as much as you want to. Most people start from a generated draft and spend a few minutes sharpening it. You always approve the final post before it goes anywhere.' },
+        { question: 'Where do the ideas come from?', answer: 'From the work you already do. Drafth mines your notes, calls, wins, and the questions your clients keep asking, then turns those into angles worth posting about.' },
+        { question: 'Can I schedule posts directly to LinkedIn?', answer: 'Yes. Connect your account once and schedule from inside Drafth, or export the text and post manually if you prefer to keep publishing in your own hands.' },
+        { question: 'What if I do not like a draft?', answer: 'Regenerate it, shorten it, change the hook, or shift the tone with one click. Nothing is published without you, and every revision teaches the voice profile a little more.' },
+      ].map((f, i) => ({
+        question: f.question, answer: f.answer,
+        open: this.state.faqOpen === i,
+        sign: this.state.faqOpen === i ? '\u2212' : '+',
+        go: () => this.setState((s) => ({ faqOpen: s.faqOpen === i ? -1 : i })),
+        q: `font-family:'Inter',sans-serif;font-weight:500;font-size:17px;line-height:1.4;color:#14130E;`,
+        icon: `font-family:'Inter',sans-serif;font-size:20px;line-height:1;color:${this.state.faqOpen === i ? '#2E3B26' : '#7A8172'};flex:0 0 auto;`,
+      })),
+      isTab0: tab === 0, notTab0: tab !== 0,
+      isTab1: tab === 1, notTab1: tab !== 1,
+      isTab2: tab === 2, notTab2: tab !== 2,
+      roboMid: mind.dir === 0,
+      roboLeft: mind.dir < 0,
+      roboRight: mind.dir > 0,
+      isIdeation: tab === 0,
+      isGenerate: tab === 1,
+      isRefine: tab === 2,
+
+      navItems: [
+        { label: 'Ideas', on: tab === 0, off: tab !== 0 },
+        { label: 'Drafts', on: tab === 1, off: tab !== 1 },
+        { label: 'Refine', on: tab === 2, off: tab !== 2 },
+        { label: 'Scheduled', on: false, off: true },
+      ],
+
+      starters: [
+        { t: 'Contrarian take', d: 'Challenge a common belief in your niche' },
+        { t: 'Client win story', d: 'Turn a recent result into a narrative' },
+        { t: 'Lesson learned', d: 'Share a mistake and the takeaway' },
+        { t: 'Industry trend', d: 'React to news your audience cares about' },
+      ],
+
+      tones: [
+        { label: 'Punchy', style: this.toneChip(true) },
+        { label: 'Warm', style: this.toneChip(false) },
+        { label: 'Bold', style: this.toneChip(false) },
+      ],
+
+      testimonials: [
+        { quote: 'I went from posting once a month to three times a week — and my inbound doubled. Drafth made showing up effortless.', name: 'Sarah Jantsen', role: 'Founder, Lever Studio', avatar: 'background:linear-gradient(135deg,#2E3B26,#9CB18C);' },
+        { quote: "It finally sounds like me. The drafts capture my voice so well that clients think I write every post myself.", name: 'Marcus Lee', role: 'Fractional CMO', avatar: 'background:linear-gradient(135deg,#88A06B,#3E6B39);' },
+        { quote: 'The ideation alone is worth it. I never open the app without leaving with three posts I actually want to publish.', name: 'Priya Nair', role: 'Product Consultant', avatar: 'background:linear-gradient(135deg,#6F8C60,#DDE4D6);' },
+        { quote: 'My network has grown faster in three months with Drafth than in the previous three years of winging it.', name: 'David Okafor', role: 'Sales Leader', avatar: 'background:linear-gradient(135deg,#9CB18C,#14130E);' },
+        { quote: 'The consistency changed everything. Recruiters and founders now reach out to me because of what I post.', name: 'Elena Rossi', role: 'Design Lead', avatar: 'background:linear-gradient(135deg,#3E6B39,#88A06B);' },
+      ],
+      trackClass: 'tt-' + tIndex,
+      dots: [0, 1, 2].map((i) => ({
+        on: tIndex === i,
+        off: tIndex !== i,
+        go: () => this.setState({ tIndex: i }),
+      })),
+      prev: () => this.setState((s) => ({ tIndex: Math.max(0, s.tIndex - 1) })),
+      next: () => this.setState((s) => ({ tIndex: Math.min(2, s.tIndex + 1) })),
+    };
+  }
+}
+</script>
+</body>
+</html>
