@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #14181b; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #c0360f; text-decoration: none; }
+  a:hover { color: #f04c1d; }
+  @keyframes qsPatternDrift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-68px, -68px, 0); } }
+  @keyframes qsBloom { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .75; } 50% { transform: translate3d(3vw, -2vw, 0) scale(1.12); opacity: 1; } }
+  @keyframes qsTrackA { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes qsTrackB { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  @keyframes qsBlink { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+  @keyframes qsScan { 0% { transform: translateY(-14%); } 50% { transform: translateY(700%); } 100% { transform: translateY(-14%); } }
+  [data-r="burger"] { display: none; }
+  @media (max-width: 767px) {
+    [data-r="navbg"] { height: 56px !important; }
+    nav { padding: 6px 5vw !important; gap: 10px !important; }
+    nav > div:first-child { gap: 0 !important; }
+    [data-r="navdesk"], [data-r="navcta"] { display: none !important; }
+    [data-r="burger"] { display: inline-flex !important; }
+    [data-r="navpanel"][data-open="1"] { display: flex !important; }
+    section { padding-top: 56px !important; padding-bottom: 52px !important; padding-left: 5.5vw !important; padding-right: 5.5vw !important; }
+    [data-r="hero"] { padding-top: 100px !important; padding-bottom: 44px !important; }
+    footer { padding: 44px 5.5vw 30px !important; }
+    h1 { font-size: clamp(28px, 8.4vw, 40px) !important; max-width: 100% !important; }
+    h2 { font-size: clamp(23px, 6.6vw, 31px) !important; max-width: 100% !important; }
+    h3 { font-size: 17px !important; }
+    p { max-width: 100% !important; }
+    [data-r="hero"] p { font-size: 15px !important; }
+    #demo { padding: 32px 20px 36px !important; }
+    #demo button[type="submit"] { width: 100% !important; }
+    [style*="grid-column: span 2"] { grid-column: auto !important; }
+    [data-qs="modal"] { padding: 0 !important; align-items: stretch !important; }
+    [data-qs="modal"] > div:last-child { width: 100% !important; height: 100% !important; max-height: 100% !important; border-radius: 0 !important; }
+    [style*="grid-template-columns: repeat(2,"], [style*="grid-template-columns: repeat(3,"], [style*=".92fr"], [style*=".8fr) minmax"], [style*="1.5fr"], [style*="146px minmax"] { grid-template-columns: minmax(0, 1fr) !important; gap: 18px !important; }
+    [style*="grid-template-columns: repeat(auto-fit"] { gap: 14px !important; }
+    [data-qs="track"] > div { width: 178px !important; height: 107px !important; }
+    [style*="42px minmax"] { grid-template-columns: 26px minmax(0, 1fr) 24px !important; gap: 12px !important; }
+  }
+</style>
+</helmet>
+
+<div style="background: #ffffff">
+
+  <div data-r="navbg" style="position: fixed; z-index: 39; top: 0; left: 0; right: 0; height: 70px; pointer-events: none; background: #ffffff; box-shadow: 0 8px 26px -14px rgba(20,24,27,.28)"></div>
+  <nav style="position: fixed; z-index: 40; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 15px 5.5vw">
+    <div style="display: flex; align-items: center; gap: 44px">
+      <a href="index.html" style="display: flex; align-items: center; height: 35px">
+        <img src="uploads/quadinel-logo-dark.svg" alt="Quadinel AI" style="display: block; height: 35px; width: auto" />
+      </a>
+      <div data-r="navdesk" style="display: flex; gap: 28px; font-size: 14px; font-weight: 500">
+        <a href="#cv" style="position: relative; display: inline-flex; flex-direction: column; align-items: center; gap: 6px; color: #14181b; font-weight: 600">Solutions<span style="width: 100%; height: 2px; border-radius: 2px; background: #f04c1d"></span></a>
+        <a href="about.html" style="display: inline-flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(20,24,27,.68); transition: color .3s ease" style-hover="color: #c0360f">About us<span style="width: 100%; height: 2px"></span></a>
+      </div>
+    </div>
+      <button type="button" data-r="burger" onClick="{{ toggleNav }}" aria-label="Open menu" style="appearance: none; cursor: pointer; display: none; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(20,24,27,.18); border-radius: 10px; background: #ffffff"><span style="display: flex; flex-direction: column; gap: 4px"><span style="display: block; width: 18px; height: 1.5px; background: #14181b"></span><span style="display: block; width: 18px; height: 1.5px; background: #14181b"></span><span style="display: block; width: 18px; height: 1.5px; background: #14181b"></span></span></button>
+    <button type="button" data-r="navcta" onClick="{{ openDemo }}" style="appearance: none; cursor: pointer; padding: 11px 22px; border-radius: 9px; border: 1px solid rgba(20,24,27,.24); background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600; color: #14181b; transition: border-color .35s ease, color .35s ease, transform .45s cubic-bezier(.16,1,.3,1)" style-hover="border-color: #f04c1d; color: #c0360f; transform: translateY(-1px)">Book a demo</button>
+  </nav>
+
+  <div data-r="navpanel" data-open="0" style="display: none; position: fixed; z-index: 41; top: 56px; left: 0; right: 0; flex-direction: column; gap: 2px; padding: 10px 5vw 16px; background: #ffffff; border-bottom: 1px solid rgba(20,24,27,.1); box-shadow: 0 26px 44px -30px rgba(20,24,27,.5)">
+    <a href="solutions.html" style="display: flex; align-items: center; min-height: 46px; font-size: 15px; font-weight: 600; color: #c0360f">Solutions</a>
+    <a href="about.html" style="display: flex; align-items: center; min-height: 46px; font-size: 15px; font-weight: 500; color: #14181b">About us</a>
+    <button type="button" onClick="{{ openDemoMobile }}" style="appearance: none; border: 0; cursor: pointer; font-family: inherit; width: 100%; min-height: 48px; margin-top: 8px; border-radius: 10px; background: #f04c1d; color: #2b0a02; font-size: 15px; font-weight: 600">Book a demo</button>
+  </div>
+
+  <div data-qs="modal" style="display: none; position: fixed; inset: 0; z-index: 60; align-items: center; justify-content: center; padding: 24px">
+    <div data-qs="scrim" onClick="{{ closeDemo }}" style="position: absolute; inset: 0; background: rgba(14,18,20,.62); backdrop-filter: blur(4px)"></div>
+    <div style="position: relative; width: min(560px, 100%); max-height: calc(100vh - 48px); overflow: auto; border-radius: 20px; background: #ffffff; box-shadow: 0 50px 90px -40px rgba(0,0,0,.6)">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 26px 30px 0">
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #c0360f">Request a demo</div>
+          <p style="margin: 10px 0 0; font-size: 14px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7); max-width: 42ch">Send one feed and a use case. We reply within two working days with what we can detect on it.</p>
+        </div>
+        <button type="button" onClick="{{ closeDemo }}" aria-label="Close" style="flex: 0 0 auto; appearance: none; cursor: pointer; width: 34px; height: 34px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-size: 15px; line-height: 1; color: rgba(20,24,27,.7); transition: border-color .3s ease, color .3s ease" style-hover="border-color: #f04c1d; color: #c0360f">✕</button>
+      </div>
+  <div style="min-width: 0; padding: 30px 30px 32px; border-radius: 16px; background: #ffffff">
+            <div style="margin-bottom: 22px; font-size: 20px; font-weight: 600; letter-spacing: -.025em; color: #14181b">Book a demo</div>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+              <div style="min-width: 0; grid-column: span 2">
+                <label for="m-name" style="display: block; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(20,24,27,.6)">Full name</label>
+                <input id="m-name" name="m-name" type="text" placeholder="Abdullah Al-Harbi" style="width: 100%; padding: 13px 14px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; color: #14181b; outline: none; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)" />
+              </div>
+              <div style="min-width: 0; grid-column: span 2">
+                <label for="m-email" style="display: block; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(20,24,27,.6)">Work email</label>
+                <input id="m-email" name="m-email" type="email" placeholder="abdullah@company.com" style="width: 100%; padding: 13px 14px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; color: #14181b; outline: none; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)" />
+              </div>
+              <div style="min-width: 0; grid-column: span 2">
+                <label for="m-phone" style="display: block; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(20,24,27,.6)">Phone number</label>
+                <div style="display: grid; grid-template-columns: 146px minmax(0, 1fr); gap: 10px">
+                  <select id="m-dial" name="m-dial" style="min-width: 0; padding: 13px 12px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: #14181b; outline: none; cursor: pointer; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)">
+                    <option value="+966" selected="selected" title="Saudi Arabia">+966 SA</option>
+                    <option value="+971" title="United Arab Emirates">+971 AE</option>
+                    <option value="+974" title="Qatar">+974 QA</option>
+                    <option value="+973" title="Bahrain">+973 BH</option>
+                    <option value="+965" title="Kuwait">+965 KW</option>
+                    <option value="+968" title="Oman">+968 OM</option>
+                    <option value="+91" title="India">+91 IN</option>
+                    <option value="+44" title="United Kingdom">+44 GB</option>
+                    <option value="+49" title="Germany">+49 DE</option>
+                    <option value="+1" title="United States">+1 US</option>
+                  </select>
+                  <input id="m-phone" name="m-phone" type="tel" placeholder="50 123 4567" style="min-width: 0; padding: 13px 14px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; color: #14181b; outline: none; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)" />
+                </div>
+              </div>
+              <div style="min-width: 0; grid-column: span 2">
+                <label for="m-message" style="display: block; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(20,24,27,.6)">Message</label>
+                <textarea id="m-message" name="m-message" rows="4" placeholder="What would you like detected, and on how many cameras?" style="width: 100%; padding: 13px 14px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; line-height: 1.55; color: #14181b; resize: vertical; outline: none; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)"></textarea>
+              </div>
+              <div style="grid-column: span 2; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-top: 4px">
+                <button type="button" style="appearance: none; cursor: pointer; display: inline-flex; align-items: center; gap: 9px; padding: 15px 28px; border: 0; border-radius: 10px; background: linear-gradient(140deg, #c93a10, #8f240a); color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600; box-shadow: 0 14px 30px -18px rgba(201,58,16,.9); transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease" style-hover="transform: translateY(-2px); box-shadow: 0 22px 42px -18px rgba(201,58,16,.95)">Request the demo →</button>
+                <span style="font-size: 12.5px; font-weight: 300; color: rgba(20,24,27,.6)">No feed leaves your network.</span>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section data-screen-label="Solutions hero" data-r="hero" style="position: relative; overflow: hidden; padding: 190px 5.5vw 118px; background: linear-gradient(140deg, #c93a10 0%, #a82c0b 46%, #6f1a05 100%)">
+    
+    <div style="position: absolute; inset: 0; pointer-events: none; opacity: .9">
+      <div style="position: absolute; inset: -10%; background-image: radial-gradient(rgba(255,255,255,.2) 1px, transparent 1px); background-size: 34px 34px; animation: qsPatternDrift 9s linear infinite"></div>
+      <div style="position: absolute; left: -12%; top: -22%; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.13), rgba(255,255,255,0)); animation: qsBloom 26s ease-in-out infinite"></div>
+      <div style="position: absolute; right: -18%; bottom: -26%; width: 66vw; height: 66vw; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.1), rgba(255,255,255,0)); animation: qsBloom 30s ease-in-out 6s infinite"></div>
+    </div>
+    <div style="position: relative; max-width: 1120px; margin: 0 auto">
+      <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; padding: 7px 15px 7px 11px; border: 1px solid rgba(255,255,255,.42); border-radius: 999px; background: rgba(255,255,255,.14); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #ffffff">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #ffffff; animation: qsBlink 1.9s ease-in-out infinite"></span>Solutions
+      </div>
+      <h1 style="margin: 0 0 22px; font-size: clamp(32px, 3.9vw, 56px); line-height: 1.06; font-weight: 600; letter-spacing: -.042em; max-width: 24ch; color: #ffffff; text-wrap: balance">One platform. As many capabilities as the business needs.</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; font-weight: 300; color: #ffffff; max-width: 46ch; text-wrap: pretty">Every capability runs on the same edge boxes and the same console. The next one is a licence, not another rollout.</p>
+    </div>
+      <div style="position: relative; margin: 44px -5.5vw 0">
+        <div style="display: flex; align-items: center; gap: 10px; width: min(1120px, 89vw); margin: 0 auto 18px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.78)">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: #ffd9c9; animation: qsBlink 1.7s ease-in-out infinite"></span>Detections running in production
+        </div>
+        <div onMouseEnter="{{ pauseMarquee }}" onMouseLeave="{{ resumeMarquee }}" style="overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); height: 139px">
+          <div data-qs="track" style="display: flex; width: max-content; gap: 14px; animation: qsTrackA 72s linear infinite">
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/oilgas.png" alt="Gas leak · unit 4 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Gas leak · unit 4</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Forklift zone · warehouse detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Forklift zone · warehouse</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Container ID · port gate detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Container ID · port gate</div>
+            </div>
+            
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Stock aisle · shelf gap detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Stock aisle · shelf gap</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1697134674327-3f2261031064?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Footfall · mall entrance detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Footfall · mall entrance</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1726087163038-2910e4de29e5?auto=format&amp;fit=crop&amp;w=420&amp;h=252&amp;q=76" alt="Site activity · zone 3 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Site activity · zone 3</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1672135383688-8fdf9a8011e1?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Queue length · counter detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Queue length · counter</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/pothole.png" alt="Pothole · lane 2 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Pothole · lane 2</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1706760802876-3f447c70e8a1?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Crowd density · concourse detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Crowd density · concourse</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1646082276009-bb35409086ed?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Gloves and vest · line 3 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Gloves &amp; vest · line 3</div>
+            </div>
+            
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/weapon.png" alt="Weapon detected detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Weapon detected</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1562280963-8a5475740a10?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Heat map · store aisle detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; background: radial-gradient(closest-side at 34% 58%, rgba(255,86,0,.85), rgba(255,190,0,.4) 52%, rgba(0,60,255,.25) 100%), radial-gradient(closest-side at 72% 34%, rgba(255,60,0,.7), rgba(255,200,0,.3) 55%, rgba(0,40,200,.2) 100%); opacity: .78"></div><div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Heat map · store aisle</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1617400210795-53720bf465c3?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Drone inspection · plant detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Drone inspection · plant</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/forest-fire.png" alt="Fire and smoke detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Fire &amp; smoke</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/robots.png" alt="Cycle time · cell 4 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Cycle time · cell 4</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1728206348193-9b5ae74a7d32?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="School zone · safe entry detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">School zone · safe entry</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1738410775719-9f237adb266d?auto=format&amp;fit=crop&amp;w=420&amp;h=252&amp;q=76" alt="Illegal parking detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Illegal parking</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1736528520038-015c130d0f9b?auto=format&amp;fit=crop&amp;w=420&amp;h=252&amp;q=76&amp;crop=bottom" alt="Wrong way detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Wrong way</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1691724414154-8b1551e7b292?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Vehicle count · corridor detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Vehicle count · corridor</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/oilgas.png" alt="Gas leak · unit 4 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Gas leak · unit 4</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Forklift zone · warehouse detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Forklift zone · warehouse</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Container ID · port gate detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Container ID · port gate</div>
+            </div>
+            
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Stock aisle · shelf gap detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Stock aisle · shelf gap</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1697134674327-3f2261031064?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Footfall · mall entrance detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Footfall · mall entrance</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1726087163038-2910e4de29e5?auto=format&amp;fit=crop&amp;w=420&amp;h=252&amp;q=76" alt="Site activity · zone 3 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Site activity · zone 3</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1672135383688-8fdf9a8011e1?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Queue length · counter detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Queue length · counter</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/pothole.png" alt="Pothole · lane 2 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Pothole · lane 2</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1706760802876-3f447c70e8a1?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Crowd density · concourse detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Crowd density · concourse</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1646082276009-bb35409086ed?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Gloves and vest · line 3 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Gloves &amp; vest · line 3</div>
+            </div>
+            
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/weapon.png" alt="Weapon detected detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Weapon detected</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1562280963-8a5475740a10?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Heat map · store aisle detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; background: radial-gradient(closest-side at 34% 58%, rgba(255,86,0,.85), rgba(255,190,0,.4) 52%, rgba(0,60,255,.25) 100%), radial-gradient(closest-side at 72% 34%, rgba(255,60,0,.7), rgba(255,200,0,.3) 55%, rgba(0,40,200,.2) 100%); opacity: .78"></div><div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Heat map · store aisle</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1617400210795-53720bf465c3?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Drone inspection · plant detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Drone inspection · plant</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/forest-fire.png" alt="Fire and smoke detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Fire &amp; smoke</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="img/robots.png" alt="Cycle time · cell 4 detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Cycle time · cell 4</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1728206348193-9b5ae74a7d32?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="School zone · safe entry detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">School zone · safe entry</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1738410775719-9f237adb266d?auto=format&amp;fit=crop&amp;w=420&amp;h=252&amp;q=76" alt="Illegal parking detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Illegal parking</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1736528520038-015c130d0f9b?auto=format&amp;fit=crop&amp;w=420&amp;h=252&amp;q=76&amp;crop=bottom" alt="Wrong way detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Wrong way</div>
+            </div>
+            <div style="position: relative; flex: 0 0 auto; width: 231px; height: 139px; border-radius: 10px; overflow: hidden; background: rgba(0,0,0,.36)">
+              <img src="https://images.unsplash.com/photo-1691724414154-8b1551e7b292?auto=format&amp;fit=crop&amp;w=462&amp;h=278&amp;q=78" alt="Vehicle count · corridor detection" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.84) saturate(.94)" />
+              <div style="position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; pointer-events: none"></div>
+              <div style="position: absolute; left: 10px; bottom: 10px; padding: 4px 9px; border-radius: 5px; background: rgba(6,10,13,.82); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #ffffff; white-space: nowrap">Vehicle count · corridor</div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- ===== OUTCOMES ===== -->
+  <section style="padding: 96px 5.5vw 88px">
+    <div style="max-width: 1120px; margin: 0 auto">
+      <div style="max-width: 62ch; margin-bottom: 42px">
+        <h2 style="margin: 0 0 18px; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.06; font-weight: 600; letter-spacing: -.042em; text-wrap: balance">Fewer incidents. Faster response. Lower cost per camera.</h2>
+        <p style="margin: 0; font-size: 15.5px; line-height: 1.65; font-weight: 300; color: rgba(20,24,27,.72); text-wrap: pretty">The camera network you already own starts doing the watching — flagging what matters in the moment instead of after the fact, without new hardware or a cloud bill per stream.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch">
+        <div style="min-width: 0; display: flex; flex-direction: column; padding: 28px 26px 26px; border: 3px solid rgba(240,76,29,.3); border-radius: 18px; background: #ffffff; box-shadow: 0 18px 40px -30px rgba(20,24,27,.25); transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease" style-hover="transform: translateY(-4px); box-shadow: 0 26px 52px -30px rgba(20,24,27,.3)">
+          <h3 style="margin: 0 0 10px; font-size: 19px; font-weight: 600; letter-spacing: -.028em; color: #14181b">Catch it live</h3>
+          <p style="margin: 0 0 22px; font-size: 14.5px; line-height: 1.55; min-height: 68px; font-weight: 300; color: rgba(20,24,27,.7)">Incidents surface while they can still be acted on, not the next morning.</p>
+          <div style="flex: 1 1 auto; padding: 16px 16px 18px; border: 1px solid rgba(20,24,27,.1); border-radius: 12px; background: #faf9f8">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: rgba(20,24,27,.6)">
+              <span style="width: 5px; height: 5px; border-radius: 50%; background: #f04c1d; animation: qsBlink 1.8s ease-in-out infinite"></span>ALERTS · LAST HOUR
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(20,24,27,.08)">
+              <span style="min-width: 0; font-size: 13px; color: #14181b">No hard hat, zone B</span>
+              <span style="flex: 0 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #c0360f">09:41</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(20,24,27,.08)">
+              <span style="min-width: 0; font-size: 13px; color: #14181b">Overspeed, lane 3</span>
+              <span style="flex: 0 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #c0360f">09:38</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(20,24,27,.08)">
+              <span style="min-width: 0; font-size: 13px; color: #14181b">Coolant pooling, bay 3</span>
+              <span style="flex: 0 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(20,24,27,.6)">09:22</span>
+            </div>
+          </div>
+        </div>
+        <div style="min-width: 0; display: flex; flex-direction: column; padding: 28px 26px 26px; border: 3px solid rgba(240,76,29,.3); border-radius: 18px; background: #ffffff; box-shadow: 0 18px 40px -30px rgba(20,24,27,.25); transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease" style-hover="transform: translateY(-4px); box-shadow: 0 26px 52px -30px rgba(20,24,27,.3)">
+          <h3 style="margin: 0 0 10px; font-size: 19px; font-weight: 600; letter-spacing: -.028em; color: #14181b">Trust the number</h3>
+          <p style="margin: 0 0 22px; font-size: 14.5px; line-height: 1.55; min-height: 68px; font-weight: 300; color: rgba(20,24,27,.7)">Every figure traces back to the evidence that produced it.</p>
+          <div style="flex: 1 1 auto; padding: 16px 16px 18px; border: 1px solid rgba(20,24,27,.1); border-radius: 12px; background: #faf9f8">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: rgba(20,24,27,.6); margin-bottom: 10px">EVIDENCE TRAIL</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(20,24,27,.08)">
+              <span style="min-width: 0; font-size: 13px; color: #14181b">Emission event #1284</span>
+              <span style="flex: 0 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #c0360f">09:41:07</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(20,24,27,.08)">
+              <span style="min-width: 0; font-size: 13px; color: #14181b">Signed off by</span>
+              <span style="flex: 0 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(20,24,27,.6)">HSE lead</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(20,24,27,.08)">
+              <span style="min-width: 0; font-size: 13px; color: #14181b">Export</span>
+              <span style="flex: 0 0 auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(20,24,27,.6)">BRSR · GRI</span>
+            </div>
+          </div>
+        </div>
+        <div style="min-width: 0; display: flex; flex-direction: column; padding: 28px 26px 26px; border: 3px solid rgba(240,76,29,.3); border-radius: 18px; background: #ffffff; box-shadow: 0 18px 40px -30px rgba(20,24,27,.25); transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease" style-hover="transform: translateY(-4px); box-shadow: 0 26px 52px -30px rgba(20,24,27,.3)">
+          <h3 style="margin: 0 0 10px; font-size: 19px; font-weight: 600; letter-spacing: -.028em; color: #14181b">Spend less to run it</h3>
+          <p style="margin: 0 0 22px; font-size: 14.5px; line-height: 1.55; min-height: 68px; font-weight: 300; color: rgba(20,24,27,.7)">One deployment carries every capability you add to it.</p>
+          <div style="flex: 1 1 auto; padding: 16px 16px 18px; border: 1px solid rgba(20,24,27,.1); border-radius: 12px; background: #faf9f8">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; color: rgba(20,24,27,.6); margin-bottom: 14px">PER-CAMERA COST</div>
+            <div style="margin-bottom: 14px">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 7px">
+                <span style="font-size: 12.5px; color: rgba(20,24,27,.72)">Cloud, per stream</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(20,24,27,.62)">100%</span>
+              </div>
+              <div style="height: 5px; border-radius: 3px; background: rgba(20,24,27,.09); overflow: hidden"><div style="width: 100%; height: 100%; border-radius: 3px; background: rgba(20,24,27,.34)"></div></div>
+            </div>
+            <div style="margin-bottom: 14px">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 7px">
+                <span style="font-size: 12.5px; color: rgba(20,24,27,.72)">Quadinel, on the edge</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a82c0b">46%</span>
+              </div>
+              <div style="height: 5px; border-radius: 3px; background: rgba(20,24,27,.09); overflow: hidden"><div style="width: 46%; height: 100%; border-radius: 3px; background: #f04c1d"></div></div>
+            </div>
+            <div style="font-size: 12.5px; line-height: 1.5; font-weight: 300; color: rgba(20,24,27,.66)">Models 50–80% smaller, no per-stream fees, no extra box per use case.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTENTS ===== -->
+  <!-- ===== 01 COMPUTER VISION ===== -->
+  <section id="capabilities" style="padding: 96px 5.5vw 96px; background: #faf7f5">
+    <div style="max-width: 1120px; margin: 0 auto">
+      <div style="max-width: 46ch; margin-bottom: 64px">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #c0360f; margin-bottom: 16px">Four capabilities</div>
+        <h2 style="margin: 0; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.08; font-weight: 600; letter-spacing: -.04em">What runs on your network</h2>
+      </div>
+
+      <div style="display: grid; gap: 72px">
+        <div id="cv" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; align-items: stretch">
+          <div style="min-width: 0; position: relative; border-radius: 16px; overflow: hidden; background: #0d1114; box-shadow: 0 26px 54px -34px rgba(20,24,27,.45)">
+            <div style="position: relative; overflow: hidden; width: 100%; aspect-ratio: 16 / 10">
+              <img src="https://images.unsplash.com/photo-1738410775719-9f237adb266d?auto=format&amp;fit=crop&amp;w=1200&amp;h=900&amp;q=80" alt="Kerbside feed from a pole camera, read on the edge" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.82)" />
+              <div style="position: absolute; left: 0; right: 0; top: 0; height: 11%; background: linear-gradient(180deg, rgba(240,76,29,0), rgba(240,76,29,.2)); border-bottom: 1px solid rgba(240,76,29,.4); animation: qsScan 11s cubic-bezier(.45,.05,.55,.95) infinite"></div>
+              <div style="position: absolute; left: 22%; top: 62%; width: 26%; height: 30%; transform: translate(-50%, -50%); border: 1.5px solid #f04c1d; border-radius: 2px; box-shadow: 0 0 22px rgba(240,76,29,.4)">
+                <div data-qs="tab" style="position: absolute; bottom: calc(100% + 6px); left: -1.5px; padding: 3px 8px; border-radius: 4px; background: #f04c1d; color: #2b0a02; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; white-space: nowrap">{{ cvLabelA }}</div>
+              </div>
+              <div style="position: absolute; left: 68%; top: 52%; width: 22%; height: 26%; transform: translate(-50%, -50%); border: 1.5px solid rgba(240,76,29,.85); border-radius: 2px">
+                <div data-qs="tab" style="position: absolute; bottom: calc(100% + 6px); right: -1.5px; padding: 3px 8px; border-radius: 4px; background: rgba(240,76,29,.94); color: #2b0a02; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; white-space: nowrap">{{ cvLabelB }}</div>
+              </div>
+            </div>
+          </div>
+          <div style="min-width: 0; align-self: center">
+            <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; padding: 7px 15px 7px 11px; border: 1px solid rgba(240,76,29,.42); border-radius: 999px; background: rgba(240,76,29,.1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #c0360f">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #f04c1d; animation: qsBlink 1.9s ease-in-out infinite"></span>01 · Computer vision
+            </div>
+            <h3 style="margin: 0 0 16px; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.1; font-weight: 600; letter-spacing: -.038em; max-width: 20ch">Point it at a feed you already have</h3>
+            <p style="margin: 0 0 24px; font-size: 15.5px; line-height: 1.66; font-weight: 300; color: rgba(20,24,27,.74); max-width: 42ch; text-wrap: pretty">Models run on a box beside the camera against your existing streams — no new hardware per use case, and nothing leaves the site.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">200+ models</span>
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">On-device</span>
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">Custom classes in weeks</span>
+            </div>
+          </div>
+        </div>
+        <div id="esg" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; align-items: stretch">
+          <div style="min-width: 0; align-self: center">
+            <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; padding: 7px 15px 7px 11px; border: 1px solid rgba(240,76,29,.42); border-radius: 999px; background: rgba(240,76,29,.1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #c0360f">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #f04c1d; animation: qsBlink 1.9s ease-in-out infinite"></span>02 · ESG platform
+            </div>
+            <h3 style="margin: 0 0 16px; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.1; font-weight: 600; letter-spacing: -.038em; max-width: 20ch">Numbers with a frame behind them</h3>
+            <p style="margin: 0 0 24px; font-size: 15.5px; line-height: 1.66; font-weight: 300; color: rgba(20,24,27,.74); max-width: 42ch; text-wrap: pretty">Emissions, waste and compliance figures accumulate continuously, and every line traces back to the clip or reading that produced it.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">BRSR &amp; GRI ready</span>
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">Audit trail</span>
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">Observed, not estimated</span>
+            </div>
+          </div>
+          <div style="min-width: 0; position: relative; border-radius: 16px; overflow: hidden; background: #0d1114; box-shadow: 0 26px 54px -34px rgba(20,24,27,.45)">
+            <div style="position: relative; padding: 26px 26px 22px; display: flex; flex-direction: column">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.14); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; color: rgba(255,255,255,.62)"><span>SITE 04 · THIS QUARTER</span><span style="color: #ff9878">OBSERVED</span></div>
+              <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center">
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08)">
+                  <span style="font-size: 13px; color: rgba(255,255,255,.82)">High-emission events</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #ffffff; font-variant-numeric: tabular-nums">{{ esgEvents }}</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08)">
+                  <span style="font-size: 13px; color: rgba(255,255,255,.82)">PPE compliance</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #ffffff; font-variant-numeric: tabular-nums">96.4%</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08)">
+                  <span style="font-size: 13px; color: rgba(255,255,255,.82)">Effluent discharge</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: rgba(255,255,255,.78); font-variant-numeric: tabular-nums">within consent</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08)">
+                  <span style="font-size: 13px; color: rgba(255,255,255,.82)">Waste accumulation</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #ff9878; font-variant-numeric: tabular-nums">{{ esgWaste }} open</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0">
+                  <span style="font-size: 13px; color: rgba(255,255,255,.82)">Disclosure pack</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: rgba(255,255,255,.78); font-variant-numeric: tabular-nums">BRSR &amp; GRI ready</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 9px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.14); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; color: rgba(255,255,255,.55)"><span style="width: 5px; height: 5px; border-radius: 50%; background: #f04c1d; animation: qsBlink 2.1s ease-in-out infinite"></span>EVERY ROW OPENS ITS EVIDENCE</div>
+            </div>
+          </div>
+        </div>
+        <div id="cyber" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; align-items: stretch">
+          <div style="min-width: 0; position: relative; border-radius: 16px; overflow: hidden; background: #0d1114; box-shadow: 0 26px 54px -34px rgba(20,24,27,.45)">
+            <div style="position: relative; padding: 26px 26px 22px; display: flex; flex-direction: column">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.14); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; color: rgba(255,255,255,.62)"><span>EDGE NETWORK · 248 NODES</span><span style="color: #ff9878">MONITORED</span></div>
+              <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; gap: 22px">
+                <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: 11px; gap: 6px">
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: #f04c1d; box-shadow: 0 0 12px rgba(240,76,29,.75); animation: qsBlink 1.6s ease-in-out infinite"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: #f04c1d; box-shadow: 0 0 12px rgba(240,76,29,.75); animation: qsBlink 1.6s ease-in-out infinite"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: #f04c1d; box-shadow: 0 0 12px rgba(240,76,29,.75); animation: qsBlink 1.6s ease-in-out infinite"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                  <span style="height: 100%; border-radius: 2px; background: rgba(255,152,120,.26)"></span>
+                </div>
+                <div style="display: grid">
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08)">
+                  <span style="font-size: 13px; color: rgba(255,255,255,.82)">Default credentials</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: rgba(255,255,255,.78); font-variant-numeric: tabular-nums">none remaining</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08)">
+                  <span style="font-size: 13px; color: rgba(255,255,255,.82)">Firmware drift</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #ff9878; font-variant-numeric: tabular-nums">3 nodes behind</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0">
+                  <span style="font-size: 13px; color: rgba(255,255,255,.82)">Outbound anomalies</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: rgba(255,255,255,.78); font-variant-numeric: tabular-nums">{{ cyberAnomaly }}</span>
+                </div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 9px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.14); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; color: rgba(255,255,255,.55)"><span style="width: 6px; height: 6px; border-radius: 2px; background: #f04c1d"></span>DRIFT DETECTED · REMEDIATION QUEUED</div>
+            </div>
+          </div>
+          <div style="min-width: 0; align-self: center">
+            <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; padding: 7px 15px 7px 11px; border: 1px solid rgba(240,76,29,.42); border-radius: 999px; background: rgba(240,76,29,.1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #c0360f">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #f04c1d; animation: qsBlink 1.9s ease-in-out infinite"></span>03 · Cybersecurity
+            </div>
+            <h3 style="margin: 0 0 16px; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.1; font-weight: 600; letter-spacing: -.038em; max-width: 20ch">A camera network is unmanaged computers</h3>
+            <p style="margin: 0 0 24px; font-size: 15.5px; line-height: 1.66; font-weight: 300; color: rgba(20,24,27,.74); max-width: 42ch; text-wrap: pretty">Default credentials, stale firmware, flat networks. We harden the network the detection runs on and keep watching it.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">TLS 1.3 all nodes</span>
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">Credential rotation</span>
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">Scheduled VAPT</span>
+            </div>
+          </div>
+        </div>
+        <div id="iot" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; align-items: stretch">
+          <div style="min-width: 0; align-self: center">
+            <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; padding: 7px 15px 7px 11px; border: 1px solid rgba(240,76,29,.42); border-radius: 999px; background: rgba(240,76,29,.1); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #c0360f">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #f04c1d; animation: qsBlink 1.9s ease-in-out infinite"></span>04 · IoT platform
+            </div>
+            <h3 style="margin: 0 0 16px; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.1; font-weight: 600; letter-spacing: -.038em; max-width: 20ch">Some things a lens will never see</h3>
+            <p style="margin: 0 0 24px; font-size: 15.5px; line-height: 1.66; font-weight: 300; color: rgba(20,24,27,.74); max-width: 42ch; text-wrap: pretty">Gas, flow, vibration and temperature land on the same gateway as the video — so a sensor reading and what a camera sees become one incident.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">18 gateways</span>
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">Same console</span>
+              <span style="padding: 7px 13px; border-radius: 999px; border: 1px solid rgba(20,24,27,.18); background: #ffffff; font-size: 12.5px; color: rgba(20,24,27,.78)">Correlated alerts</span>
+            </div>
+          </div>
+          <div style="min-width: 0; position: relative; border-radius: 16px; overflow: hidden; background: #0d1114; box-shadow: 0 26px 54px -34px rgba(20,24,27,.45)">
+            <div style="position: relative; padding: 26px 26px 22px; display: flex; flex-direction: column">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.14); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; color: rgba(255,255,255,.62)"><span>GATEWAY 07 · UNIT 4</span><span style="color: #ff9878">18 REPORTING</span></div>
+              <div style="flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; gap: 18px">
+                <div style="display: grid; gap: 8px">
+                  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px">
+                    <span style="font-size: 13px; color: rgba(255,255,255,.82)">Gas concentration</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #ffffff; font-variant-numeric: tabular-nums">{{ iotGas }} <span style="font-size: 10.5px; color: rgba(255,255,255,.5)">ppm</span></span>
+                  </div>
+                  <div style="position: relative; height: 4px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden">
+                    <div style="position: absolute; inset: 0 auto 0 0; width: 38%; border-radius: 3px; background: rgba(255,152,120,.68)"></div>
+                  </div>
+                </div>
+                <div style="display: grid; gap: 8px">
+                  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px">
+                    <span style="font-size: 13px; color: rgba(255,255,255,.82)">Flow, line 4</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #ffffff; font-variant-numeric: tabular-nums">{{ iotFlow }} <span style="font-size: 10.5px; color: rgba(255,255,255,.5)">m³/h</span></span>
+                  </div>
+                  <div style="position: relative; height: 4px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden">
+                    <div style="position: absolute; inset: 0 auto 0 0; width: 62%; border-radius: 3px; background: rgba(255,152,120,.68)"></div>
+                  </div>
+                </div>
+                <div style="display: grid; gap: 8px">
+                  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px">
+                    <span style="font-size: 13px; color: rgba(255,255,255,.82)">Panel 7 temperature</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #ff9878; font-variant-numeric: tabular-nums">{{ iotTemp }} <span style="font-size: 10.5px; color: rgba(255,255,255,.5)">°C · trips at 55</span></span>
+                  </div>
+                  <div style="position: relative; height: 4px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden">
+                    <div style="position: absolute; inset: 0 auto 0 0; width: 74%; border-radius: 3px; background: #f04c1d"></div>
+                  </div>
+                </div>
+                <div style="display: grid; gap: 8px">
+                  <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px">
+                    <span style="font-size: 13px; color: rgba(255,255,255,.82)">Vibration, pump 2</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #ffffff; font-variant-numeric: tabular-nums">{{ iotVib }} <span style="font-size: 10.5px; color: rgba(255,255,255,.5)">mm/s</span></span>
+                  </div>
+                  <div style="position: relative; height: 4px; border-radius: 3px; background: rgba(255,255,255,.12); overflow: hidden">
+                    <div style="position: absolute; inset: 0 auto 0 0; width: 29%; border-radius: 3px; background: rgba(255,152,120,.68)"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 9px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.14); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; color: rgba(255,255,255,.55)"><span style="width: 5px; height: 5px; border-radius: 50%; background: #f04c1d; animation: qsBlink 1.8s ease-in-out infinite"></span>CORRELATED WITH CAM 04</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- ===== FAQ ===== -->
+  <section id="platform" style="padding: 96px 5.5vw 100px; background: #faf7f5; border-top: 1px solid rgba(20,24,27,.08); border-bottom: 1px solid rgba(20,24,27,.08)">
+    <div style="max-width: 1120px; margin: 0 auto">
+      <div style="display: inline-flex; align-items: center; gap: 9px; margin-bottom: 20px; padding: 6px 14px 6px 10px; border: 1px solid rgba(240,76,29,.4); border-radius: 999px; background: rgba(240,76,29,.1); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #c0360f"><span style="width: 6px; height: 6px; border-radius: 50%; background: #f04c1d; animation: qsBlink 1.9s ease-in-out infinite"></span>The stack we deploy</div>
+      <h2 style="margin: 0 0 18px; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.06; font-weight: 600; letter-spacing: -.04em; color: #14181b; max-width: 24ch">Built on Awiros, deployed by <span style="white-space: nowrap">Quadinel AI</span></h2>
+      <p style="margin: 0 0 44px; font-size: 15.5px; line-height: 1.66; font-weight: 300; color: rgba(20,24,27,.72); max-width: 62ch; text-wrap: pretty">Every capability on this page runs on the Awiros platform and its appliances. We size the hardware, licence the applications your operation needs, and operate the console — so what you buy is a working deployment rather than a component list.</p>
+
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(20,24,27,.5); padding-bottom: 12px; border-bottom: 1px solid rgba(20,24,27,.14); margin-bottom: 22px">Platform &amp; software</div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-bottom: 52px">
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">UVIP</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Platform</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">Unified video intelligence platform</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">The console every capability reports into. It ingests cameras, files and third-party VMS feeds, runs inference in real time and raises alerts to the teams that act on them.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Multi-source ingest</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Real-time alerts</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Role-based access</span>
+            </div>
+          </div>
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">AppStack</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Application library</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">120+ vision AI applications</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">The catalogue capabilities are licensed from — detection classes across mobility, safety, retail and industry. Adding a capability is a licence against boxes you already run.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">120+ apps</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Per-site licence</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Weeks to add</span>
+            </div>
+          </div>
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">aiscope</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Handheld</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">Inspection where there is no camera</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">A handheld unit for field and plant inspection: automated scanning, anomaly detection and instant alerts, with models tuned to the asset being checked.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Portable</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Anomaly detection</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Field inspection</span>
+            </div>
+          </div>
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">ATOM</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Annotation</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">Training data for classes you need</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">Precision annotation for detection, segmentation and tracking — the tool behind a custom class when your use case is not already in the library.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Detection</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Segmentation</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Tracking</span>
+            </div>
+          </div>
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">HYDRA</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Cloud testing</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">Test on your footage before you buy hardware</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">Upload a clip or point a stream at the cloud and see what each application reads on your own site — accuracy checked before an appliance is specified.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">No hardware</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Own footage</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Accuracy report</span>
+            </div>
+          </div>
+      </div>
+
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(20,24,27,.5); padding-bottom: 12px; border-bottom: 1px solid rgba(20,24,27,.14); margin-bottom: 22px">Appliances</div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-bottom: 52px">
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">V-Stream Enterprise</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">2U rack</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">Network-scale inference</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">A rack-mountable appliance for large deployments, preloaded with the platform OS and supporting 150+ deep-learning applications on one box.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">150+ apps</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Rack-mounted</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Enterprise</span>
+            </div>
+          </div>
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">V-Tower</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Tower</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">Mid-size sites, plug and play</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">Turns an existing CCTV network into an analytics system without a server room — sized for single sites and mid-scale networks.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Plug and play</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Single site</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">CCTV retrofit</span>
+            </div>
+          </div>
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">EdgePlus-7</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Edge</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">Remote locations, no backhaul</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">Built for highways, warehouses and remote retail: inference happens on site, with the console managing every node centrally.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">On-site inference</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Low bandwidth</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Central console</span>
+            </div>
+          </div>
+          <div style="min-width: 0; display: flex; flex-direction: column; padding: 24px 24px 26px; border: 1px solid rgba(20,24,27,.14); border-radius: 14px; background: #ffffff; box-shadow: 0 20px 44px -34px rgba(20,24,27,.34)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px">
+              <div style="font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: #14181b">Awiros Cloud</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Cloud</div>
+            </div>
+            <div style="margin-bottom: 10px; font-size: 13.5px; font-weight: 500; color: #14181b">Where on-premise is not required</div>
+            <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">The same platform on public or private cloud, for operators that would rather not host hardware — scaled per feed rather than per box.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(20,24,27,.1)">
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Public or private</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">Per-feed scaling</span>
+              <span style="padding: 3px 9px; border-radius: 999px; background: rgba(240,76,29,.08); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: #c0360f; white-space: nowrap">No hardware</span>
+            </div>
+          </div>
+      </div>
+
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(20,24,27,.5); padding-bottom: 12px; border-bottom: 1px solid rgba(20,24,27,.14); margin-bottom: 22px">Deployment models</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+        <div style="min-width: 0; padding: 22px 22px 24px; border: 1px solid rgba(240,76,29,.24); border-radius: 14px; background: rgba(240,76,29,.05)">
+          <div style="margin-bottom: 9px; font-size: 15.5px; font-weight: 600; letter-spacing: -.02em; color: #14181b">On-premise</div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">Everything inside your infrastructure — full data control for operators under strict privacy mandates.</p>
+        </div>
+        <div style="min-width: 0; padding: 22px 22px 24px; border: 1px solid rgba(240,76,29,.24); border-radius: 14px; background: rgba(240,76,29,.05)">
+          <div style="margin-bottom: 9px; font-size: 15.5px; font-weight: 600; letter-spacing: -.02em; color: #14181b">Edge and cloud</div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">Inference at the edge, management in the cloud — lowest latency with far less bandwidth to carry.</p>
+        </div>
+        <div style="min-width: 0; padding: 22px 22px 24px; border: 1px solid rgba(240,76,29,.24); border-radius: 14px; background: rgba(240,76,29,.05)">
+          <div style="margin-bottom: 9px; font-size: 15.5px; font-weight: 600; letter-spacing: -.02em; color: #14181b">Cloud</div>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; font-weight: 300; color: rgba(20,24,27,.7)">No appliances to host, scaled per feed — quickest to stand up when hardware is not an option.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding: 104px 5.5vw 0">
+    <div style="max-width: 1120px; margin: 0 auto">
+      <h2 style="margin: 30px 0 40px; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.06; font-weight: 600; letter-spacing: -.04em; max-width: 22ch">Before you send us a feed</h2>
+      <sc-for list="{{ faqs }}" as="item" hint-placeholder-count="6">
+        <div style="border-top: 1px solid rgba(20,24,27,.14)">
+          <button type="button" onClick="{{ item.toggle }}" style="appearance: none; cursor: pointer; width: 100%; display: grid; grid-template-columns: 42px minmax(0, 1fr) 30px; gap: 16px; align-items: baseline; padding: 24px 0; border: 0; background: transparent; text-align: left; font-family: 'Plus Jakarta Sans', sans-serif; color: #14181b; transition: padding-left .5s cubic-bezier(.16,1,.3,1)" style-hover="padding-left: 10px">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #f04c1d">{{ item.num }}</span>
+            <span style="min-width: 0; font-size: clamp(16px, 1.5vw, 20px); font-weight: 600; letter-spacing: -.02em">{{ item.q }}</span>
+            <span style="justify-self: end; font-size: 20px; font-weight: 300; line-height: 1; color: #c0360f">{{ item.sign }}</span>
+          </button>
+          <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0 0 26px; padding-left: 58px; font-size: 15.5px; line-height: 1.68; font-weight: 300; color: rgba(20,24,27,.72); max-width: 66ch; text-wrap: pretty">{{ item.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+      <div style="border-top: 1px solid rgba(20,24,27,.14)"></div>
+    </div>
+  </section>
+
+  <!-- ===== DEMO FORM ===== -->
+  <section style="padding: 104px 5.5vw 96px">
+    <div id="demo" style="position: relative; overflow: hidden; max-width: 1120px; margin: 0 auto; padding: 56px 52px 60px; border-radius: 20px; background: linear-gradient(140deg, #c93a10 0%, #a82c0b 46%, #6f1a05 100%); color: #ffffff">
+      <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.16) 1px, transparent 1px); background-size: 30px 30px; opacity: .5; pointer-events: none"></div>
+      <div style="position: relative; display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: 56px; align-items: start">
+
+        <div style="min-width: 0">
+          <div style="margin-bottom: 18px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #ffffff">Proof before procurement</div>
+          <h2 style="margin: 0 0 18px; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.08; font-weight: 600; letter-spacing: -.038em">Start with one feed</h2>
+          <p style="margin: 0 0 30px; font-size: 15.5px; line-height: 1.64; font-weight: 300; color: #ffffff; max-width: 46ch; text-wrap: pretty">Send a stream from a camera you already run. We put a model against it and show you what it reads, usually inside a week — before anything is signed.</p>
+          <div style="display: grid; gap: 14px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.28)">
+            <div style="display: flex; align-items: baseline; gap: 12px">
+              <span style="flex: 0 0 auto; width: 88px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; color: rgba(255,255,255,.72)">EMAIL</span>
+              <a href="mailto:info@quadinel.ai" style="font-size: 14.5px; font-weight: 500; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,.45)" style-hover="border-color: #ffffff">info@quadinel.ai</a>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 12px">
+              <span style="flex: 0 0 auto; width: 88px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; color: rgba(255,255,255,.72)">RESPONSE</span>
+              <span style="font-size: 14.5px; font-weight: 300; color: #ffffff">Within two working days</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="min-width: 0; padding: 30px 30px 32px; border-radius: 16px; background: #ffffff; box-shadow: 0 30px 60px -34px rgba(20,24,27,.5)">
+          <div style="margin-bottom: 22px; font-size: 20px; font-weight: 600; letter-spacing: -.025em; color: #14181b">Book a demo</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+            <div style="min-width: 0; grid-column: span 2">
+              <label for="name" style="display: block; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(20,24,27,.6)">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Abdullah Al-Harbi" style="width: 100%; padding: 13px 14px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; color: #14181b; outline: none; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)" />
+            </div>
+            <div style="min-width: 0; grid-column: span 2">
+              <label for="email" style="display: block; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(20,24,27,.6)">Work email</label>
+              <input id="email" name="email" type="email" placeholder="abdullah@company.com" style="width: 100%; padding: 13px 14px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; color: #14181b; outline: none; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)" />
+            </div>
+            <div style="min-width: 0; grid-column: span 2">
+              <label for="phone" style="display: block; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(20,24,27,.6)">Phone number</label>
+              <div style="display: grid; grid-template-columns: 146px minmax(0, 1fr); gap: 10px">
+                <select id="dial" name="dial" style="min-width: 0; padding: 13px 12px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: #14181b; outline: none; cursor: pointer; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)">
+                  <option value="+966" selected="selected" title="Saudi Arabia">+966 SA</option>
+                  <option value="+971" title="United Arab Emirates">+971 AE</option>
+                  <option value="+974" title="Qatar">+974 QA</option>
+                  <option value="+973" title="Bahrain">+973 BH</option>
+                  <option value="+965" title="Kuwait">+965 KW</option>
+                  <option value="+968" title="Oman">+968 OM</option>
+                  <option value="+91" title="India">+91 IN</option>
+                  <option value="+44" title="United Kingdom">+44 GB</option>
+                  <option value="+49" title="Germany">+49 DE</option>
+                  <option value="+1" title="United States">+1 US</option>
+                </select>
+                <input id="phone" name="phone" type="tel" placeholder="50 123 4567" style="min-width: 0; padding: 13px 14px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; color: #14181b; outline: none; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)" />
+              </div>
+            </div>
+            <div style="min-width: 0; grid-column: span 2">
+              <label for="message" style="display: block; margin-bottom: 7px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(20,24,27,.6)">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="What would you like detected, and on how many cameras?" style="width: 100%; padding: 13px 14px; border: 1px solid rgba(20,24,27,.16); border-radius: 9px; background: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; line-height: 1.55; color: #14181b; resize: vertical; outline: none; transition: border-color .3s ease, box-shadow .3s ease" style-focus="border-color: #c0360f; box-shadow: 0 0 0 3px rgba(240,76,29,.14)"></textarea>
+            </div>
+            <div style="grid-column: span 2; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-top: 4px">
+              <button type="button" style="appearance: none; cursor: pointer; display: inline-flex; align-items: center; gap: 9px; padding: 15px 28px; border: 0; border-radius: 10px; background: linear-gradient(140deg, #c93a10, #8f240a); color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600; box-shadow: 0 14px 30px -18px rgba(201,58,16,.9); transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease" style-hover="transform: translateY(-2px); box-shadow: 0 22px 42px -18px rgba(201,58,16,.95)">Request the demo →</button>
+              <span style="font-size: 12.5px; font-weight: 300; color: rgba(20,24,27,.6)">No feed leaves your network.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="padding: 68px 5.5vw 44px; background: #faf7f5">
+    <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, .7fr) minmax(0, 1fr); gap: 48px">
+      <div style="min-width: 0">
+        <img src="uploads/quadinel-logo-dark.svg" alt="Quadinel AI" style="display: block; height: 35px; width: auto" />
+        <p style="margin: 18px 0 24px; font-size: 14.5px; line-height: 1.6; font-weight: 300; color: rgba(20,24,27,.68); max-width: 34ch">Edge AI on the cameras you already own — detection on the device, in real time.</p>
+        <div style="display: flex; gap: 10px">
+        <a href="#" aria-label="LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 9px; border: 1px solid rgba(20,24,27,.18); color: rgba(20,24,27,.7); transition: border-color .3s ease, color .3s ease, transform .45s cubic-bezier(.16,1,.3,1)" style-hover="border-color: #f04c1d; color: #c0360f; transform: translateY(-2px)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4V21H3zM9.5 8.98h3.83v1.64h.05c.53-1 1.84-2.06 3.78-2.06C20.6 8.56 22 10.6 22 14.1V21h-4v-6.12c0-1.54-.55-2.6-1.93-2.6-1.05 0-1.68.71-1.95 1.4-.1.24-.12.58-.12.92V21h-4z"></path></svg>
+        </a>
+        <a href="#" aria-label="X" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 9px; border: 1px solid rgba(20,24,27,.18); color: rgba(20,24,27,.7); transition: border-color .3s ease, color .3s ease, transform .45s cubic-bezier(.16,1,.3,1)" style-hover="border-color: #f04c1d; color: #c0360f; transform: translateY(-2px)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3h3.1l-6.77 7.73L21.5 21h-5.9l-4.2-5.5L6.6 21H3.5l7.03-8.03L2.9 3h5.9l3.9 5.15zm-1.1 16h1.72L7.05 4.74H5.24z"></path></svg>
+        </a>
+        <a href="#" aria-label="YouTube" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 9px; border: 1px solid rgba(20,24,27,.18); color: rgba(20,24,27,.7); transition: border-color .3s ease, color .3s ease, transform .45s cubic-bezier(.16,1,.3,1)" style-hover="border-color: #f04c1d; color: #c0360f; transform: translateY(-2px)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.51 2.51 0 00-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.83.43A2.51 2.51 0 002.4 7.2C2 8.78 2 12 2 12s0 3.22.4 4.8a2.51 2.51 0 001.77 1.77C5.75 19 12 19 12 19s6.25 0 7.83-.43a2.51 2.51 0 001.77-1.77C22 15.22 22 12 22 12s0-3.22-.4-4.8zM10 15.5v-7l6 3.5z"></path></svg>
+        </a>
+        </div>
+      </div>
+        <div style="min-width: 0; display: flex; flex-direction: column; gap: 12px">
+          <div style="margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(20,24,27,.72)">Menu</div>
+          <a href="#cv" style="font-size: 14px; font-weight: 300; color: rgba(20,24,27,.68); transition: color .3s ease" style-hover="color: #c0360f">Solutions</a>
+          <a href="about.html" style="font-size: 14px; font-weight: 300; color: rgba(20,24,27,.68); transition: color .3s ease" style-hover="color: #c0360f">About us</a>
+        </div>
+        <div style="min-width: 0; display: flex; flex-direction: column; gap: 20px">
+          <div style="margin-bottom: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(20,24,27,.72)">Partners</div>
+          <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px">
+            <img src="uploads/awiros.png" alt="Awiros" style="display: block; height: 22px; width: auto; max-width: 100%; object-fit: contain" />
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; color: rgba(20,24,27,.55)">VISION AI PLATFORM</div>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px">
+            <img src="uploads/cardeleine.png" alt="Cardeleine" style="display: block; height: 20px; width: auto; max-width: 100%; object-fit: contain" />
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; color: rgba(20,24,27,.55)">DIGITAL IDENTITY</div>
+          </div>
+        </div>
+      </div>
+    <div style="max-width: 1120px; margin: 44px auto 0; padding-top: 24px; border-top: 1px solid rgba(20,24,27,.12); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 13px; color: rgba(20,24,27,.55)">
+      <span>© 2026 Quadinel AI</span>
+      <span style="display: inline-flex; align-items: center; gap: 8px">Contact us <a href="mailto:info@quadinel.ai" style="font-weight: 600; color: #c0360f; transition: color .3s ease" style-hover="color: #f04c1d">info@quadinel.ai</a></span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;liveReadouts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+class Component extends DCLogic {
+  state = { step: 0, faqOpen: 0 };
+
+  FAQS = [
+    ['Do we have to replace our cameras?',
+     'No. Detection runs on an edge box beside your existing recorder, against the RTSP streams your cameras already publish. Most deployments need no new cameras at all — an ONVIF-compatible feed at reasonable resolution is enough.'],
+    ['Where does the footage actually go?',
+     'Nowhere. Inference happens on the device, on your premises. Only the detection result — a timestamp, a class, a bounding box and optionally a still — is written to the console. There are no cloud calls in the detection path.'],
+    ['How long does a deployment take?',
+     'A proof against one feed usually runs inside a week. A production rollout depends on deployment size and network access, but because capabilities share the same boxes and console, adding the second and third is measured in days rather than months.'],
+    ['What if our use case is not on the list?',
+     'The stack ships with 200+ models, and new classes are trained and delivered in weeks. Send sample footage showing what you need detected and we will tell you honestly whether it is a training job or a camera-placement problem.'],
+    ['Can it read Indian number plates reliably?',
+     'Yes — 99.2% on multi-line, dusty and partly occluded plates at highway speed, with speed detection certified by STQC and RDSO for enforcement use.'],
+    ['How is this priced?',
+     'Per capability, per site, on an annual licence, with the edge hardware quoted separately or supplied by you. Because the boxes are shared across capabilities, cost per camera falls as you add more.']
+  ];
+
+  componentDidMount() {
+    this.rot = setInterval(() => this.setState(s => ({ step: s.step + 1 })), 4200);
+    this.clampLoop = setInterval(() => this.clampTabs(), 600);
+    this.clampTabs();
+    requestAnimationFrame(() => this.initReveal());
+  }
+
+  initReveal() {
+    if (this.rvReady) return;
+    this.rvReady = true;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const EASE = 'opacity .8s cubic-bezier(.16,1,.3,1), transform .95s cubic-bezier(.16,1,.3,1)';
+    const skip = el => el.closest('nav, [data-qs="modal"], [data-qa="modal"], [data-qs="track"], [data-qa="track"]');
+    const units = [];
+    const seen = [];
+    const claim = el => {
+      if (!el || seen.indexOf(el) !== -1 || skip(el)) return false;
+      for (let i = 0; i < seen.length; i++) if (seen[i].contains(el) || el.contains(seen[i])) return false;
+      seen.push(el);
+      return true;
+    };
+    // headlines rise word by word
+    [].slice.call(document.querySelectorAll('h1, h2')).forEach(h => {
+      if (skip(h) || h.dataset.rvSplit || h.children.length) return;
+      h.dataset.rvSplit = '1';
+      const words = (h.textContent || '').split(/\s+/).filter(Boolean);
+      if (!words.length) return;
+      h.textContent = '';
+      words.forEach((w, i) => {
+        const s = document.createElement('span');
+        s.textContent = w;
+        s.style.display = 'inline-block';
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(.4em)';
+        s.style.transition = EASE;
+        s.style.transitionDelay = Math.min(i * 42, 640) + 'ms';
+        h.appendChild(s);
+        if (i < words.length - 1) h.appendChild(document.createTextNode(' '));
+      });
+      units.push({ el: h, kind: 'words' });
+      seen.push(h);
+    });
+    // rows of cards enter in sequence
+    [].slice.call(document.querySelectorAll('div[style*="grid-template-columns"]')).forEach(g => {
+      if (skip(g)) return;
+      const kids = [].slice.call(g.children).filter(k => k.getBoundingClientRect().height > 24);
+      if (kids.length < 2 || kids.length > 10) return;
+      kids.forEach((k, i) => { if (claim(k)) units.push({ el: k, kind: 'up', delay: Math.min(i * 85, 520) }); });
+    });
+    [].slice.call(document.querySelectorAll('figure, section > div > p, section p[style*="max-width: 62ch"]')).forEach(el => {
+      if (el.getBoundingClientRect().height > 8 && claim(el)) units.push({ el: el, kind: 'up' });
+    });
+    units.forEach(u => { u.el.dataset.rvUnit = u.kind; });
+    units.forEach(u => {
+      if (u.kind === 'words') return;
+      u.el.style.opacity = '0';
+      u.el.style.transform = 'translateY(20px)';
+      u.el.style.transition = EASE + (u.delay ? '' : '');
+      u.el.style.transitionDelay = (u.delay || 0) + 'ms';
+      u.el.style.willChange = 'opacity, transform';
+    });
+    const counters = [].slice.call(document.querySelectorAll('[data-count]'));
+    const runCount = el => {
+      const to = parseFloat(el.dataset.count), suf = el.dataset.suffix || '';
+      const t0 = performance.now(), dur = 1100;
+      const tick = now => {
+        const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(to * e) + suf;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const show = u => {
+      if (u.kind === 'words') {
+        [].slice.call(u.el.children).forEach(s => { s.style.opacity = '1'; s.style.transform = 'none'; });
+      } else {
+        u.el.style.opacity = '1';
+        u.el.style.transform = 'none';
+      }
+      if (counters.length) counters.forEach(c => { if (!c.dataset.ran && (u.el === c || u.el.contains(c))) { c.dataset.ran = '1'; runCount(c); } });
+      setTimeout(() => { u.el.style.willChange = 'auto'; }, 1400);
+    };
+    const reveal = el => {
+      if (!el || !el.dataset.rvUnit) return;
+      show({ el: el, kind: el.dataset.rvUnit });
+      delete el.dataset.rvUnit;
+    };
+    if (!('IntersectionObserver' in window)) { units.forEach(u => reveal(u.el)); return; }
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    units.forEach(u => io.observe(u.el));
+    this.rvIO = io;
+    // fast scrolling can outrun the observer — sweep whatever it missed
+    const sweep = () => {
+      const left = [].slice.call(document.querySelectorAll('[data-rv-unit]'));
+      left.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.94 && r.bottom > 0) { io.unobserve(el); reveal(el); }
+      });
+      if (!document.querySelector('[data-rv-unit]') && this.rvSweepOff) this.rvSweepOff();
+    };
+    let t = null;
+    const onScroll = () => { if (t) clearTimeout(t); t = setTimeout(sweep, 110); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    this.rvSweepOff = () => { window.removeEventListener('scroll', onScroll); if (t) clearTimeout(t); };
+    setTimeout(sweep, 1200);
+  }
+
+  componentWillUnmount() {
+    if (this.rvSweepOff) this.rvSweepOff();
+    if (this.rvIO) this.rvIO.disconnect();
+    if (this.rot) clearInterval(this.rot);
+    if (this.clampLoop) clearInterval(this.clampLoop);
+  }
+  componentDidUpdate() { this.clampTabs(); }
+
+  // keeps a feed label inside its frame whatever the cycled string
+  clampTabs() {
+    [].slice.call(document.querySelectorAll('[data-qs="tab"]')).forEach(t => {
+      const frame = t.closest('div[style*="overflow: hidden"]');
+      if (!frame) return;
+      const fr = frame.getBoundingClientRect();
+      const prev = parseFloat(t.dataset.sx || '0');
+      const r = t.getBoundingClientRect();
+      const baseL = r.left - prev, baseR = r.right - prev;
+      let sx = 0;
+      if (baseL < fr.left + 8) sx = fr.left + 8 - baseL;
+      else if (baseR > fr.right - 8) sx = fr.right - 8 - baseR;
+      if (Math.abs(sx - prev) > 0.5) {
+        t.dataset.sx = sx;
+        t.style.transform = sx ? 'translateX(' + sx.toFixed(1) + 'px)' : 'none';
+      }
+    });
+  }
+
+  setMarquee(state) {
+    const t = document.querySelector('[data-qs="track"]');
+    if (t) t.style.animationPlayState = state;
+  }
+
+  renderVals() {
+    const n = this.state.step;
+    const cyc = (arr, off) => arr[(n + off) % arr.length];
+    const live = this.props.liveReadouts ?? true;
+    const drift = (base, spread, off) => live ? base + ((n + off) % spread) : base;
+    const ink = '#14181b', warm = '#c0360f';
+    return {
+      toggleNav: () => {
+        const p = document.querySelector('[data-r="navpanel"]');
+        if (p) p.setAttribute('data-open', p.getAttribute('data-open') === '1' ? '0' : '1');
+      },
+      openDemoMobile: () => {
+        const p = document.querySelector('[data-r="navpanel"]');
+        if (p) p.setAttribute('data-open', '0');
+        const m = document.querySelector('[data-qs="modal"]');
+        if (m) { m.style.display = 'flex'; document.documentElement.style.overflow = 'hidden'; }
+      },
+      openDemo: () => {
+        const m = document.querySelector('[data-qs="modal"]');
+        if (m) { m.style.display = 'flex'; document.documentElement.style.overflow = 'hidden'; }
+      },
+      closeDemo: () => {
+        const m = document.querySelector('[data-qs="modal"]');
+        if (m) { m.style.display = 'none'; document.documentElement.style.overflow = ''; }
+      },
+      pauseMarquee: () => this.setMarquee('paused'),
+      resumeMarquee: () => this.setMarquee('running'),
+      esgRows: [
+        { label: 'High-emission vehicle events', value: (live ? 1284 + n : 1284).toLocaleString('en-US'), tone: ink },
+        { label: 'PPE compliance, nine sites', value: '96.4%', tone: ink },
+        { label: 'Effluent discharge', value: 'within consent', tone: ink },
+        { label: 'Waste accumulation flags', value: drift(2, 3, 1) + ' open', tone: warm },
+        { label: 'Disclosure pack, BRSR & GRI', value: 'ready', tone: ink }
+      ],
+      cyberRows: [
+        { label: 'Stream encryption', value: 'TLS 1.3 · all nodes', tone: ink },
+        { label: 'Shipped default credentials', value: 'none remaining', tone: ink },
+        { label: 'Firmware drift from baseline', value: '3 nodes behind', tone: warm },
+        { label: 'Anomalous outbound traffic', value: cyc(['none in 24 h', '1 blocked · 06:12', 'none in 24 h'], 2), tone: ink },
+        { label: 'Penetration test', value: 'passed · 14 days ago', tone: ink }
+      ],
+      faqs: this.FAQS.map((entry, i) => ({
+        num: String(i + 1).padStart(2, '0'),
+        q: entry[0],
+        a: entry[1],
+        open: this.state.faqOpen === i,
+        sign: this.state.faqOpen === i ? '−' : '+',
+        toggle: () => this.setState(s => ({ faqOpen: s.faqOpen === i ? -1 : i }))
+      })),
+      cvLabelA: cyc(['PLATE · DL 8C AB 1234', 'VEHICLE · SEDAN', 'SPEED · 58 KM/H'], 0),
+      cvLabelB: cyc(['HEAVY · LANE 3', 'VEHICLE · TRUCK', 'ATCC · CLASS 04'], 1),
+      esgEvents: (live ? 1284 + n : 1284).toLocaleString('en-US'),
+      esgWaste: drift(2, 3, 1),
+      cyberAnomaly: cyc(['none in 24 h', '1 blocked · 06:12', 'none in 24 h'], 2),
+      iotVib: drift(2, 3, 2) + '.1',
+      iotGas: drift(31, 5, 1) + '.4',
+      iotFlow: drift(40, 4, 2) + '.8',
+      iotTemp: drift(39, 4, 0) + '.2'
+    };
+  }
+}
+</script>
+</body>
+</html>
