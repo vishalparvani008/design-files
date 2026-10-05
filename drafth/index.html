@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F5F5F7;color:#1F2421;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#5B2DB3;text-decoration:none}
+a:hover{color:#4A2396;text-decoration:underline}
+button,input,textarea{font-family:inherit}
+input::placeholder,textarea::placeholder{color:#A0A3AB}
+[data-panel]::-webkit-scrollbar{display:none}
+@keyframes aiSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes aiPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes ringOut{0%{transform:scale(.8);opacity:.55}100%{transform:scale(1.9);opacity:0}}
+@keyframes lineIn{0%,8%{clip-path:inset(0 100% 0 0)}30%,88%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 0);opacity:0}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes txtShim{from{background-position:100% 0}to{background-position:-150% 0}}
+@keyframes popIn{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+[data-orb]{box-shadow:0 4px 12px rgba(91,45,179,0.28),0 1px 3px rgba(91,45,179,0.18)}
+[data-orb-a]{animation:aiSpin 5s linear infinite;filter:blur(5px)}
+[data-screen]{animation:fadeUp .55s cubic-bezier(.22,1,.36,1) both}
+[data-screen] [data-stag]{animation:fadeUp .55s cubic-bezier(.22,1,.36,1) both}
+[data-stag="1"]{animation-delay:.05s!important}[data-stag="2"]{animation-delay:.1s!important}[data-stag="3"]{animation-delay:.15s!important}[data-stag="4"]{animation-delay:.2s!important}[data-stag="5"]{animation-delay:.25s!important}
+[data-ln]{animation:lineIn 7s cubic-bezier(.65,0,.35,1) infinite both}
+[data-ln="2"]{animation-delay:.6s}[data-ln="3"]{animation-delay:1.2s}[data-ln="4"]{animation-delay:1.8s}
+[data-float]{animation:floatY 4s ease-in-out infinite}
+[data-float="2"]{animation-delay:1.2s}[data-float="3"]{animation-delay:2.4s}
+[data-shim]{background:linear-gradient(90deg,currentColor 0%,currentColor 35%,#C6B4EF 50%,currentColor 65%,currentColor 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:txtShim 1.8s linear infinite}
+[data-ring]{animation:ringOut 2.4s cubic-bezier(.22,1,.36,1) infinite}
+[data-ring="2"]{animation-delay:.8s}[data-ring="3"]{animation-delay:1.6s}
+[data-pop]{animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both}
+[data-caret]{animation:caret 1s step-end infinite}
+[data-seg-fill]{transition:width .7s cubic-bezier(.22,1,.36,1)}
+[data-meter]{transition:width .9s cubic-bezier(.22,1,.36,1)}
+[data-row]{transition:background-color .35s ease,border-color .35s ease}
+</style>
+</helmet>
+<div style="height:100vh; background:#F5F5F7; padding:10px; display:flex">
+  <div data-panel="1" style="flex:1; min-width:0; height:calc(100vh - 20px); overflow-y:auto; scrollbar-width:none; border-radius:12px; background-color:#FFFFFF; background-image:radial-gradient(circle, #F4F4F7 0.7px, transparent 1.1px); background-size:18px 18px; background-position:9px 9px; box-shadow:0 1px 6px rgba(20,20,40,0.02); display:flex; flex-direction:column">
+
+    <!-- Top bar -->
+    <div style="flex-shrink:0; padding:22px 28px 0; display:flex; align-items:center; justify-content:space-between; gap:16px">
+      <div style="display:flex; align-items:center; gap:9px">
+        <svg width="23" height="26" viewBox="0 0 220 250" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-label="Drafth"><path d="M14 150V68a56 56 0 0 1 56-56h82a56 56 0 0 1 56 56v24a56 56 0 0 1-56 56H82l-46 52-22-22" stroke="#9B75E8" stroke-width="22"></path><path d="M66 74h76M66 114h48" stroke="#3F1D85" stroke-width="24"></path></svg>
+        <span style="font:600 21px/1 Inter; letter-spacing:-0.02em; color:#3F1D85">Drafth</span>
+      </div>
+      <sc-if value="{{ showSignIn }}" hint-placeholder-val="{{ true }}">
+        <span style="font:400 13px/1 Inter; color:#71777F">Already have an account? <a href="AI Ideas.dc.html?screen=chat" style="font-weight:600">Sign in</a></span>
+      </sc-if>
+      <sc-if value="{{ showSignOut }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ signOut }}" style="height:32px; padding:0 12px 0 10px; border:0; background:transparent; border-radius:999px; display:flex; align-items:center; gap:7px; color:#71777F; font:500 12.5px/1 Inter; cursor:pointer" style-hover="background:#F5F5F7; color:#1F2421">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4.5h3.5a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H14"></path><path d="M10 8l-4 4 4 4M6 12h9.5"></path></svg>
+          Sign out
+        </button>
+      </sc-if>
+    </div>
+
+    <!-- Step rail -->
+    <sc-if value="{{ showRail }}" hint-placeholder-val="{{ false }}">
+      <div style="flex-shrink:0; padding:26px 28px 0; display:flex; justify-content:center">
+        <div style="width:100%; max-width:980px; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px">
+          <sc-for list="{{ rail }}" as="r" hint-placeholder-count="3">
+            <div style="display:flex; flex-direction:column; gap:9px">
+              <div style="height:3px; border-radius:3px; background:#EFEFF2; overflow:hidden"><div data-seg-fill="1" style="height:100%; width:{{ r.fill }}; background:#5B2DB3; border-radius:3px"></div></div>
+              <div style="display:flex; align-items:center; gap:7px; font:500 12px/1 Inter; color:{{ r.color }}">
+                <sc-if value="{{ r.done }}" hint-placeholder-val="{{ false }}">
+                  <span data-pop="1" style="width:16px; height:16px; border-radius:5px; background:#5B2DB3; color:#FFFFFF; display:grid; place-items:center"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+                </sc-if>
+                <sc-if value="{{ r.notDone }}" hint-placeholder-val="{{ true }}">
+                  <span style="width:16px; height:16px; border-radius:5px; background:{{ r.numBg }}; color:{{ r.numColor }}; display:grid; place-items:center; font:600 9.5px/1 Inter">{{ r.n }}</span>
+                </sc-if>
+                {{ r.label }}
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:40px 28px 56px">
+
+      <!-- 01 Sign up -->
+      <sc-if value="{{ isSignup }}" hint-placeholder-val="{{ true }}">
+        <div data-screen="1" data-screen-label="01 Sign up" style="width:100%; max-width:1000px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:64px">
+          <div style="flex:1 1 380px; max-width:420px; display:flex; flex-direction:column; gap:26px">
+            <div data-stag="1" style="display:flex; flex-direction:column; gap:12px">
+              <h1 style="margin:0; font:600 36px/1.15 Lora, Georgia, serif; letter-spacing:-0.01em; color:#1F2421; text-wrap:pretty">Start writing better LinkedIn posts</h1>
+              <p style="margin:0; font:400 14.5px/1.55 Inter; color:#5B625C">Takes about 60 seconds. We'll never post without your permission.</p>
+            </div>
+            <button data-stag="2" onClick="{{ google }}" style="height:46px; border:1px solid #E6E6EA; background:#FFFFFF; border-radius:999px; display:flex; align-items:center; justify-content:center; gap:10px; color:#1F2421; font:500 14px/1 Inter; cursor:pointer; transition:border-color .2s, background .2s" style-hover="background:#FAFAFB; border-color:#D6D6DC">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"></path><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"></path><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"></path><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"></path></svg>
+              Continue with Google
+            </button>
+            <div data-stag="3" style="display:flex; align-items:center; gap:12px; font:500 11px/1 Inter; letter-spacing:0.1em; color:#A0A3AB">
+              <span style="flex:1; height:1px; background:#EFEFF2"></span>OR WITH EMAIL<span style="flex:1; height:1px; background:#EFEFF2"></span>
+            </div>
+            <div data-stag="4" style="display:flex; flex-direction:column; gap:14px">
+              <label style="display:flex; flex-direction:column; gap:8px">
+                <span style="font:500 13px/1 Inter; color:#3A413C">Full name</span>
+                <input value="{{ name }}" onChange="{{ onName }}" placeholder="Your name" style="height:46px; padding:0 16px; border:1px solid #E6E6EA; border-radius:14px; background:#FFFFFF; font:400 14px/1 Inter; color:#1F2421; outline:none; transition:border-color .25s, box-shadow .25s" style-focus="border-color:#D9CCF5; box-shadow:0 0 0 4px #F1ECFC">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:8px">
+                <span style="font:500 13px/1 Inter; color:#3A413C">Email</span>
+                <input value="{{ email }}" onChange="{{ onEmail }}" type="email" placeholder="you@example.com" style="height:46px; padding:0 16px; border:1px solid #E6E6EA; border-radius:14px; background:#FFFFFF; font:400 14px/1 Inter; color:#1F2421; outline:none; transition:border-color .25s, box-shadow .25s" style-focus="border-color:#D9CCF5; box-shadow:0 0 0 4px #F1ECFC">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:8px">
+                <span style="display:flex; justify-content:space-between; font:500 13px/1 Inter; color:#3A413C">Password <span style="font-weight:400; color:{{ pwHintColor }}">{{ pwHint }}</span></span>
+                <span style="position:relative; display:flex">
+                  <input value="{{ pw }}" onChange="{{ onPw }}" type="{{ pwType }}" placeholder="At least 8 characters" style="flex:1; height:46px; padding:0 48px 0 16px; border:1px solid #E6E6EA; border-radius:14px; background:#FFFFFF; font:400 14px/1 Inter; color:#1F2421; outline:none; transition:border-color .25s, box-shadow .25s" style-focus="border-color:#D9CCF5; box-shadow:0 0 0 4px #F1ECFC">
+                  <button onClick="{{ togglePw }}" title="Show password" style="position:absolute; right:7px; top:7px; width:32px; height:32px; border:0; background:transparent; border-radius:999px; color:#8A9089; display:grid; place-items:center; cursor:pointer" style-hover="background:#F5F5F7; color:#1F2421">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  </button>
+                </span>
+              </label>
+            </div>
+            <div data-stag="5" style="display:flex; flex-direction:column; gap:14px">
+              <sc-if value="{{ canSignup }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ signup }}" style="height:46px; border:0; background:#5B2DB3; border-radius:999px; color:#FFFFFF; font:500 14px/1 Inter; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(91,45,179,.24); transition:background .2s" style-hover="background:#4A2396">Create account<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+              </sc-if>
+              <sc-if value="{{ cannotSignup }}" hint-placeholder-val="{{ true }}">
+                <button disabled="{{ true }}" style="height:46px; border:0; background:#ECECEF; border-radius:999px; color:#A0A3AB; font:500 14px/1 Inter; cursor:not-allowed">Create account</button>
+              </sc-if>
+              <p style="margin:0; text-align:center; font:400 12px/1.5 Inter; color:#8A9089">By continuing you agree to our <a href="#" onClick="{{ fakeLink }}">Terms</a> and <a href="#" onClick="{{ fakeLink }}">Privacy Policy</a>.</p>
+            </div>
+          </div>
+
+          <!-- Showcase -->
+          <div data-stag="3" style="flex:1 1 380px; max-width:440px; position:relative; padding:28px 0">
+            <div style="position:absolute; inset:0; border-radius:32px; background:radial-gradient(70% 60% at 60% 40%, #F1ECFC, rgba(241,236,252,0) 70%)"></div>
+            <div style="position:relative; background:#FFFFFF; border:1px solid #E6E6EA; border-radius:23px; box-shadow:0 0 2px rgba(91,45,179,0.05), 0 0 24px rgba(91,45,179,0.07); padding:28px 28px 32px; display:flex; flex-direction:column; gap:20px">
+              <div style="display:flex; align-items:center; gap:12px">
+                <span data-orb="1" style="position:relative; width:34px; height:34px; border-radius:50%; overflow:hidden; flex-shrink:0; background:#7C4DDB"><span data-orb-a="1" style="position:absolute; inset:-40%; background:conic-gradient(from 0deg, #5B2DB3, #C14FD9, #FF7AB8, #FFB36B, #6FA8FF, #5B2DB3)"></span><span style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 30% 28%, rgba(255,255,255,0.55), rgba(255,255,255,0) 55%)"></span><span data-orb-d="1" style="position:absolute; inset:0; display:grid; place-items:center; pointer-events:none"><span style="font-family:Lora, Georgia, serif; font-style:normal; font-weight:600; font-size:23px; line-height:1; padding-bottom:2px; color:#EFE9FC; opacity:0.25; text-transform:lowercase">d</span></span></span>
+                <div style="display:flex; flex-direction:column; gap:4px">
+                  <span style="font:600 13.5px/1 Inter; color:#1F2421">Drafth AI</span>
+                  <span data-shim="1" style="font:500 12px/1 Inter; color:#71777F">Writing in your voice</span>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px; min-height:300px">
+                <p data-ln="1" style="margin:0; font:600 17px/1.4 Lora, Georgia, serif; color:#1F2421">Most onboarding flows lose users before step one.</p>
+                <p data-ln="2" style="margin:0; font:400 13.5px/1.55 Inter; color:#5B625C">I audited 12 SaaS products this quarter.</p>
+                <p data-ln="3" style="margin:0; font:400 13.5px/1.55 Inter; color:#5B625C">80% of users who quit never finished a single meaningful action.</p>
+                <p data-ln="4" style="margin:0; font:400 13.5px/1.55 Inter; color:#5B625C">The fix was never more tooltips.<span data-caret="1" style="display:inline-block; width:1.5px; height:15px; background:#5B2DB3; margin-left:2px; vertical-align:-2px"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- 02 Verify -->
+      <sc-if value="{{ isVerify }}" hint-placeholder-val="{{ false }}">
+        <div data-screen="1" data-screen-label="02 Verify email" style="width:100%; max-width:440px; display:flex; flex-direction:column; align-items:center; gap:26px; text-align:center">
+          <div data-stag="1" style="position:relative; width:64px; height:64px; display:grid; place-items:center">
+            <span data-ring="1" style="position:absolute; inset:0; border-radius:20px; border:1px solid #D9CCF5"></span>
+            <span data-ring="2" style="position:absolute; inset:0; border-radius:20px; border:1px solid #D9CCF5"></span>
+            <span style="position:relative; width:64px; height:64px; border-radius:20px; background:#F1ECFC; color:#5B2DB3; display:grid; place-items:center">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>
+            </span>
+          </div>
+          <div data-stag="2" style="display:flex; flex-direction:column; gap:12px; align-items:center">
+            <h1 style="margin:0; font:600 34px/1.15 Lora, Georgia, serif; color:#1F2421">Verify your email</h1>
+            <p style="margin:0; font:400 14.5px/1.55 Inter; color:#5B625C">We sent a six-digit code to</p>
+            <span style="height:32px; padding:0 8px 0 12px; border-radius:999px; background:#F5F5F7; display:flex; align-items:center; gap:8px; font:500 13px/1 Inter; color:#1F2421">{{ emailShown }}<button onClick="{{ editEmail }}" style="height:22px; padding:0 8px; border:0; border-radius:999px; background:#FFFFFF; color:#5B2DB3; font:500 11.5px/1 Inter; cursor:pointer" style-hover="background:#F1ECFC">Edit</button></span>
+          </div>
+          <div data-stag="3" style="position:relative; display:flex; align-items:center; gap:8px">
+            <sc-for list="{{ codeBoxes }}" as="b" hint-placeholder-count="6">
+              <sc-if value="{{ b.isCur }}" hint-placeholder-val="{{ false }}">
+                <span style="width:50px; height:60px; border-radius:14px; border:1px solid #D9CCF5; background:#FFFFFF; box-shadow:0 0 0 4px #F1ECFC; display:grid; place-items:center; font:600 22px/1 Inter; color:#1F2421">
+                  <span>{{ b.ch }}</span>
+                  <sc-if value="{{ b.cursor }}" hint-placeholder-val="{{ false }}"><span data-caret="1" style="width:1.5px; height:22px; background:#5B2DB3"></span></sc-if>
+                </span>
+              </sc-if>
+              <sc-if value="{{ b.isIdle }}" hint-placeholder-val="{{ true }}">
+                <span style="width:50px; height:60px; border-radius:14px; border:1px solid #E6E6EA; background:#FFFFFF; box-shadow:none; display:grid; place-items:center; font:600 22px/1 Inter; color:#1F2421">
+                  <span>{{ b.ch }}</span>
+                  <sc-if value="{{ b.cursor }}" hint-placeholder-val="{{ false }}"><span data-caret="1" style="width:1.5px; height:22px; background:#5B2DB3"></span></sc-if>
+                </span>
+              </sc-if>
+            </sc-for>
+            <input value="{{ code }}" onChange="{{ onCode }}" onFocus="{{ codeFocus }}" onBlur="{{ codeBlur }}" aria-label="Verification code" style="position:absolute; inset:0; opacity:0; width:100%; height:100%; border:0; cursor:text; font-size:16px">
+          </div>
+          <div data-stag="4" style="width:100%; display:flex; flex-direction:column; gap:16px">
+            <button onClick="{{ verify }}" style="height:46px; border:0; background:#5B2DB3; border-radius:999px; color:#FFFFFF; font:500 14px/1 Inter; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(91,45,179,.24)" style-hover="background:#4A2396">Verify and continue<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            <sc-if value="{{ resendWaiting }}" hint-placeholder-val="{{ true }}">
+              <span style="font:400 13px/1 Inter; color:#8A9089">Didn't get it? Resend in <span style="font-variant-numeric:tabular-nums; color:#5B625C">{{ resendLabel }}</span></span>
+            </sc-if>
+            <sc-if value="{{ resendReady }}" hint-placeholder-val="{{ false }}">
+              <span style="font:400 13px/1 Inter; color:#8A9089">Didn't get it? <a href="#" onClick="{{ resend }}" style="font-weight:600">Resend code</a></span>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- 03 Welcome -->
+      <sc-if value="{{ isWelcome }}" hint-placeholder-val="{{ false }}">
+        <div data-screen="1" data-screen-label="03 Welcome" style="width:100%; max-width:560px; display:flex; flex-direction:column; align-items:center; gap:28px; text-align:center">
+          <span data-stag="1" style="height:28px; padding:0 12px 0 10px; border-radius:999px; background:#F1ECFC; color:#3F1D85; display:flex; align-items:center; gap:7px; font:500 12px/1 Inter"><span style="width:6px; height:6px; border-radius:50%; background:#7C4DDB"></span>Takes about 60 seconds</span>
+          <div data-stag="2" style="display:flex; flex-direction:column; gap:12px">
+            <h1 style="margin:0; font:600 38px/1.15 Lora, Georgia, serif; color:#1F2421">Let's set you up, {{ firstName }}</h1>
+            <p style="margin:0; font:400 15px/1.55 Inter; color:#5B625C">The more we know, the sharper your ideas.</p>
+          </div>
+          <div data-stag="3" style="width:100%; background:#FFFFFF; border:1px solid #E6E6EA; border-radius:23px; padding:8px; text-align:left; display:flex; flex-direction:column">
+            <div style="padding:12px 14px 10px; display:flex; justify-content:space-between; font:600 10.5px/1 Inter; letter-spacing:0.08em; text-transform:uppercase; color:#8A9089"><span>What we'll ask</span><span style="letter-spacing:0; text-transform:none; font-weight:500">3 quick inputs</span></div>
+            <sc-for list="{{ asks }}" as="a" hint-placeholder-count="3">
+              <div style="padding:14px; border-radius:16px; display:flex; align-items:center; gap:14px; transition:background .2s" style-hover="background:#F8F6FD">
+                <span style="width:40px; height:40px; flex-shrink:0; border-radius:12px; background:{{ a.bg }}; color:{{ a.fg }}; display:grid; place-items:center">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ a.icon }}"></path></svg>
+                </span>
+                <span style="flex:1; min-width:0; display:flex; flex-direction:column; gap:5px">
+                  <span style="font:600 14px/1.2 Inter; color:#1F2421">{{ a.title }}</span>
+                  <span style="font:400 13px/1.4 Inter; color:#71777F">{{ a.desc }}</span>
+                </span>
+                <span style="font:500 11.5px/1 Inter; color:#A0A3AB; font-variant-numeric:tabular-nums">{{ a.n }} / 3</span>
+              </div>
+            </sc-for>
+          </div>
+          <div data-stag="4" style="display:flex; flex-direction:column; align-items:center; gap:14px">
+            <button onClick="{{ getStarted }}" style="height:48px; padding:0 26px 0 28px; border:0; background:#5B2DB3; border-radius:999px; color:#FFFFFF; font:500 14.5px/1 Inter; cursor:pointer; display:flex; align-items:center; gap:9px; box-shadow:0 4px 14px rgba(91,45,179,.24)" style-hover="background:#4A2396">Get started<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            <span style="font:400 12.5px/1 Inter; color:#8A9089">You can refine any of this later in Settings.</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- 04–06 Profile steps -->
+      <sc-if value="{{ isProfileStep }}" hint-placeholder-val="{{ false }}">
+        <div style="width:100%; max-width:980px; display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:center; gap:56px">
+          <div style="flex:1 1 400px; max-width:500px">
+
+            <sc-if value="{{ isLinkedin }}" hint-placeholder-val="{{ false }}">
+              <div data-screen="1" data-screen-label="04 LinkedIn" style="display:flex; flex-direction:column; gap:24px">
+                <button data-stag="1" onClick="{{ back }}" style="align-self:flex-start; height:30px; padding:0 12px 0 8px; margin-left:-8px; border:0; background:transparent; border-radius:999px; display:flex; align-items:center; gap:6px; color:#71777F; font:500 13px/1 Inter; cursor:pointer" style-hover="background:#F5F5F7; color:#1F2421"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back</button>
+                <div data-stag="2" style="display:flex; flex-direction:column; gap:10px">
+                  <h1 style="margin:0; font:600 32px/1.2 Lora, Georgia, serif; color:#1F2421">What's your LinkedIn?</h1>
+                  <p style="margin:0; font:400 14.5px/1.55 Inter; color:#5B625C">Paste your profile URL — we'll read your bio to match your voice.</p>
+                </div>
+                <div data-stag="3" style="display:flex; flex-direction:column; gap:8px">
+                  <span style="font:500 13px/1 Inter; color:#3A413C">LinkedIn profile URL</span>
+                  <div style="display:flex; align-items:center; gap:6px; padding:5px 5px 5px 14px; border:1px solid #E6E6EA; border-radius:999px; background:#FFFFFF; transition:border-color .25s, box-shadow .25s" style-focus-within="border-color:#D9CCF5; box-shadow:0 0 0 4px #F1ECFC">
+                    <span style="width:22px; height:22px; flex-shrink:0; border-radius:6px; background:#EAF2FE; color:#2F7BE0; display:grid; place-items:center; font:700 11px/1 Inter">in</span>
+                    <input value="{{ url }}" onChange="{{ onUrl }}" placeholder="https://linkedin.com/in/your-handle" style="flex:1; min-width:0; height:36px; border:0; outline:none; background:transparent; font:400 14px/1 Inter; color:#1F2421">
+                    <sc-if value="{{ canFetch }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ fetchBio }}" style="height:36px; padding:0 16px; border:0; background:#5B2DB3; border-radius:999px; color:#FFFFFF; font:500 13px/1 Inter; cursor:pointer; white-space:nowrap" style-hover="background:#4A2396">Fetch my bio</button>
+                    </sc-if>
+                    <sc-if value="{{ isFetching }}" hint-placeholder-val="{{ false }}">
+                      <span style="height:36px; padding:0 14px; border-radius:999px; background:#F1ECFC; color:#3F1D85; display:flex; align-items:center; gap:8px; font:500 13px/1 Inter; white-space:nowrap"><span style="width:11px; height:11px; border-radius:50%; border:1.6px solid #D9CCF5; border-top-color:#5B2DB3; animation:aiSpin .8s linear infinite"></span><span data-shim="1">Reading</span></span>
+                    </sc-if>
+                    <sc-if value="{{ cannotFetch }}" hint-placeholder-val="{{ true }}">
+                      <span style="height:36px; padding:0 16px; border-radius:999px; background:#ECECEF; color:#A0A3AB; display:flex; align-items:center; font:500 13px/1 Inter; white-space:nowrap">Fetch my bio</span>
+                    </sc-if>
+                  </div>
+                </div>
+                <div data-stag="4" style="display:flex; flex-direction:column; gap:8px">
+                  <span style="display:flex; align-items:center; gap:8px; font:500 13px/1 Inter; color:#3A413C">Your bio
+                    <sc-if value="{{ fetched }}" hint-placeholder-val="{{ false }}"><span data-pop="1" style="height:20px; padding:0 8px; border-radius:999px; background:#F1ECFC; color:#5B2DB3; display:flex; align-items:center; font:500 11px/1 Inter">Pulled from LinkedIn</span></sc-if>
+                  </span>
+                  <textarea value="{{ bio }}" onChange="{{ onBio }}" rows="5" placeholder="Founder building Drafth — agent-driven LinkedIn writing. Previously led product at two venture-backed SaaS companies. I write about product, AI, and the messy middle of building." style="padding:14px 16px; border:1px solid #E6E6EA; border-radius:18px; background:#FFFFFF; font:400 14px/1.6 Inter; color:#1F2421; outline:none; resize:none; transition:border-color .25s, box-shadow .25s" style-focus="border-color:#D9CCF5; box-shadow:0 0 0 4px #F1ECFC"></textarea>
+                  <span style="font:400 12px/1.4 Inter; color:#8A9089">One or two paragraphs. Your role, what you build, and how you sound.</span>
+                </div>
+                <div data-stag="5">
+                  <sc-if value="{{ canBio }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ next }}" style="width:100%; height:46px; border:0; background:#5B2DB3; border-radius:999px; color:#FFFFFF; font:500 14px/1 Inter; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(91,45,179,.24)" style-hover="background:#4A2396">Looks right<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+                  </sc-if>
+                  <sc-if value="{{ cannotBio }}" hint-placeholder-val="{{ true }}">
+                    <button disabled="{{ true }}" style="width:100%; height:46px; border:0; background:#ECECEF; border-radius:999px; color:#A0A3AB; font:500 14px/1 Inter; cursor:not-allowed">Looks right</button>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isIndustry }}" hint-placeholder-val="{{ false }}">
+              <div data-screen="1" data-screen-label="05 Industry" style="display:flex; flex-direction:column; gap:24px">
+                <button data-stag="1" onClick="{{ back }}" style="align-self:flex-start; height:30px; padding:0 12px 0 8px; margin-left:-8px; border:0; background:transparent; border-radius:999px; display:flex; align-items:center; gap:6px; color:#71777F; font:500 13px/1 Inter; cursor:pointer" style-hover="background:#F5F5F7; color:#1F2421"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back</button>
+                <div data-stag="2" style="display:flex; flex-direction:column; gap:10px">
+                  <h1 style="margin:0; font:600 32px/1.2 Lora, Georgia, serif; color:#1F2421">Your space</h1>
+                  <p style="margin:0; font:400 14.5px/1.55 Inter; color:#5B625C">This helps us tailor your content ideas.</p>
+                </div>
+                <button data-stag="3" onClick="{{ pickSuggested }}" style="padding:14px 16px; border:1px solid {{ sugBorder }}; background:{{ sugBg }}; border-radius:18px; display:flex; align-items:center; gap:14px; cursor:pointer; text-align:left; transition:border-color .25s, background .25s">
+                  <span data-orb="1" style="position:relative; width:34px; height:34px; border-radius:50%; overflow:hidden; flex-shrink:0; background:#7C4DDB"><span data-orb-a="1" style="position:absolute; inset:-40%; background:conic-gradient(from 0deg, #5B2DB3, #C14FD9, #FF7AB8, #FFB36B, #6FA8FF, #5B2DB3)"></span><span style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 30% 28%, rgba(255,255,255,0.55), rgba(255,255,255,0) 55%)"></span><span data-orb-d="1" style="position:absolute; inset:0; display:grid; place-items:center; pointer-events:none"><span style="font-family:Lora, Georgia, serif; font-style:normal; font-weight:600; font-size:23px; line-height:1; padding-bottom:2px; color:#EFE9FC; opacity:0.25; text-transform:lowercase">d</span></span></span>
+                  <span style="flex:1; display:flex; flex-direction:column; gap:6px">
+                    <span style="font:600 10.5px/1 Inter; letter-spacing:0.08em; text-transform:uppercase; color:#8A9089">Suggested from your bio</span>
+                    <span style="font:600 15px/1 Inter; color:#1F2421">{{ suggested }}</span>
+                  </span>
+                  <sc-if value="{{ sugPicked }}" hint-placeholder-val="{{ true }}">
+                    <span data-pop="1" style="width:24px; height:24px; border-radius:8px; background:#5B2DB3; color:#FFFFFF; display:grid; place-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+                  </sc-if>
+                  <sc-if value="{{ sugNotPicked }}" hint-placeholder-val="{{ false }}">
+                    <span style="font:500 12px/1 Inter; color:#5B2DB3">Use this</span>
+                  </sc-if>
+                </button>
+                <div data-stag="4" style="display:flex; flex-direction:column; gap:12px">
+                  <span style="font:500 13px/1 Inter; color:#3A413C">Or pick another</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:8px">
+                    <sc-for list="{{ industries }}" as="ind" hint-placeholder-count="8">
+                      <sc-if value="{{ ind.on }}" hint-placeholder-val="{{ false }}">
+                        <button onClick="{{ ind.pick }}" style="height:36px; padding:0 14px; border:1px solid #5B2DB3; background:#5B2DB3; border-radius:999px; color:#FFFFFF; font:500 13px/1 Inter; cursor:pointer; transition:all .2s">{{ ind.name }}</button>
+                      </sc-if>
+                      <sc-if value="{{ ind.off }}" hint-placeholder-val="{{ true }}">
+                        <button onClick="{{ ind.pick }}" style="height:36px; padding:0 14px; border:1px solid #E6E6EA; background:#FFFFFF; border-radius:999px; color:#3A413C; font:500 13px/1 Inter; cursor:pointer; transition:all .2s" style-hover="border-color:#D9CCF5; background:#F8F6FD; color:#3F1D85">{{ ind.name }}</button>
+                      </sc-if>
+                    </sc-for>
+                  </div>
+                </div>
+                <div data-stag="5">
+                  <button onClick="{{ next }}" style="width:100%; height:46px; border:0; background:#5B2DB3; border-radius:999px; color:#FFFFFF; font:500 14px/1 Inter; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(91,45,179,.24)" style-hover="background:#4A2396">Continue<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isIcp }}" hint-placeholder-val="{{ false }}">
+              <div data-screen="1" data-screen-label="06 Audience" style="display:flex; flex-direction:column; gap:22px">
+                <button data-stag="1" onClick="{{ back }}" style="align-self:flex-start; height:30px; padding:0 12px 0 8px; margin-left:-8px; border:0; background:transparent; border-radius:999px; display:flex; align-items:center; gap:6px; color:#71777F; font:500 13px/1 Inter; cursor:pointer" style-hover="background:#F5F5F7; color:#1F2421"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back</button>
+                <div data-stag="2" style="display:flex; flex-direction:column; gap:10px">
+                  <h1 style="margin:0; font:600 32px/1.2 Lora, Georgia, serif; color:#1F2421">Tell us about your audience (ICP)</h1>
+                  <p style="margin:0; font:400 14.5px/1.55 Inter; color:#5B625C">The clearer this is, the sharper every idea Drafth writes.</p>
+                </div>
+                <label data-stag="3" style="display:flex; flex-direction:column; gap:8px">
+                  <span style="font:500 13.5px/1 Inter; color:#1F2421">Who are you writing for?</span>
+                  <span style="font:400 12px/1.4 Inter; color:#8A9089">Their role, seniority, and company stage — one group, not your whole market.</span>
+                  <input value="{{ audience }}" onChange="{{ onAudience }}" placeholder="Technical founders and CTOs at seed-stage SaaS" style="height:46px; padding:0 16px; border:1px solid #E6E6EA; border-radius:14px; background:#FFFFFF; font:400 14px/1 Inter; color:#1F2421; outline:none; transition:border-color .25s, box-shadow .25s" style-focus="border-color:#D9CCF5; box-shadow:0 0 0 4px #F1ECFC">
+                </label>
+                <label data-stag="4" style="display:flex; flex-direction:column; gap:8px">
+                  <span style="font:500 13.5px/1 Inter; color:#1F2421">What problem do you solve for them?</span>
+                  <span style="font:400 12px/1.4 Inter; color:#8A9089">Lead with the outcome they get, not your feature list.</span>
+                  <textarea value="{{ problem }}" onChange="{{ onProblem }}" rows="3" placeholder="We help early-stage SaaS founders ship their first AI feature in weeks, not months — they have the engineers, but keep rebuilding the wrong thing." style="padding:13px 16px; border:1px solid #E6E6EA; border-radius:18px; background:#FFFFFF; font:400 14px/1.6 Inter; color:#1F2421; outline:none; resize:none; transition:border-color .25s, box-shadow .25s" style-focus="border-color:#D9CCF5; box-shadow:0 0 0 4px #F1ECFC"></textarea>
+                </label>
+                <label data-stag="5" style="display:flex; flex-direction:column; gap:8px">
+                  <span style="display:flex; align-items:center; gap:8px; font:500 13.5px/1 Inter; color:#1F2421">Your bio for this audience<span style="height:20px; padding:0 8px; border-radius:999px; background:#F1ECFC; color:#5B2DB3; display:flex; align-items:center; font:500 11px/1 Inter">From LinkedIn</span></span>
+                  <span style="font:400 12px/1.4 Inter; color:#8A9089">Pulled from LinkedIn — tweak it if it doesn't quite fit the audience above.</span>
+                  <textarea value="{{ icpBio }}" onChange="{{ onIcpBio }}" rows="4" style="padding:13px 16px; border:1px solid #E6E6EA; border-radius:18px; background:#FFFFFF; font:400 14px/1.6 Inter; color:#1F2421; outline:none; resize:none; transition:border-color .25s, box-shadow .25s" style-focus="border-color:#D9CCF5; box-shadow:0 0 0 4px #F1ECFC"></textarea>
+                </label>
+                <div>
+                  <sc-if value="{{ canIcp }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ finish }}" style="width:100%; height:46px; border:0; background:#5B2DB3; border-radius:999px; color:#FFFFFF; font:500 14px/1 Inter; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 14px rgba(91,45,179,.24)" style-hover="background:#4A2396">Craft my first ideas<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+                  </sc-if>
+                  <sc-if value="{{ cannotIcp }}" hint-placeholder-val="{{ true }}">
+                    <button disabled="{{ true }}" style="width:100%; height:46px; border:0; background:#ECECEF; border-radius:999px; color:#A0A3AB; font:500 14px/1 Inter; cursor:not-allowed">Craft my first ideas</button>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+
+          <!-- Live profile card -->
+          <aside style="flex:0 1 360px; position:sticky; top:24px; background:#FFFFFF; border:1px solid #E6E6EA; border-radius:23px; box-shadow:0 0 2px rgba(91,45,179,0.05), 0 0 24px rgba(91,45,179,0.07); padding:8px; display:flex; flex-direction:column">
+            <div style="padding:14px 14px 12px; display:flex; align-items:center; gap:10px">
+              <span data-orb="1" style="position:relative; width:26px; height:26px; border-radius:50%; overflow:hidden; flex-shrink:0; background:#7C4DDB"><span data-orb-a="1" style="position:absolute; inset:-40%; background:conic-gradient(from 0deg, #5B2DB3, #C14FD9, #FF7AB8, #FFB36B, #6FA8FF, #5B2DB3)"></span><span data-orb-d="1" style="position:absolute; inset:0; display:grid; place-items:center; pointer-events:none"><span style="font-family:Lora, Georgia, serif; font-style:normal; font-weight:600; font-size:19px; line-height:1; padding-bottom:2px; color:#EFE9FC; opacity:0.25; text-transform:lowercase">d</span></span></span>
+              <span style="flex:1; font:600 13.5px/1 Inter; color:#1F2421">What Drafth knows</span>
+              <span style="font:500 11.5px/1 Inter; color:#8A9089">Live</span>
+            </div>
+            <sc-for list="{{ profileRows }}" as="pr" hint-placeholder-count="3">
+              <div data-row="1" style="padding:14px; border-radius:16px; background:{{ pr.bg }}; display:flex; flex-direction:column; gap:9px">
+                <div style="display:flex; align-items:center; gap:8px">
+                  <span style="width:22px; height:22px; border-radius:7px; background:{{ pr.iconBg }}; color:{{ pr.iconFg }}; display:grid; place-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ pr.icon }}"></path></svg></span>
+                  <span style="flex:1; font:600 11px/1 Inter; letter-spacing:0.06em; text-transform:uppercase; color:#8A9089">{{ pr.label }}</span>
+                  <sc-if value="{{ pr.filled }}" hint-placeholder-val="{{ false }}"><span data-pop="1" style="width:16px; height:16px; border-radius:5px; background:#5B2DB3; color:#FFFFFF; display:grid; place-items:center"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span></sc-if>
+                </div>
+                <sc-if value="{{ pr.filled }}" hint-placeholder-val="{{ false }}">
+                  <span style="font:400 13px/1.5 Inter; color:#1F2421; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden">{{ pr.value }}</span>
+                </sc-if>
+                <sc-if value="{{ pr.empty }}" hint-placeholder-val="{{ true }}">
+                  <span style="display:flex; flex-direction:column; gap:6px"><span style="height:8px; width:86%; border-radius:4px; background:#F1F1F3"></span><span style="height:8px; width:58%; border-radius:4px; background:#F1F1F3"></span></span>
+                </sc-if>
+              </div>
+            </sc-for>
+            <div style="margin:6px 6px 6px; padding:14px 10px 8px; border-top:1px solid #EFEFF2; display:flex; flex-direction:column; gap:10px">
+              <div style="display:flex; justify-content:space-between; font:500 12px/1 Inter; color:#71777F"><span>Idea sharpness</span><span style="color:#3F1D85; font-weight:600; font-variant-numeric:tabular-nums">{{ sharp }}%</span></div>
+              <div style="height:6px; border-radius:6px; background:#F1ECFC; overflow:hidden"><div data-meter="1" style="height:100%; width:{{ sharpW }}; border-radius:6px; background:linear-gradient(90deg, #7C4DDB, #C14FD9)"></div></div>
+            </div>
+          </aside>
+        </div>
+      </sc-if>
+
+      <!-- 07 Loading -->
+      <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+        <div data-screen="1" data-screen-label="07 Crafting ideas" style="width:100%; max-width:440px; display:flex; flex-direction:column; align-items:center; gap:30px; text-align:center">
+          <div style="position:relative; width:88px; height:88px; display:grid; place-items:center">
+            <span data-ring="1" style="position:absolute; inset:0; border-radius:50%; border:1px solid #D9CCF5"></span>
+            <span data-ring="2" style="position:absolute; inset:0; border-radius:50%; border:1px solid #D9CCF5"></span>
+            <span data-ring="3" style="position:absolute; inset:0; border-radius:50%; border:1px solid #D9CCF5"></span>
+            <span data-orb="1" style="position:relative; width:72px; height:72px; border-radius:50%; overflow:hidden; background:#7C4DDB"><span data-orb-a="1" style="position:absolute; inset:-40%; background:conic-gradient(from 0deg, #5B2DB3, #C14FD9, #FF7AB8, #FFB36B, #6FA8FF, #5B2DB3)"></span><span style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 30% 28%, rgba(255,255,255,0.55), rgba(255,255,255,0) 55%)"></span><span data-orb-d="1" style="position:absolute; inset:0; display:grid; place-items:center; pointer-events:none"><span style="font-family:Lora, Georgia, serif; font-style:normal; font-weight:600; font-size:50px; line-height:1; padding-bottom:4px; color:#EFE9FC; opacity:0.25; text-transform:lowercase">d</span></span></span>
+          </div>
+          <h1 style="margin:0; font:600 34px/1.15 Lora, Georgia, serif; color:#1F2421">Crafting your first ideas</h1>
+          <div style="width:100%; max-width:300px; display:flex; flex-direction:column; gap:12px; text-align:left">
+            <sc-for list="{{ loadSteps }}" as="ls" hint-placeholder-count="4">
+              <div style="display:flex; align-items:center; gap:10px; font:500 13px/1 Inter; animation:fadeUp .4s cubic-bezier(.22,1,.36,1) both">
+                <sc-if value="{{ ls.done }}" hint-placeholder-val="{{ false }}">
+                  <span data-pop="1" style="width:20px; height:20px; border-radius:7px; background:#5B2DB3; color:#FFFFFF; display:grid; place-items:center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+                  <span style="color:#1F2421">{{ ls.label }}</span>
+                </sc-if>
+                <sc-if value="{{ ls.active }}" hint-placeholder-val="{{ false }}">
+                  <span style="width:20px; height:20px; border-radius:7px; background:#F1ECFC; display:grid; place-items:center"><span style="width:10px; height:10px; border-radius:50%; border:1.6px solid #D9CCF5; border-top-color:#5B2DB3; animation:aiSpin .8s linear infinite"></span></span>
+                  <span data-shim="1" style="color:#3F1D85">{{ ls.label }}</span>
+                </sc-if>
+                <sc-if value="{{ ls.pending }}" hint-placeholder-val="{{ true }}">
+                  <span style="width:20px; height:20px; border-radius:7px; border:1px dashed #D6D6DC"></span>
+                  <span style="color:#A0A3AB">{{ ls.label }}</span>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;startStep&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;signup&quot;,&quot;verify&quot;,&quot;welcome&quot;,&quot;linkedin&quot;,&quot;industry&quot;,&quot;icp&quot;,&quot;loading&quot;],&quot;default&quot;:&quot;signup&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const STEPS = ["signup", "verify", "welcome", "linkedin", "industry", "icp", "loading"];
+const SAMPLE_BIO = "Product designer with 12+ years across SaaS, fintech and healthcare. I help teams turn complex flows into simple ones, and I write about UX, AI-assisted design and the decisions behind good products.";
+const INDUSTRIES = ["Design & UX", "SaaS & Software", "Marketing", "Fintech", "Healthcare", "Consulting", "E-commerce", "Other"];
+const LOAD = ["Reading your bio", "Matching your industry patterns", "Mapping your audience", "Drafting your first ideas"];
+const ICON = {
+  link: "M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1",
+  case: "M4 8.5h16v10a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5v-10ZM9 8.5V6a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 6v2.5M4 13h16",
+  target: "M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10ZM12 10.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z",
+  voice: "M12 4a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V7a3 3 0 0 0-3-3ZM6 11.5a6 6 0 0 0 12 0M12 17.5V20",
+};
+
+class Component extends DCLogic {
+  state = { step: null, name: "", email: "", pw: "", showPw: false, code: "", codeFocused: true, resendIn: 30, url: "", bio: "", fetching: false, fetched: false, industry: null, audience: "", problem: "", icpBio: "", loadIdx: 0 };
+
+  componentDidMount() { this._last = this.cur(); this.onStep(this._last); }
+  componentDidUpdate() { const c = this.cur(); if (c !== this._last) { this._last = c; this.onStep(c); } }
+  componentWillUnmount() { clearInterval(this._iv); clearTimeout(this._t); }
+  cur() { return this.state.step ?? this.props.startStep ?? "signup"; }
+  go(step) { this.setState({ step }); const p = document.querySelector('[data-panel]'); if (p) p.scrollTo({ top: 0 }); }
+  onStep(step) {
+    clearInterval(this._iv); clearTimeout(this._t);
+    if (step === "verify") {
+      this.setState({ resendIn: 30 });
+      this._iv = setInterval(() => this.setState(s => ({ resendIn: Math.max(0, s.resendIn - 1) })), 1000);
+    }
+    if (step === "loading") {
+      this.setState({ loadIdx: 0 });
+      this._iv = setInterval(() => this.setState(s => {
+        const n = s.loadIdx + 1;
+        if (n > LOAD.length) { clearInterval(this._iv); this._t = setTimeout(() => { window.location.href = "AI Ideas.dc.html"; }, 500); return null; }
+        return { loadIdx: n };
+      }), 1200);
+    }
+  }
+
+  renderVals() {
+    const s = this.state, step = this.cur();
+    const set = k => e => this.setState({ [k]: e.target.value });
+    const idx = STEPS.indexOf(step);
+    const emailOk = /.+@.+\..+/.test(s.email.trim());
+    const canSignup = true;
+    const suggested = s.fetched ? "Design & UX" : "Other";
+    const industry = s.industry ?? (idx > 4 || step === "industry" ? suggested : null);
+    const urlOk = true;
+    const bioOk = true;
+    const icpOk = true;
+    const railIdx = { linkedin: 0, industry: 1, icp: 2 }[step];
+    const done = [bioOk && railIdx > 0, railIdx > 1, false];
+    const sharp = Math.min(98, 18 + (bioOk ? 30 : 0) + (industry && railIdx >= 1 ? 18 : 0) + (s.audience.trim() ? 16 : 0) + (s.problem.trim() ? 16 : 0));
+    const rows = [
+      { label: "Voice", icon: ICON.voice, iconBg: "#F1ECFC", iconFg: "#5B2DB3", value: s.bio.trim(), active: step === "linkedin" },
+      { label: "Industry", icon: ICON.case, iconBg: "#FFF1E6", iconFg: "#E8741C", value: railIdx >= 1 ? industry : "", active: step === "industry" },
+      { label: "Audience", icon: ICON.target, iconBg: "#EAF2FE", iconFg: "#2F7BE0", value: [s.audience.trim(), s.problem.trim()].filter(Boolean).join(" — "), active: step === "icp" },
+    ];
+    const codeBoxes = Array.from({ length: 6 }, (_, i) => {
+      const ch = s.code[i] || "", isCur = s.codeFocused && i === Math.min(s.code.length, 5) && s.code.length < 6;
+      return { ch, cursor: isCur && !ch, isCur, isIdle: !isCur };
+    });
+    return {
+      isSignup: step === "signup", isVerify: step === "verify", isWelcome: step === "welcome",
+      isLinkedin: step === "linkedin", isIndustry: step === "industry", isIcp: step === "icp", isLoading: step === "loading",
+      isProfileStep: railIdx !== undefined, showRail: railIdx !== undefined,
+      showSignIn: step === "signup", showSignOut: step !== "signup" && step !== "loading",
+      rail: ["Your LinkedIn", "Your industry", "Your audience"].map((label, i) => {
+        const d = done[i], cur = i === railIdx;
+        return { label, n: i + 1, done: d, notDone: !d, fill: d ? "100%" : cur ? "45%" : "0%", color: cur || d ? "#1F2421" : "#A0A3AB", numBg: cur ? "#F1ECFC" : "#F5F5F7", numColor: cur ? "#5B2DB3" : "#A0A3AB" };
+      }),
+      fakeLink: e => e.preventDefault(),
+      signOut: () => this.go("signup"),
+      name: s.name, email: s.email, pw: s.pw, onName: set("name"), onEmail: set("email"), onPw: set("pw"),
+      pwType: s.showPw ? "text" : "password", togglePw: () => this.setState(st => ({ showPw: !st.showPw })),
+      pwHint: s.pw.length === 0 ? "" : s.pw.length < 8 ? (8 - s.pw.length) + " more characters" : "Looks good",
+      pwHintColor: s.pw.length >= 8 ? "#5B2DB3" : "#8A9089",
+      canSignup, cannotSignup: !canSignup,
+      signup: () => canSignup && this.go("verify"),
+      google: () => { if (!s.name) this.setState({ name: "Vishal Parmar", email: "parvani.vishal@gmail.com" }); this.go("welcome"); },
+      emailShown: s.email.trim() || "parvani.vishal@gmail.com", editEmail: () => this.go("signup"),
+      code: s.code, codeBoxes,
+      onCode: e => { const v = e.target.value.replace(/\D/g, "").slice(0, 6); this.setState({ code: v }); if (v.length === 6) setTimeout(() => this.go("welcome"), 450); },
+      codeFocus: () => this.setState({ codeFocused: true }), codeBlur: () => this.setState({ codeFocused: false }),
+      canVerify: true, cannotVerify: false, verify: () => this.go("welcome"),
+      resendLabel: s.resendIn + "s", resendWaiting: s.resendIn > 0, resendReady: s.resendIn === 0,
+      resend: e => { e.preventDefault(); this.onStep("verify"); },
+      firstName: (s.name.trim().split(/\s+/)[0]) || "there",
+      asks: [
+        { n: 1, title: "Your LinkedIn", desc: "We read your bio to match your voice.", icon: ICON.link, bg: "#EAF2FE", fg: "#2F7BE0" },
+        { n: 2, title: "Your industry", desc: "So the ideas fit the field you work in.", icon: ICON.case, bg: "#FFF1E6", fg: "#E8741C" },
+        { n: 3, title: "Your focus", desc: "What you're building and who it's for.", icon: ICON.target, bg: "#F1ECFC", fg: "#5B2DB3" },
+      ],
+      getStarted: () => this.go("linkedin"),
+      back: () => this.go(STEPS[Math.max(0, idx - 1)] === "verify" ? "welcome" : STEPS[idx - 1]),
+      next: () => this.go(STEPS[idx + 1]),
+      url: s.url, onUrl: set("url"), canFetch: urlOk && !s.fetching, isFetching: s.fetching, cannotFetch: !urlOk && !s.fetching,
+      fetchBio: () => { this.setState({ fetching: true }); setTimeout(() => this.setState({ fetching: false, fetched: true, bio: SAMPLE_BIO, icpBio: SAMPLE_BIO }), 1500); },
+      fetched: s.fetched, bio: s.bio, onBio: e => this.setState({ bio: e.target.value, icpBio: s.icpBio || e.target.value }),
+      canBio: bioOk, cannotBio: !bioOk,
+      suggested, sugPicked: industry === suggested, sugNotPicked: industry !== suggested,
+      sugBorder: industry === suggested ? "#D9CCF5" : "#E6E6EA", sugBg: industry === suggested ? "#F8F6FD" : "#FFFFFF",
+      pickSuggested: () => this.setState({ industry: suggested }),
+      industries: INDUSTRIES.filter(n => n !== suggested).map(name => ({ name, on: industry === name, off: industry !== name, pick: () => this.setState({ industry: name }) })),
+      audience: s.audience, problem: s.problem, icpBio: s.icpBio || s.bio,
+      onAudience: set("audience"), onProblem: set("problem"), onIcpBio: set("icpBio"),
+      canIcp: icpOk, cannotIcp: !icpOk, finish: () => this.go("loading"),
+      profileRows: rows.map(r => ({ ...r, filled: !!r.value, empty: !r.value, bg: r.active ? "#F8F6FD" : "transparent" })),
+      sharp, sharpW: sharp + "%",
+      loadSteps: LOAD.map((label, i) => ({ label, done: i < s.loadIdx, active: i === s.loadIdx, pending: i > s.loadIdx })),
+    };
+  }
+}
+</script>
+</body>
+</html>
