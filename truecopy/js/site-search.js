@@ -1,0 +1,53 @@
+/* Site search: nav toggle + client-side index. Results render on Search.html */
+(function(){
+  if(window.__tcSearch) return; window.__tcSearch=1;
+  var IDX=[{"type":"Product","t":"TRUESigner ONE","e":"Central signing hub for the enterprise. Aadhaar eSign, DSC token, HSM bulk and electronic signatures in one platform.","k":"esign esignature digital signature aadhaar dsc hsm bulk signing it act","u":"truesigner-one.html"},{"type":"Product","t":"Contract Verse","e":"AI-powered contract lifecycle — draft, collaborate, approve, e-stamp, sign and renew.","k":"contract clm contract management e-stamping estamp nesl renewal templates","u":"contract-verse.html"},{"type":"Product","t":"TRUESigner Enterprise NX","e":"Internal approvals and governance with policy-driven authorization and tamper-evident audit trails.","k":"approval workflow governance audit compliance on-premise private cloud nx","u":"enterprise-nx.html"},{"type":"Product","t":"ConsentKeeper","e":"On-premise consent management for DPDP — capture, revoke and report consent.","k":"consent dpdp privacy data protection revoke compliance","u":"consent-keeper.html"},{"type":"Product","t":"TRUESigner Credentials","e":"Issue and verify digitally signed academic and professional credentials.","k":"credentials transcripts degree certificates university verification education","u":"credentials.html"},{"type":"Industry","t":"Automotive","e":"Dealer finance & delivery","k":"industry sector dealer finance & delivery","u":"industry.html"},{"type":"Industry","t":"Manufacturing","e":"Change orders & MSAs","k":"industry sector change orders & msas","u":"industry.html"},{"type":"Industry","t":"Chemicals","e":"Safety & compliance docs","k":"industry sector safety & compliance docs","u":"industry.html"},{"type":"Industry","t":"FMCD","e":"Distributor agreements","k":"industry sector distributor agreements","u":"industry.html"},{"type":"Industry","t":"Real Estate","e":"Leases & approvals","k":"industry sector leases & approvals","u":"industry.html"},{"type":"Industry","t":"Government","e":"Digital file movement","k":"industry sector digital file movement","u":"industry.html"},{"type":"Industry","t":"FMCG","e":"Vendor & trade contracts","k":"industry sector vendor & trade contracts","u":"industry.html"},{"type":"Industry","t":"Finance","e":"Loan origination & KYC","k":"industry sector loan origination & kyc","u":"industry.html"},{"type":"Industry","t":"Education","e":"Degrees & transcripts","k":"industry sector degrees & transcripts","u":"industry.html"},{"type":"Blog","t":"eSignatures for procurement and vendor management","e":"Purchase orders, vendor agreements, supplier NDAs and goods receipts — why procurement is usually the fastest signing workflow to automate, and what the savings actually compound to.","k":"Procurement","c":"Procurement","d":"12 Jul 2026","r":"8 min","img":"photo-1454165804606-c3d57bc86b40","u":"resources.html"},{"type":"Blog","t":"Aadhaar eSign vs DSC tokens: choosing the right assurance level","e":"Not every document needs the same signature. A practical decision framework for matching assurance level to risk, volume and jurisdiction.","k":"eSign","c":"eSign","d":"28 Jun 2026","r":"6 min","img":"photo-1450101499163-c8848c66ca85","u":"resources.html"},{"type":"Blog","t":"How a diversified manufacturing group eliminated 1.2M paper pages a year","e":"From HR letters to purchase orders across four business units — a rollout that started as a single-department pilot and became the default signing path.","k":"Contracts","c":"Contracts","d":"19 Jun 2026","r":"9 min","img":"photo-1581091226825-a6a2a5aee158","u":"resources.html"},{"type":"Blog","t":"Signing from inside SAP: what an API-first workflow really looks like","e":"The signed document returns to the calling system in the API response. Here is the integration pattern, the failure modes, and how teams sequence a rollout.","k":"Integrations","c":"Integrations","d":"04 Jun 2026","r":"7 min","img":"photo-1518770660439-4636190af475","u":"resources.html"},{"type":"Blog","t":"The DPDP Act consent playbook for enterprises","e":"Consent capture, revocation, vendor compliance and reporting — an operational blueprint for organisations preparing for enforcement.","k":"Compliance","c":"Compliance","d":"22 May 2026","r":"24 pages","img":"photo-1450101499163-c8848c66ca85","u":"resources.html"},{"type":"Blog","t":"BFSI onboarding: 9 days to same-day account opening","e":"Aadhaar eSign and inline e-stamping removed the courier loop entirely. What the operations team measured before and after.","k":"Sales","c":"Sales","d":"11 May 2026","r":"7 min","img":"photo-1554224155-6726b3ff858f","u":"resources.html"},{"type":"Blog","t":"Building an audit-ready signing programme","e":"A 40-minute session with our solution architects on evidence packs, long-term validation and what auditors ask for first.","k":"Compliance","c":"Compliance","d":"02 May 2026","r":"40 min","img":"photo-1531482615713-2afd69097998","u":"resources.html"},{"type":"Blog","t":"Why role-based signing outlives your org chart","e":"Route by role rather than person and workflows stop breaking every time someone changes seats. A small design decision with a long tail.","k":"HR","c":"HR","d":"18 Apr 2026","r":"5 min","img":"photo-1497215842964-222b430dc094","u":"resources.html"},{"type":"Blog","t":"Legal validity of electronic signatures across IT Act, eIDAS and ESIGN","e":"A jurisdiction-by-jurisdiction reference for legal and compliance teams evaluating cross-border signature programmes.","k":"Compliance","c":"Compliance","d":"29 Mar 2026","r":"31 pages","img":"photo-1589829545856-d10d557cf95f","u":"resources.html"},{"type":"Blog","t":"TRUESigner ONE REST API — quickstart","e":"Authentication, workflow creation, signer callbacks and retrieving the signed artefact. Sample code in .NET, Java and PHP.","k":"Integrations","c":"Integrations","d":"Updated weekly","r":"Reference","img":"photo-1461749280684-dccba630e2f6","u":"resources.html"},{"type":"Blog","t":"The hidden cost of the courier loop in contract execution","e":"Print, sign, scan, courier, chase. Most organisations underestimate the cycle time by a factor of three — here is how to measure it honestly.","k":"Contracts","c":"Contracts","d":"14 Mar 2026","r":"6 min","img":"photo-1423666639041-f56000c27a9a","u":"resources.html"},{"type":"Blog","t":"e-Stamping with NeSL, end to end","e":"Live walkthrough of procuring and affixing stamp duty inside a contract workflow, including state-wise handling.","k":"Contracts","c":"Contracts","d":"01 Mar 2026","r":"32 min","img":"photo-1552664730-d307ca884978","u":"resources.html"}];
+  window.TC_SEARCH={index:IDX,run:function(q){
+    var terms=(q||'').toLowerCase().split(/\s+/).filter(Boolean); if(!terms.length) return [];
+    return IDX.map(function(it){
+      var t=it.t.toLowerCase(), b=(it.e+' '+it.k+' '+it.type).toLowerCase(), s=0, all=true;
+      terms.forEach(function(w){ var hit=0; if(t.indexOf(w)>-1) hit+=3; if(b.indexOf(w)>-1) hit+=1; if(!hit) all=false; s+=hit; });
+      return {it:it,s:all?s:0};
+    }).filter(function(r){return r.s>0;}).sort(function(a,b){return b.s-a.s;}).map(function(r){return r.it;});
+  }};
+  function init(){
+    var inner=document.querySelector('.nav-in'), cta=document.querySelector('.nav-cta');
+    if(!inner||!cta||inner.querySelector('.nav-sbtn')) return;
+    var ico='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg>';
+    var btn=document.createElement('button'); btn.type='button'; btn.className='nav-sbtn'; btn.setAttribute('aria-label','Search'); btn.innerHTML=ico;
+    /* below 1000px .nav-cta is display:none — park the button beside the burger */
+    var mq=window.matchMedia('(max-width:1000px)');
+    function dock(){
+      var burger=inner.querySelector('.nav-burger');
+      if(mq.matches && burger){ if(btn.parentNode!==inner||btn.nextSibling!==burger) inner.insertBefore(btn,burger); btn.classList.add('is-mob'); }
+      else { if(btn.parentNode!==cta) cta.insertBefore(btn,cta.firstChild); btn.classList.remove('is-mob'); }
+      var nv=inner.parentNode; if(nv&&nv.classList.contains('is-searching')&&typeof place==='function') place();
+    }
+    cta.insertBefore(btn,cta.firstChild);
+    dock();
+    if(mq.addEventListener) mq.addEventListener('change',dock); else mq.addListener(dock);
+    var f=document.createElement('form'); f.className='nav-sform'; f.action='search.html'; f.setAttribute('role','search');
+    f.innerHTML='<span class="nav-sic">'+ico+'</span><input type="search" name="q" placeholder="Search products, industries and blogs" autocomplete="off" aria-label="Search"><button type="submit" class="nav-sgo">Search</button><button type="button" class="nav-sx" aria-label="Close search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>';
+    /* drop-down panel sits under the nav pill, matching its width */
+    var nav=inner.parentNode; nav.appendChild(f);
+    var inp=f.querySelector('input');
+    function place(){ var ir=inner.getBoundingClientRect(), nr=nav.getBoundingClientRect();
+      f.style.left=(ir.left-nr.left)+'px'; f.style.width=ir.width+'px'; f.style.top=(ir.bottom-nr.top+10)+'px'; }
+    window.addEventListener('resize',function(){ if(nav.classList.contains('is-searching')) place(); });
+    function open(){ place(); nav.classList.add('is-searching'); btn.setAttribute('aria-expanded','true'); setTimeout(function(){inp.focus();},260); }
+    function close(){ nav.classList.remove('is-searching'); btn.setAttribute('aria-expanded','false'); inp.blur(); }
+    function toggle(){ nav.classList.contains('is-searching')?close():open(); }
+    btn.addEventListener('click',toggle);
+    var sx=f.querySelector('.nav-sx');
+    sx.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); close(); });
+    /* any press outside the bar or the search icon closes it */
+    document.addEventListener('pointerdown',function(e){
+      if(!nav.classList.contains('is-searching')) return;
+      if(f.contains(e.target)||btn.contains(e.target)) return;
+      close();
+    },true);
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&nav.classList.contains('is-searching')) close(); });
+    f.addEventListener('submit',function(e){ if(!inp.value.trim()){ e.preventDefault(); inp.focus(); } });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
