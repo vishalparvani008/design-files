@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Tutorac Academy — Online Learning Platform Case Study | Techuz</title>
+<meta name="description" content="How Techuz built Tutorac Academy, a subscription LMS for web and mobile with optimised video streaming, interactive quizzes and institute partnerships.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Gordita';src:url('fonts/Gordita-Light.otf');font-weight:300;font-style:normal;font-display:swap}
+  @font-face{font-family:'Gordita';src:url('fonts/Gordita-Regular.otf');font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:'Gordita';src:url('fonts/Gordita-Medium.otf');font-weight:500;font-style:normal;font-display:swap}
+  @font-face{font-family:'Gordita';src:url('fonts/Gordita-Bold.otf');font-weight:600 700;font-style:normal;font-display:swap}
+  @font-face{font-family:'Gordita';src:url('fonts/Gordita-Black.otf');font-weight:800 900;font-style:normal;font-display:swap}
+  @font-face{font-family:'Gordita';src:url('fonts/Gordita-RegularItalic.otf');font-weight:400;font-style:italic;font-display:swap}
+  @font-face{font-family:'Gordita';src:url('fonts/Gordita-MediumItalic.otf');font-weight:500 700;font-style:italic;font-display:swap}
+  *{box-sizing:border-box}
+  html{background:#F6F7F4;color-scheme:only light;scroll-behavior:auto}
+  body{margin:0;background:#F6F7F4;color:#121212;font-family:'Gordita','Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:#1A9C35;text-decoration:none}
+  a:hover{color:#121212}
+  ::selection{background:#3DCB4B;color:#121212}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+  h1,h2,h3{font-family:'Lora',Georgia,serif!important}
+  h1,h2{letter-spacing:-.02em!important}
+  h3{letter-spacing:-.01em!important}
+  .serif{font-family:'Lora',Georgia,serif;font-style:italic;font-weight:inherit!important;font-size:inherit!important;letter-spacing:inherit}
+  @keyframes slot{0%,26%{transform:translateY(0)}33%,59%{transform:translateY(-25%)}66%,92%{transform:translateY(-50%)}100%{transform:translateY(-75%)}}
+  @keyframes dropWord{0%{transform:translate(-50%,-.55em) scale(.45) rotate(0);opacity:1}20%{transform:translate(calc(-50% + var(--x)),var(--y)) scale(1) rotate(var(--r));opacity:1}78%{transform:translate(calc(-50% + var(--x)),var(--y)) scale(1) rotate(var(--r));opacity:1}90%,100%{transform:translate(calc(-50% + var(--x)),calc(var(--y) + .5em)) scale(.96) rotate(var(--r));opacity:0}}
+  @keyframes aiGlow{0%,100%{box-shadow:0 0 0 .05em #E8F6E8,0 0 0 .09em rgba(61,203,75,.45),0 .1em .4em rgba(61,203,75,.25)}50%{box-shadow:0 0 0 .05em #E8F6E8,0 0 0 .12em rgba(61,203,75,.7),0 .15em .7em rgba(61,203,75,.45)}}
+  @keyframes dotBlink{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-.03em)}}
+  @keyframes aiSheen{from{background-position:150% 0}to{background-position:-100% 0}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes popIn{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:none}}
+  .hero-grain{position:absolute;inset:0;opacity:.18;mix-blend-mode:multiply;background-size:220px 220px;background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.07 0 0 0 0 0.07 0 0 0 0 0.07 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .dots-sheen{-webkit-mask-image:linear-gradient(115deg,transparent 35%,#000 50%,transparent 65%);mask-image:linear-gradient(115deg,transparent 35%,#000 50%,transparent 65%);-webkit-mask-size:300% 100%;mask-size:300% 100%;animation:dotSheen 11s ease-in-out infinite}
+  .dots-spot{-webkit-mask-image:radial-gradient(220px circle at var(--mx) var(--my),#000 0%,rgba(0,0,0,.35) 45%,transparent 75%);mask-image:radial-gradient(220px circle at var(--mx) var(--my),#000 0%,rgba(0,0,0,.35) 45%,transparent 75%)}
+  @keyframes dotSheen{0%{-webkit-mask-position:100% 0;mask-position:100% 0}100%{-webkit-mask-position:0% 0;mask-position:0% 0}}
+  @keyframes auroraA{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-6vw,4vh) scale(1.12)}100%{transform:translate(3vw,-3vh) scale(.95)}}
+  @keyframes auroraB{0%{transform:translate(0,0) scale(1)}50%{transform:translate(5vw,-5vh) scale(.9)}100%{transform:translate(-4vw,3vh) scale(1.1)}}
+  @keyframes auroraC{0%{transform:translate(0,0) scale(1)}100%{transform:translate(8vw,-4vh) scale(1.15)}}
+  @keyframes waveDrift{to{transform:translateX(-50%)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  @keyframes marqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  @keyframes wave{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+  @keyframes caret{50%{opacity:0}}
+  @keyframes type{from{width:0}to{width:100%}}
+  @keyframes shimmer{0%,100%{opacity:.25}50%{opacity:1}}
+  @keyframes bubble{0%,15%{opacity:0;transform:translateY(8px)}25%,90%{opacity:1;transform:none}100%{opacity:0}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(61,203,75,.45)}60%{box-shadow:0 0 0 10px rgba(61,203,75,0)}}
+  @media (hover:hover) and (min-width:1025px){.hero-area,.hero-area *{cursor:none}}
+  .rv{opacity:0;transform:translateY(34px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .wrow{transition:background .35s ease,color .35s ease}
+  .wrow:hover{background:#121212;color:#F6F7F4}
+  .wrow .wname{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .wrow:hover .wname{transform:translateX(18px)}
+  .wrow:hover .wmeta{color:#D5D8D2!important}
+  .wrow:hover .wnum{color:#6BE07A!important}
+  .wrow:hover .wname > div:first-child{color:#F6F7F4!important}
+  .wrow:hover .warr{color:#121212}
+  .wrow .warr{transition:transform .45s cubic-bezier(.2,.7,.2,1),background .3s ease}
+  .wrow:hover .warr{transform:rotate(-45deg);background:#3DCB4B;border-color:#1A9C35}
+  .award{transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1),background .3s ease}
+  .award.in:hover{transform:translateY(-8px)}
+  .stk{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .stk:hover{transform:rotate(0) translateY(-8px) scale(1.03)!important}
+  .ttile{transition:background .3s ease,transform .4s cubic-bezier(.2,.7,.2,1)}
+  .ttile:hover{background:#121212;transform:translateY(-4px)}
+  .ttile:hover .tname{color:#F6F7F4}
+  .slink{transition:color .25s ease,padding .35s cubic-bezier(.2,.7,.2,1)}
+  .slink:hover{color:#1A9C35;padding-left:10px}
+  .prow{transition:background .3s ease}
+  .prow:hover{background:#ECEEE9}
+  .prow:hover .ptitle{color:#1A9C35}
+  .btn-ink:hover{background:#3DCB4B!important;color:#121212!important}
+  .btn-blue:hover{background:#121212!important;color:#fff!important}
+  .btn-line:hover{background:#121212!important;color:#F6F7F4!important}
+  .btn-paper:hover{background:#121212!important;color:#fff!important}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}*{animation:none!important}}
+  @media (max-width:1024px){
+    .g-yrs,.g-ai,.g-team,.g-cloud,.g-cta,.g-foot{grid-template-columns:1fr!important}
+    .g-models{grid-template-columns:1fr 1fr!important}
+    .g-crew{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+    .g-press2{grid-template-columns:1fr!important}
+    .press-lead{position:relative!important;top:auto!important}
+    .g-tech{grid-template-columns:repeat(4,1fr)!important}
+    .g-offices{grid-template-columns:1fr 1fr!important}
+    .hide-md{display:none!important}
+  }
+  @media (min-width:1025px){.mvp-ruler .wk{color:transparent!important}.mvp-ruler .wk:nth-child(1),.mvp-ruler .wk:nth-child(4),.mvp-ruler .wk:nth-child(8),.mvp-ruler .wk:nth-child(12),.mvp-ruler .wk:nth-child(16){color:#9A9E97!important}}
+  @media (max-width:1180px){.badge{display:none!important}}
+  @media (max-width:1024px){
+    .mvp-ruler .wk:nth-child(even){color:transparent}
+    .mvp-bars{grid-template-columns:3fr 13fr!important}
+    .mvp-disc{grid-column:1!important}
+    .mvp-main{grid-column:2!important}
+  }
+  @media (max-width:1024px){
+    .mvp-pts{height:auto!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 10px}
+    .mvp-pt{position:static!important;transform:none!important;align-items:flex-start!important;text-align:left!important}
+    .mvp-line{display:none}
+  }
+  @media (max-width:1100px){.g-awards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+  @media (max-width:720px){
+    .mvp-arrow{transform:rotate(90deg)}
+    .g-awards{grid-template-columns:1fr 1fr!important}
+    .nav-row{grid-template-columns:1fr auto!important}
+    .h1-line{white-space:normal!important}
+    .mvp-pts{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .mvp-ruler .wk{color:transparent!important}
+    .mvp-ruler .wk:first-child,.mvp-ruler .wk:nth-child(8),.mvp-ruler .wk:last-child{color:#1E4A24!important;overflow:visible}
+    .mvp-ruler .wk:last-child{direction:rtl;padding-left:0}
+    .mvp-bars{grid-template-columns:1fr!important;gap:10px!important}
+    .mvp-disc,.mvp-main{grid-column:1!important;margin-right:0!important}
+    .g-models,.g-offices,.g-svc{grid-template-columns:1fr!important}
+    .g-tech{grid-template-columns:repeat(2,1fr)!important}
+    .g-mvp{grid-template-columns:1fr!important}
+    .nav-links{display:none!important}
+    .wmeta-col{display:none!important}
+    .wrap{padding-left:20px!important;padding-right:20px!important}
+    .badge{display:none!important}
+  }
+  .kn-row:last-child{border-bottom:none!important}
+  .kn-row:hover .kn-pub{color:#6BE07A}
+  .kn-row:hover .kn-ph{filter:grayscale(0)}
+  .kn-row:hover .kn-arr{background:#3DCB4B;color:#121212;border-color:#3DCB4B;transform:rotate(45deg)}
+  @media (max-width:820px){.kn-row{grid-template-columns:1fr 40px!important;gap:10px 16px!important}.kn-row > span:nth-child(2){grid-column:1/-1}.kn-row > span:nth-child(3){grid-column:1}}
+  html.cur-nav header, html.cur-nav header *{cursor:auto}
+  html.cur-nav header a, html.cur-nav header button{cursor:pointer}
+  @keyframes dotflow{0%,100%{opacity:.25;transform:translateX(0)}50%{opacity:1;transform:translateX(2px)}}
+  @keyframes orbit{to{transform:rotate(360deg)}}
+  @keyframes leadPop{0%{transform:scale(.3);opacity:0}100%{transform:scale(1);opacity:1}}
+  #start input::placeholder{color:#6B6E69}
+  #start input:focus,#start select:focus{border-color:#3DCB4B!important}
+  @media (max-width:900px){.g-lead{grid-template-columns:1fr!important;gap:44px!important}.g-lead > div:first-child{position:static!important}.g-opt3{grid-template-columns:1fr!important}.g-opt2{grid-template-columns:1fr!important}}
+  @media (hover:hover){.cta-zone.cur-on, .cta-zone.cur-on *{cursor:none}}
+  @media (hover:none){.cta-cur{display:none!important}}
+  @keyframes revmq{to{transform:translateX(calc(-50% - 10px))}}
+  .rev-mq:hover .rev-track{animation-play-state:paused}
+  h2.ts-ready .tsw{display:inline-block;opacity:0;transform:translateX(-18px);filter:blur(6px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1),filter .9s cubic-bezier(.22,.61,.36,1)}
+  h2.ts-ready.ts-in .tsw{opacity:1;transform:none;filter:none}
+  @media (max-width:600px){.orb-wrap .orb-up{font-size:10.5px!important;padding:6px 10px!important}}
+  @keyframes orbitUp{to{transform:translate(-50%,-50%) rotate(-360deg)}}
+  .orb .orb-up{animation:orbitUp 38s linear infinite}
+  .orb-rev .orb-up{animation:orbitUp 60s linear infinite reverse}
+  .wk-card:hover .wk-arr{background:#3DCB4B;color:#121212;transform:rotate(45deg)}
+  .wk-card:hover .wk-shot{transform:scale(1.015)}
+  @media (max-width:900px){.g-wk{grid-template-columns:1fr!important}.wk-stage{height:auto!important}.wk-pin{position:static!important;height:auto!important;overflow:visible!important}.wk-card{position:relative!important;top:auto!important;height:auto!important;min-height:0!important;transform:none!important}.g-wk{height:auto!important;min-height:0!important}.g-wkh{grid-template-columns:1fr!important;gap:18px!important}.g-wkh p{justify-self:start!important}.wk-shot{aspect-ratio:16/11;height:auto!important}}
+  @media (max-width:900px){.g-cs-hero,.g-two,.g-feat{grid-template-columns:1fr!important;gap:36px!important;direction:ltr!important}.g-snap{grid-template-columns:repeat(2,1fr)!important}.g-snap > div{border-left:none!important;padding-left:0!important}.g-stat4{grid-template-columns:1fr 1fr!important}}
+  .nxt:hover .nxt-arr{transform:translateX(6px)}
+  .nxt:hover .nxt-img{transform:scale(1.02)}
+  @media (max-width:1000px){.g-story{grid-template-columns:1fr!important;gap:40px!important}.toc{display:none}.g-pr{grid-template-columns:1fr!important}.pr-arr{transform:rotate(90deg)}.g-tl{flex-direction:column}.g-tl > div{width:100%}.g-sol,.g-ov,.nxt{grid-template-columns:1fr!important}.g-imp{grid-template-columns:1fr 1fr!important}.g-imp > div{border-right:none!important}}
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:50;padding:14px 0;background:rgba(246,247,244,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
+  <div class="wrap nav-row" style="padding:0 20px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:24px">
+    <a href="index.html" style="display:flex;align-items:center" aria-label="Techuz home"><img src="assets/techuz-logo-dark.png" alt="Techuz" style="height:26px;width:auto;display:block"></a>
+    <nav class="nav-links" aria-label="Main" style="justify-self:center;display:flex;align-items:center;gap:8px">
+      <a href="index.html#ai" style="color:#121212;font-size:14.5px;font-weight:500;padding:9px 16px" style-hover="color:#1A9C35">AI</a>
+      <a href="index.html#mvp" style="color:#121212;font-size:14.5px;font-weight:500;padding:9px 16px" style-hover="color:#1A9C35">Edtech</a>
+      <a href="software-development.html" style="color:#121212;font-size:14.5px;font-weight:500;padding:9px 16px" style-hover="color:#1A9C35">Services</a>
+      <a href="index.html#tech" style="color:#121212;font-size:14.5px;font-weight:500;padding:9px 16px" style-hover="color:#1A9C35">Technology</a>
+      <a href="index.html#work" style="color:#121212;font-size:14.5px;font-weight:500;padding:9px 16px" style-hover="color:#1A9C35">Work</a>
+      <a href="index.html#years" style="color:#121212;font-size:14.5px;font-weight:500;padding:9px 16px" style-hover="color:#1A9C35">Company</a>
+    </nav>
+    <a href="https://www.techuz.com/contact-us/" class="btn-ink" style="justify-self:end;display:inline-flex;align-items:center;gap:10px;background:#121212;color:#fff;font-weight:500;font-size:14.5px;padding:12px 20px;border-radius:99px;white-space:nowrap">Contact us <span style="font-size:16px">↗</span></a>
+  </div>
+</header>
+
+<main>
+<section id="top" data-screen-label="Case study hero" style="background:#F6F7F4">
+  <div class="wrap" style="max-width:1440px;margin:0 auto;padding:56px 40px 0">
+    <nav aria-label="Breadcrumb" class="mono rv" style="display:flex;gap:10px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#8A8D88;margin-bottom:56px"><a href="index.html" style="color:#8A8D88" style-hover="color:#121212">Home</a><span>/</span><a href="index.html#work" style="color:#8A8D88" style-hover="color:#121212">Work</a><span>/</span><span style="color:#121212">Tutorac Academy</span></nav>
+    <div class="g-cs-hero" style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:64px;align-items:end;margin-bottom:56px">
+      <div>
+        <div class="rv" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px"><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:8px 14px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">EdTech</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:8px 14px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Web + Mobile</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:8px 14px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Case study</span></div>
+        <h1 class="rv" style="margin:0;font-weight:600;font-size:clamp(44px,6.4vw,104px);line-height:.92;letter-spacing:-.03em">Tutorac Academy<span style="color:#3DCB4B">.</span></h1>
+      </div>
+      <p class="rv" style="margin:0;font-size:19px;line-height:1.6;color:#3B3D3A;text-wrap:pretty;transition-delay:.12s">Tutorac Academy is an innovative Learning Management System, where learning meets innovation! this platform offers a subscription service that grants you access to a wealth of academic videos, all optimized for smooth viewing.</p>
+    </div>
+    <div class="rv g-snap" style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid #DCDDD8;border-bottom:1px solid #DCDDD8">
+      <div style="padding:22px 20px 22px 0"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:8px">INDUSTRY</div><div style="font-weight:500;font-size:16px">EdTech</div></div>
+      <div style="padding:22px 20px;border-left:1px solid #DCDDD8"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:8px">PLATFORM</div><div style="font-weight:500;font-size:16px">Web · iOS · Android</div></div>
+      <div style="padding:22px 20px;border-left:1px solid #DCDDD8"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:8px">COUNTRY</div><div style="font-weight:500;font-size:16px">India</div></div>
+      <div style="padding:22px 20px;border-left:1px solid #DCDDD8"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:8px">TIMELINE</div><div style="font-weight:500;font-size:16px">[7 months]</div></div>
+      <div style="padding:22px 20px;border-left:1px solid #DCDDD8"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:8px">TEAM</div><div style="font-weight:500;font-size:16px">[8 specialists]</div></div>
+      <div style="padding:22px 20px;border-left:1px solid #DCDDD8"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:8px">BUDGET</div><div style="font-weight:500;font-size:16px">$50k – $100k</div></div>
+    </div>
+  </div>
+  <div class="wrap" style="max-width:1440px;margin:0 auto;padding:56px 40px 120px">
+    <div class="rv" style="border-radius:32px;background:#E8F6EA;padding:clamp(24px,4.5vw,72px)"><div style="border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:#fff url('assets/work-tutorac.png') left top / cover no-repeat;box-shadow:0 30px 60px -24px rgba(18,18,18,.28)" role="img" aria-label="Tutorac Academy platform screenshot"></div></div>
+  </div>
+</section>
+
+<section data-screen-label="Case study story" style="background:#F6F7F4">
+  <div class="wrap g-story" style="max-width:1440px;margin:0 auto;padding:0 40px 140px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:88px;align-items:start">
+    <aside class="toc" style="position:sticky;top:110px">
+      <div class="mono" style="font-size:11.5px;letter-spacing:.1em;color:#8A8D88;margin-bottom:18px">ON THIS PAGE</div>
+      <nav aria-label="Case study sections" style="display:flex;flex-direction:column;gap:2px;border-left:1px solid #DCDDD8">
+        <sc-for list="{{ toc }}" as="t" hint-placeholder-count="5"><a href="{{ t.href }}" onClick="{{ t.go }}" style="{{ t.style }}">{{ t.label }}</a></sc-for>
+      </nav>
+    </aside>
+    <div style="display:flex;flex-direction:column;gap:140px;min-width:0">
+      <div id="cs-overview" class="cs-sec">
+        <div class="mono rv" style="display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#1A9C35;margin-bottom:18px"><span>01</span><span style="width:28px;height:1px;background:#1A9C35"></span><span>Overview</span></div>
+        <p class="rv" style="margin:0 0 48px;font-family:'Lora',Georgia,serif;font-size:clamp(26px,2.5vw,38px);line-height:1.3;max-width:900px;text-wrap:pretty">Dive into interactive quizzes to solidify your understanding, and connect with top-tier learning institutes for a truly enriching experience.</p>
+        <div class="rv g-ov" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;padding-top:32px;border-top:1px solid #DCDDD8">
+          <div><div class="mono" style="font-size:11.5px;letter-spacing:.1em;color:#8A8D88;margin-bottom:14px">SERVICES</div><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Product discovery</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">UI/UX design</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Web development</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Mobile apps</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">QA</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">DevOps</span></div></div>
+          <div><div class="mono" style="font-size:11.5px;letter-spacing:.1em;color:#8A8D88;margin-bottom:14px">DELIVERABLES</div><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Learner web app</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">iOS app</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Android app</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Admin console</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#EEEEEE;color:#3B3D3A">Institute portal</span></div></div>
+        </div>
+      </div>
+      <div id="cs-challenge" class="cs-sec">
+        <div class="mono rv" style="display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#1A9C35;margin-bottom:18px"><span>02</span><span style="width:28px;height:1px;background:#1A9C35"></span><span>Challenge</span></div>
+        <h2 class="rv" style="margin:0 0 40px;font-weight:600;font-size:clamp(30px,3.2vw,50px);line-height:1.02;max-width:760px;text-wrap:balance">Three problems stood between the idea and a platform learners would stay on.</h2>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="rv g-pr" style="display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);gap:20px;align-items:stretch">
+          <div style="background:#EEEEEE;border-radius:22px;padding:26px 28px"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:10px">PROBLEM</div><div style="font-size:17px;line-height:1.55;font-weight:500">[Thousands of academic videos had to play smoothly on low-bandwidth mobile networks.]</div></div>
+          <div class="pr-arr" style="display:flex;align-items:center;justify-content:center"><span style="width:44px;height:44px;border-radius:50%;background:#121212;color:#3DCB4B;display:flex;align-items:center;justify-content:center;font-size:17px">→</span></div>
+          <div style="background:#1C1D1F;color:#F6F7F4;border-radius:22px;padding:26px 28px"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#6BE07A;margin-bottom:10px">WHAT WE DID</div><div style="font-size:17px;line-height:1.55;font-weight:500">[Adaptive streaming with a CDN and resumable playback, tuned for 3G and 4G.]</div></div>
+        </div>
+          <div class="rv g-pr" style="display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);gap:20px;align-items:stretch">
+          <div style="background:#EEEEEE;border-radius:22px;padding:26px 28px"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:10px">PROBLEM</div><div style="font-size:17px;line-height:1.55;font-weight:500">[Plans, trials and institute-sponsored access needed one consistent billing model.]</div></div>
+          <div class="pr-arr" style="display:flex;align-items:center;justify-content:center"><span style="width:44px;height:44px;border-radius:50%;background:#121212;color:#3DCB4B;display:flex;align-items:center;justify-content:center;font-size:17px">→</span></div>
+          <div style="background:#1C1D1F;color:#F6F7F4;border-radius:22px;padding:26px 28px"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#6BE07A;margin-bottom:10px">WHAT WE DID</div><div style="font-size:17px;line-height:1.55;font-weight:500">[A single subscription engine with roles for learners, institutes and admins.]</div></div>
+        </div>
+          <div class="rv g-pr" style="display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);gap:20px;align-items:stretch">
+          <div style="background:#EEEEEE;border-radius:22px;padding:26px 28px"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#8A8D88;margin-bottom:10px">PROBLEM</div><div style="font-size:17px;line-height:1.55;font-weight:500">[Learners dropped off mid-course without feedback on their progress.]</div></div>
+          <div class="pr-arr" style="display:flex;align-items:center;justify-content:center"><span style="width:44px;height:44px;border-radius:50%;background:#121212;color:#3DCB4B;display:flex;align-items:center;justify-content:center;font-size:17px">→</span></div>
+          <div style="background:#1C1D1F;color:#F6F7F4;border-radius:22px;padding:26px 28px"><div class="mono" style="font-size:11px;letter-spacing:.1em;color:#6BE07A;margin-bottom:10px">WHAT WE DID</div><div style="font-size:17px;line-height:1.55;font-weight:500">[Interactive quizzes after each module and a progress dashboard that nudges learners back.]</div></div>
+        </div>
+        </div>
+      </div>
+      <div id="cs-approach" class="cs-sec">
+        <div class="mono rv" style="display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#1A9C35;margin-bottom:18px"><span>03</span><span style="width:28px;height:1px;background:#1A9C35"></span><span>Approach</span></div>
+        <h2 class="rv" style="margin:0 0 40px;font-weight:600;font-size:clamp(30px,3.2vw,50px);line-height:1.02;max-width:760px;text-wrap:balance">A phased build, each stage shipped and tested before the next.</h2>
+        <div class="rv g-tl" style="display:flex;gap:10px;align-items:flex-start">
+          <div style="flex:3 1 0;min-width:0;display:flex;flex-direction:column;gap:14px"><div style="height:64px;border-radius:16px;background:#DDF6DE;color:#1E4A24;display:flex;align-items:center;padding:0 18px;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden">3 wks</div><div><div style="font-weight:600;font-size:17px;margin-bottom:6px">Discovery</div><p style="margin:0;font-size:14.5px;line-height:1.55;color:#3B3D3A">[Founder workshops, learner interviews, scoped backlog.]</p></div></div>
+          <div style="flex:12 1 0;min-width:0;display:flex;flex-direction:column;gap:14px"><div style="height:64px;border-radius:16px;background:#3DCB4B;color:#121212;display:flex;align-items:center;padding:0 18px;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden">12 weeks</div><div><div style="font-weight:600;font-size:17px;margin-bottom:6px">MVP build</div><p style="margin:0;font-size:14.5px;line-height:1.55;color:#3B3D3A">[Video library, subscriptions and quizzes on web, with weekly demos.]</p></div></div>
+          <div style="flex:6 1 0;min-width:0;display:flex;flex-direction:column;gap:14px"><div style="height:64px;border-radius:16px;background:#1C1D1F;color:#F6F7F4;display:flex;align-items:center;padding:0 18px;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden">6 weeks</div><div><div style="font-weight:600;font-size:17px;margin-bottom:6px">Mobile launch</div><p style="margin:0;font-size:14.5px;line-height:1.55;color:#3B3D3A">[iOS and Android apps on the same API.]</p></div></div>
+          <div style="flex:4 1 0;min-width:0;display:flex;flex-direction:column;gap:14px"><div style="height:64px;border-radius:16px;background:repeating-linear-gradient(135deg,#EEEEEE 0 10px,#E2E3DE 10px 20px);color:#3B3D3A;display:flex;align-items:center;padding:0 18px;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden">Ongoing</div><div><div style="font-weight:600;font-size:17px;margin-bottom:6px">Scale</div><p style="margin:0;font-size:14.5px;line-height:1.55;color:#3B3D3A">[Institute partnerships, analytics, performance.]</p></div></div>
+        </div>
+      </div>
+      <div id="cs-solution" class="cs-sec">
+        <div class="mono rv" style="display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#1A9C35;margin-bottom:18px"><span>04</span><span style="width:28px;height:1px;background:#1A9C35"></span><span>Solution</span></div>
+        <h2 class="rv" style="margin:0 0 40px;font-weight:600;font-size:clamp(30px,3.2vw,50px);line-height:1.02;max-width:760px;text-wrap:balance">What we built</h2>
+        <figure class="rv" style="margin:0"><div style="aspect-ratio:16/9;border-radius:24px;background:#EEEEEE;display:flex;align-items:center;justify-content:center"><span class="mono" style="font-size:12px;letter-spacing:.06em;color:#8A8D88;text-transform:uppercase">Screenshot — Video library</span></div></figure>
+        <div class="rv" style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;margin-top:20px"><span class="mono" style="font-size:12.5px;color:#1A9C35;padding-top:4px">01</span><div><h3 style="margin:0 0 6px;font-weight:600;font-size:22px">Video library</h3><p style="margin:0;font-size:15.5px;line-height:1.6;color:#3B3D3A">A wealth of academic videos, all optimized for smooth viewing.</p></div></div>
+        <div class="g-sol" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:56px">
+          <div><figure class="rv" style="margin:0"><div style="aspect-ratio:4/3;border-radius:24px;background:#EEEEEE;display:flex;align-items:center;justify-content:center"><span class="mono" style="font-size:12px;letter-spacing:.06em;color:#8A8D88;text-transform:uppercase">Screenshot — Interactive quizzes</span></div></figure><div class="rv" style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;margin-top:20px"><span class="mono" style="font-size:12.5px;color:#1A9C35;padding-top:4px">02</span><div><h3 style="margin:0 0 6px;font-weight:600;font-size:22px">Interactive quizzes</h3><p style="margin:0;font-size:15.5px;line-height:1.6;color:#3B3D3A">Dive into interactive quizzes to solidify your understanding.</p></div></div></div>
+          <div><figure class="rv" style="margin:0"><div style="aspect-ratio:4/3;border-radius:24px;background:#EEEEEE;display:flex;align-items:center;justify-content:center"><span class="mono" style="font-size:12px;letter-spacing:.06em;color:#8A8D88;text-transform:uppercase">Screenshot — Institute network</span></div></figure><div class="rv" style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;margin-top:20px"><span class="mono" style="font-size:12.5px;color:#1A9C35;padding-top:4px">03</span><div><h3 style="margin:0 0 6px;font-weight:600;font-size:22px">Institute network</h3><p style="margin:0;font-size:15.5px;line-height:1.6;color:#3B3D3A">Connect with top-tier learning institutes for a truly enriching experience.</p></div></div></div>
+        </div>
+      </div>
+      <div id="cs-impact" class="cs-sec">
+        <div class="mono rv" style="display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#1A9C35;margin-bottom:18px"><span>05</span><span style="width:28px;height:1px;background:#1A9C35"></span><span>Impact</span></div>
+        <h2 class="rv" style="margin:0 0 40px;font-weight:600;font-size:clamp(30px,3.2vw,50px);line-height:1.02;max-width:760px;text-wrap:balance">What changed after launch</h2>
+        <div class="g-imp" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;padding-top:32px;border-top:1px solid #DCDDD8">
+          <div class="rv" style="padding:6px 28px 6px 0;border-right:1px solid #DCDDD8"><div style="font-weight:600;font-size:clamp(38px,3.8vw,60px);line-height:.9;letter-spacing:-.05em">[120k+]</div><div style="margin-top:14px;font-size:14.5px;color:#3B3D3A">Active learners</div></div><div class="rv" style="padding:6px 28px 6px 0;border-right:1px solid #DCDDD8"><div style="font-weight:600;font-size:clamp(38px,3.8vw,60px);line-height:.9;letter-spacing:-.05em">[4.8★]</div><div style="margin-top:14px;font-size:14.5px;color:#3B3D3A">App store rating</div></div><div class="rv" style="padding:6px 28px 6px 0;border-right:1px solid #DCDDD8"><div style="font-weight:600;font-size:clamp(38px,3.8vw,60px);line-height:.9;letter-spacing:-.05em">[+35%]</div><div style="margin-top:14px;font-size:14.5px;color:#3B3D3A">Course completion</div></div><div class="rv" style="padding:6px 0"><div style="font-weight:600;font-size:clamp(38px,3.8vw,60px);line-height:.9;letter-spacing:-.05em">[1.8s]</div><div style="margin-top:14px;font-size:14.5px;color:#3B3D3A">Avg. video start</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Client quote" style="background:#3DCB4B;color:#121212;border-radius:48px 48px 0 0">
+  <figure class="wrap" style="max-width:1100px;margin:0 auto;padding:130px 40px;text-align:center">
+    <div class="rv" style="font-family:'Lora',Georgia,serif;font-size:120px;line-height:.5;height:52px">“</div>
+    <blockquote class="rv" style="margin:0 0 40px;font-family:'Lora',Georgia,serif;font-weight:500;font-size:clamp(28px,3.2vw,48px);line-height:1.18;text-wrap:balance">[Techuz understood our learners as well as our code. The platform has been stable from day one.]</blockquote>
+    <figcaption class="rv" style="display:inline-flex;align-items:center;gap:14px;text-align:left"><span style="width:56px;height:56px;border-radius:50%;background:#2E9E44"></span><span><span style="display:block;font-weight:600;font-size:16px">[Client name]</span><span style="display:block;font-size:14px;color:#1E4A24">[Founder, Tutorac Academy]</span></span></figcaption>
+  </figure>
+</section>
+
+<section data-screen-label="Stack and next" style="background:#1C1D1F;color:#F6F7F4;border-radius:48px 48px 0 0;margin-top:-48px">
+  <div class="wrap" style="max-width:1440px;margin:0 auto;padding:110px 40px 120px">
+    <div class="rv" style="display:flex;align-items:center;gap:20px 28px;flex-wrap:wrap;padding-bottom:56px;border-bottom:1px solid #2E2F32">
+      <span class="mono" style="font-size:12px;letter-spacing:.1em;color:#8A8D88">BUILT WITH</span>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#2A2B2E;color:#D5D8D2">ReactJS</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#2A2B2E;color:#D5D8D2">NodeJS</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#2A2B2E;color:#D5D8D2">SQL Server</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#2A2B2E;color:#D5D8D2">Redis</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#2A2B2E;color:#D5D8D2">React Native</span><span class="mono" style="font-size:12px;letter-spacing:.04em;padding:9px 15px;border-radius:99px;background:#2A2B2E;color:#D5D8D2">AWS</span></div>
+    </div>
+    <a href="index.html#work" class="rv nxt" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:48px;align-items:center;padding-top:56px;color:#F6F7F4">
+      <span><span class="mono" style="display:block;font-size:12px;letter-spacing:.1em;color:#6BE07A;margin-bottom:16px">NEXT CASE STUDY</span><span style="display:block;font-family:'Lora',Georgia,serif;font-weight:600;font-size:clamp(38px,5vw,80px);line-height:.95">GetLitt!</span><span style="display:flex;align-items:center;gap:14px;margin-top:22px;font-size:17px;color:#B8BBB6">e-Book Reading App for Kids with Gamification <span class="nxt-arr" style="width:48px;height:48px;border-radius:50%;background:#3DCB4B;color:#121212;display:inline-flex;align-items:center;justify-content:center;font-size:18px;transition:transform .4s ease">→</span></span></span>
+      <span class="nxt-img" style="display:block;aspect-ratio:16/10;border-radius:22px;background:#E3F7FA url('assets/work-getlitt.png') left top / cover no-repeat;transition:transform .6s cubic-bezier(.22,.61,.36,1)"></span>
+    </a>
+  </div>
+</section>
+</main>
+
+<section id="contact" style="background:#3DCB4B;color:#121212;border-radius:48px 48px 0 0;overflow:hidden">
+  <div class="wrap" style="max-width:1100px;margin:0 auto;padding:120px 40px 140px;text-align:center">
+    <h2 class="rv" style="margin:0 auto 22px;max-width:900px;font-weight:600;font-size:clamp(32px,3.9vw,62px);line-height:.98;text-wrap:balance">Building something similar? Let’s talk.</h2>
+    <div class="rv" style="display:flex;justify-content:center;gap:10px 28px;flex-wrap:wrap;font-size:15px;font-weight:500;margin:36px 0 40px;transition-delay:.1s">
+      <span style="display:flex;align-items:center;gap:8px"><span style="width:20px;height:20px;border-radius:50%;background:#121212;color:#3DCB4B;display:flex;align-items:center;justify-content:center;font-size:11px">✓</span>We will respond to you within 24 hours.</span>
+      <span style="display:flex;align-items:center;gap:8px"><span style="width:20px;height:20px;border-radius:50%;background:#121212;color:#3DCB4B;display:flex;align-items:center;justify-content:center;font-size:11px">✓</span>We’ll sign an NDA if requested.</span>
+      <span style="display:flex;align-items:center;gap:8px"><span style="width:20px;height:20px;border-radius:50%;background:#121212;color:#3DCB4B;display:flex;align-items:center;justify-content:center;font-size:11px">✓</span>Access to dedicated product specialists.</span>
+    </div>
+    <a class="rv btn-paper" href="https://www.techuz.com/contact-us/" style="display:inline-flex;align-items:center;gap:10px;background:#F6F7F4;color:#121212;font-weight:500;font-size:16px;padding:16px 28px;border-radius:99px;transition-delay:.18s">Get an estimate <span>↗</span></a>
+  </div>
+  <footer style="background:#1C1D1F;color:#F6F7F4;border-radius:48px 48px 0 0">
+    <div class="wrap" style="max-width:1440px;margin:0 auto;padding:96px 40px 0">
+      <div class="g-foot" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:72px;padding-bottom:64px">
+        <div>
+          <div style="font-weight:600;font-size:clamp(24px,2.2vw,32px);line-height:1.15;letter-spacing:-.035em;margin-bottom:18px;max-width:320px">Made within <span style="color:#6BE07A">India</span> and serving worldwide</div>
+          <div style="font-size:14.5px;line-height:1.8;color:#8A8D88;max-width:320px">USA · UK · Australia · Singapore · India · UAE · Europe</div>
+        </div>
+        <div class="g-offices" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px">
+          <div><div class="mono" style="font-size:11px;color:#6BE07A;letter-spacing:.1em;margin-bottom:14px">USA — OFFICE</div><p style="margin:0;font-size:15px;line-height:1.75;color:#B8BBB6">10685-B Hazelhurst Dr. # 22194<br>Houston - TX 77043<br>+1 (832) 500-5245</p></div>
+          <div><div class="mono" style="font-size:11px;color:#6BE07A;letter-spacing:.1em;margin-bottom:14px">INDIA — HEADQUARTERS</div><p style="margin:0;font-size:15px;line-height:1.75;color:#B8BBB6">1014-1020, 10th Floor,<br>i-Square Corporate Park,<br>Science City Road,<br>Ahmedabad - 380060</p></div>
+          <div><div class="mono" style="font-size:11px;color:#6BE07A;letter-spacing:.1em;margin-bottom:14px">SINGAPORE — OFFICE</div><p style="margin:0;font-size:15px;line-height:1.75;color:#B8BBB6">1003 Toa Payoh Industrial Park<br>#03-1501 Singapore - 319075</p></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:28px 0;border-top:1px solid #2E2F32">
+        <nav style="display:flex;gap:30px;flex-wrap:wrap">
+          <a href="https://www.techuz.com/company/" style="color:#D5D8D2;font-size:15px" style-hover="color:#6BE07A">Company</a>
+          <a href="https://www.techuz.com/portfolio/" style="color:#D5D8D2;font-size:15px" style-hover="color:#6BE07A">Work</a>
+          <a href="https://www.techuz.com/careers/" style="color:#D5D8D2;font-size:15px" style-hover="color:#6BE07A">Careers</a>
+          <a href="https://www.techuz.com/blog/" style="color:#D5D8D2;font-size:15px" style-hover="color:#6BE07A">Resources</a>
+          <a href="https://www.techuz.com/contact-us/" style="color:#D5D8D2;font-size:15px" style-hover="color:#6BE07A">Contact</a>
+        </nav>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a href="https://www.linkedin.com/company/techuz-infoweb-pvt-ltd" target="_blank" rel="noopener" style="color:#D5D8D2;font-size:13.5px;border:1px solid #36373B;padding:8px 14px;border-radius:99px" style-hover="border-color:#3DCB4B;color:#6BE07A">LinkedIn</a>
+          <a href="https://www.instagram.com/techuz/" target="_blank" rel="noopener" style="color:#D5D8D2;font-size:13.5px;border:1px solid #36373B;padding:8px 14px;border-radius:99px" style-hover="border-color:#3DCB4B;color:#6BE07A">Instagram</a>
+          <a href="https://dribbble.com/techuz" target="_blank" rel="noopener" style="color:#D5D8D2;font-size:13.5px;border:1px solid #36373B;padding:8px 14px;border-radius:99px" style-hover="border-color:#3DCB4B;color:#6BE07A">Dribbble</a>
+          <a href="https://www.behance.net/techuzinfoweb" target="_blank" rel="noopener" style="color:#D5D8D2;font-size:13.5px;border:1px solid #36373B;padding:8px 14px;border-radius:99px" style-hover="border-color:#3DCB4B;color:#6BE07A">Behance</a>
+        </div>
+      </div>
+      <div aria-hidden="true" style="font-family:'Lora',Georgia,serif;font-weight:600;font-size:clamp(90px,23vw,380px);line-height:.8;letter-spacing:-.04em;color:#26272A;text-align:center;user-select:none;margin-top:36px">techuz</div>
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0 34px;font-size:13.5px;color:#7D807B">
+        <span>Copyright 2026 © Techuz InfoWeb Private Limited</span>
+        <span style="display:flex;gap:24px"><a href="https://www.techuz.com/privacy-policy/" style="color:#7D807B" style-hover="color:#F6F7F4">Privacy Policy</a><a href="https://www.techuz.com/terms/" style="color:#7D807B" style-hover="color:#F6F7F4">Terms &amp; Conditions</a></span>
+      </div>
+    </div>
+  </footer>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { act: 'cs-overview' };
+  componentDidMount() {
+    const check = () => { const secs = Array.from(document.querySelectorAll('.cs-sec')); let act = secs.length ? secs[0].id : ''; secs.forEach(s => { if (s.getBoundingClientRect().top < innerHeight * 0.4) act = s.id; }); if (act && act !== this.state.act) this.setState({ act }); const lim = innerHeight * 0.94; document.querySelectorAll('.rv:not(.in)').forEach(el => { if (el.getBoundingClientRect().top < lim) el.classList.add('in'); }); };
+    this.chk = () => { if (!this.raf) this.raf = requestAnimationFrame(() => { this.raf = 0; check(); }); };
+    addEventListener('scroll', this.chk, { passive: true }); addEventListener('resize', this.chk);
+    check(); this.t = setTimeout(check, 400); this.t2 = setTimeout(check, 1200);
+  }
+  componentWillUnmount() { removeEventListener('scroll', this.chk); removeEventListener('resize', this.chk); clearTimeout(this.t); clearTimeout(this.t2); }
+  renderVals() {
+    const items = [['cs-overview', 'Overview'], ['cs-challenge', 'Challenge'], ['cs-approach', 'Approach'], ['cs-solution', 'Solution'], ['cs-impact', 'Impact']];
+    return { toc: items.map(([id, label]) => { const on = this.state.act === id; return { label, href: '#' + id,
+      go: (e) => { const el = document.getElementById(id); if (!el) return; e.preventDefault(); window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - 100, behavior: 'smooth' }); },
+      style: { display: 'block', padding: '10px 0 10px 18px', marginLeft: '-1px', borderLeft: '2px solid ' + (on ? '#3DCB4B' : 'transparent'), color: on ? '#121212' : '#8A8D88', fontSize: '15.5px', fontWeight: on ? 600 : 500, transition: 'color .3s ease, border-color .3s ease' } }; }) };
+  }
+}
+</script>
+</body>
+</html>
